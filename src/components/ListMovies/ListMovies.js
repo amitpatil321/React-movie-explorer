@@ -20,7 +20,7 @@ class ListMovies extends Component {
                 list = Object.keys(response.results).map(movie => {
                 let movie_name = "";
                 let { id, title, name, poster_path, vote_average } = response.results[movie];
-                console.log(response.results[movie].title);
+                // console.log(response.results[movie].title);
                 // Check if title is undefined
                 movie_name = (title) ? title : name;
                 

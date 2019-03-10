@@ -1,6 +1,7 @@
 dependencies:
   antd: 3.13.2
   axios: 0.18.0
+  lodash: 4.17.11
 packages:
   /@ant-design/icons-react/1.1.2/@ant-design!icons@1.1.16:
     dependencies:
@@ -914,3 +915,4 @@ shrinkwrapVersion: 3
 specifiers:
   antd: ^3.13.2
   axios: ^0.18.0
+  lodash: ^4.17.11

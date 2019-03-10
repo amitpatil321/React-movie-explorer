@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import { Menu, Layout, Input } from 'antd';
-
+import { Menu, Layout } from 'antd';
+import SearchMovies from '../SearchMovies/SearchMovies';
 const { Header } = Layout;
-const Search        = Input.Search;
+
+// const Search        = Input.Search;
 
 class HeaderMenu extends Component {
     state = {
-      current: '1',
+      
     }
-  
-    handleClick = (e) => {
-      console.log('click ', e);
-      this.setState({
-        current: e.key,
-      });
-    }
-  
+
     render() {
+      const { dataSource } = this.state;
       return (
         <Header>
           <div className="logo" />
@@ -30,11 +25,12 @@ class HeaderMenu extends Component {
             <Menu.Item key="trending">Trending</Menu.Item>
             <Menu.Item key="popular">Popular</Menu.Item>
             <Menu.Item key="search" disabled>
-              <Search
+              {/* <Search
                 placeholder="Search..."
-                onSearch={value => console.log(value)}
+                onSearch={value => this._onSearch(value)}
                 style={{ width: 200 }}
-              />              
+              />*/}
+              <SearchMovies />
             </Menu.Item>
           </Menu>
         </Header>        

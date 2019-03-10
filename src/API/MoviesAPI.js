@@ -1,31 +1,23 @@
-import Axios from '../config/axios';
+import MoviesAxios from '../config/axios';
+import Axios from 'axios';
+
+import * as CONFIG from '../config/config';
 
 // Fetch all contacts
 export const getPopularMovies = () => {
-    return Axios.get("https://api.themoviedb.org/3/trending/all/week").then(response => {
+    return MoviesAxios.get("https://api.themoviedb.org/3/trending/all/week").then(response => {
         return response.data;
     })
     .catch((error) => {
-        throw new Error("Error fetching contacts!");
+        throw new Error("Error fetching movies!");
     });   
 }
 
-// // Add new contact
-// export const addNewContact = (data) => {
-//     return Axios.post("/contacts", data).then(response => {
-//         return response.data;
-//     })
-//     .catch((error) => {
-//         throw new Error("Error saving contact!");
-//     });    
-// }
-
-// // Delete contact
-// export const deleteContact = (id) => {
-//     return Axios.delete("/contacts/"+id).then(response => {
-//         return response;
-//     })
-//     .catch((error) => {
-//         throw new Error("Error deleting contact!");
-//     });    
-// }
+export const searchMovies = (string) => {
+    return Axios.get("https://api.themoviedb.org/3/search/movie?api_key="+CONFIG.API_KEY+"&query="+string).then(response => {
+        return response.data;
+    })
+    .catch((error) => {
+        throw new Error("Error fetching movies!");
+    });   
+}
