@@ -1,0 +1,35 @@
+.mainContent-outer{
+  padding: 50px 0px 0px;
+}
+.mainContent{
+  padding-top: 20px;
+  background: #fff;
+  padding: 24px;
+  min-height: 280;  
+}
+.ant-spin{
+  margin: 0 auto;
+}
+
+.center{
+  text-align: center;
+}
+
+.float-right{
+  float: right;
+  text-align: right;
+}
+
+.float-left{
+  float: left;
+  text-align: left;
+}
+h2{
+  padding: 0px;
+  margin: 0px;
+}
+hr{
+  /* padding: 5px 0px 5px 0px; */
+  margin: 5px 0px 5px 0px;  
+  border-top: 1px solid #e8e8e8;
+}
