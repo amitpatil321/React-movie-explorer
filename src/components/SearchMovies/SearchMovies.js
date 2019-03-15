@@ -7,7 +7,8 @@ import * as CONFIG from '../../config/config';
 
 const Option = AutoComplete.Option;
 
-function onSelect(value) {
+function onSelect(value, option) {
+    console.log(option);
     console.log('onSelect', value);
 }
   
@@ -34,7 +35,6 @@ class SearchMovies extends Component {
     }    
 
     _renderMovieName(movie){
-        console.log(movie);
         let poster_path = (movie.poster_path != null) ? "http://image.tmdb.org/t/p/w185/"+movie.poster_path : CONFIG.DEFAULT_POSTER;
         return (
             <Option key={movie.id} text={movie.title}>
@@ -52,6 +52,7 @@ class SearchMovies extends Component {
                 onSelect={onSelect}
                 onSearch={debounce(this.handleSearch, 200)}
                 placeholder="Search Movie..."
+                optionLabelProp="text"
             />              
         );
     }
