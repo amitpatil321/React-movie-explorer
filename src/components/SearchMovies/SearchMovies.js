@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { AutoComplete } from 'antd';
 import debounce from 'lodash/debounce';
+import { withRouter } from 'react-router-dom';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
 
 const Option = AutoComplete.Option;
-
-function onSelect(value, option) {
-    console.log(option);
-    console.log('onSelect', value);
-}
   
 class SearchMovies extends Component {
     state = {
@@ -43,13 +39,24 @@ class SearchMovies extends Component {
           );        
     }
 
+    _onSelect = (value, options) => {
+        console.log(options);
+        let name = options.props.text;
+        name = name.replace(/ /g,"-");
+        // this.props.history.push("/movie");
+        this.props.history.push({
+            pathname: '/'+name,
+            state: { movieId : value }
+        })        
+    }    
+
     render() {
         const { dataSource } = this.state;
         return (
             <AutoComplete
                 dataSource={dataSource.map(this._renderMovieName)}
                 style={{ width: 400 }}
-                onSelect={onSelect}
+                onSelect={this._onSelect}
                 onSearch={debounce(this.handleSearch, 200)}
                 placeholder="Search Movie..."
                 optionLabelProp="text"
@@ -58,4 +65,4 @@ class SearchMovies extends Component {
     }
 }
 
-export default SearchMovies;
+export default withRouter(SearchMovies);

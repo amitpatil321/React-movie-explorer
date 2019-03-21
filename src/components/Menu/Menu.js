@@ -22,14 +22,7 @@ class HeaderMenu extends Component {
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="home">Home</Menu.Item>
-            <Menu.Item key="trending">Trending</Menu.Item>
-            <Menu.Item key="popular">Popular</Menu.Item>
             <Menu.Item key="search" disabled>
-              {/* <Search
-                placeholder="Search..."
-                onSearch={value => this._onSearch(value)}
-                style={{ width: 200 }}
-              />*/}
               <SearchMovies />
             </Menu.Item>
           </Menu>

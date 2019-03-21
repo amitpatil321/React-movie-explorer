@@ -2,6 +2,7 @@ dependencies:
   antd: 3.13.2
   axios: 0.18.0
   lodash: 4.17.11
+  react-router-dom: 5.0.0
 packages:
   /@ant-design/icons-react/1.1.2/@ant-design!icons@1.1.16:
     dependencies:
@@ -19,6 +20,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0zNVP5JYBJkfMi9HotN6QBQjF3SFmUlumJNJXZIH+pZWp/5EbrCczzlG3YTmBWoyRHAsuOGIjSFIy8v/76DTPg==
+  /@babel/runtime/7.4.2:
+    dependencies:
+      regenerator-runtime: 0.13.2
+    dev: false
+    resolution:
+      integrity: sha512-7Bl2rALb7HpvXFL7TETNzKSAeBVCPHELzc0C//9FCxN8nsiueWSJBqaF+2oIJScyILStASR/Cx5WMkXGYTiJFA==
   /add-dom-event-listener/1.1.0:
     dependencies:
       object-assign: 4.1.1
@@ -159,6 +166,18 @@ packages:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0
     resolution:
       integrity: sha512-KkpaLARMhsTsgp0d2NA/R94F/eDLbhXERdIq3LvX2biCAXcDvHYoOqHfWCHf1+OLj+HKBotLG3KqaOOf+C1C+A==
+  /create-react-context/0.2.3/prop-types@15.7.2:
+    dependencies:
+      fbjs: 0.8.17
+      gud: 1.0.0
+      prop-types: 15.7.2
+    dev: false
+    id: registry.npmjs.org/create-react-context/0.2.3
+    peerDependencies:
+      prop-types: ^15.0.0
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0
+    resolution:
+      integrity: sha512-CQBmD0+QGgTaxDL3OX1IDXYqjkp2It4RIbcb99jS6AEg27Ga+a9G3JtK6SIu0HBwPLZlmwt9F7UwWA4Bn92Rag==
   /css-animation/1.5.0:
     dependencies:
       babel-runtime: 6.26.0
@@ -245,13 +264,24 @@ packages:
       node: '>=0.8.0'
     resolution:
       integrity: sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
+  /history/4.9.0:
+    dependencies:
+      '@babel/runtime': 7.4.2
+      loose-envify: 1.4.0
+      resolve-pathname: 2.2.0
+      tiny-invariant: 1.0.3
+      tiny-warning: 1.0.2
+      value-equal: 0.4.0
+    dev: false
+    resolution:
+      integrity: sha512-H2DkjCjXf0Op9OAr6nJ56fcRkTSNrUiv41vNJ6IswJjif6wlpZK0BTfFbi7qK9dXLSYZxkq5lBsj3vUjlYBYZA==
   /hoist-non-react-statics/2.5.5:
     dev: false
     resolution:
       integrity: sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
   /hoist-non-react-statics/3.3.0:
     dependencies:
-      react-is: 16.8.2
+      react-is: 16.8.4
     dev: false
     resolution:
       integrity: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -291,6 +321,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
+  /isarray/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
   /ismobilejs/0.5.1:
     dev: false
     resolution:
@@ -391,6 +425,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O1rwbvEfAdhtonTv+v6IQeMOKTi/wlHcXpI3hehyPDlujkjSBQC6Vtzg0mdy+v2KVDmuPf7hAbHlTBM6q1bUHQ==
+  /path-to-regexp/1.7.0:
+    dependencies:
+      isarray: 0.0.1
+    dev: false
+    resolution:
+      integrity: sha1-Wf3g9DW62suhA6hOnTvGTpa5k30=
   /performance-now/2.1.0:
     dev: false
     resolution:
@@ -412,7 +452,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-      react-is: 16.8.2
+      react-is: 16.8.4
     dev: false
     resolution:
       integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -808,6 +848,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
+  /react-is/16.8.4:
+    dev: false
+    resolution:
+      integrity: sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
   /react-lazy-load/3.0.13:
     dependencies:
       eventlistener: 0.0.1
@@ -824,6 +868,37 @@ packages:
     dev: false
     resolution:
       integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+  /react-router-dom/5.0.0:
+    dependencies:
+      '@babel/runtime': 7.4.2
+      history: 4.9.0
+      loose-envify: 1.4.0
+      prop-types: 15.7.2
+      react-router: 5.0.0
+      tiny-invariant: 1.0.3
+      tiny-warning: 1.0.2
+    dev: false
+    peerDependencies:
+      react: '>=15'
+    resolution:
+      integrity: sha512-wSpja5g9kh5dIteZT3tUoggjnsa+TPFHSMrpHXMpFsaHhQkm/JNVGh2jiF9Dkh4+duj4MKCkwO6H08u6inZYgQ==
+  /react-router/5.0.0:
+    dependencies:
+      '@babel/runtime': 7.4.2
+      create-react-context: /create-react-context/0.2.3/prop-types@15.7.2
+      history: 4.9.0
+      hoist-non-react-statics: 3.3.0
+      loose-envify: 1.4.0
+      path-to-regexp: 1.7.0
+      prop-types: 15.7.2
+      react-is: 16.8.4
+      tiny-invariant: 1.0.3
+      tiny-warning: 1.0.2
+    dev: false
+    peerDependencies:
+      react: '>=15'
+    resolution:
+      integrity: sha512-6EQDakGdLG/it2x9EaCt9ZpEEPxnd0OCLBHQ1AcITAAx7nCnyvnzf76jKWG1s2/oJ7SSviUgfWHofdYljFexsA==
   /react-slick/0.23.2:
     dependencies:
       classnames: 2.2.6
@@ -842,10 +917,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
+  /regenerator-runtime/0.13.2:
+    dev: false
+    resolution:
+      integrity: sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
   /resize-observer-polyfill/1.5.1:
     dev: false
     resolution:
       integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
+  /resolve-pathname/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-bAFz9ld18RzJfddgrO2e/0S2O81710++chRMUxHjXOYKF6jTAMrUNZrEZ1PvV0zlhfjidm08iRPdTLPno1FuRg==
   /rmc-feedback/2.0.0:
     dependencies:
       babel-runtime: 6.26.0
@@ -879,6 +962,14 @@ packages:
     dev: false
     resolution:
       integrity: sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=
+  /tiny-invariant/1.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-ytQx8T4DL8PjlX53yYzcIC0WhIZbpR0p1qcYjw2pHu3w6UtgWwFJQ/02cnhOnBBhlFx/edUIfcagCaQSe3KMWg==
+  /tiny-warning/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-rru86D9CpQRLvsFG5XFdy0KdLAvjdQDyZCsRcuu60WtzFylDM3eAWSxEVz5kzL2Gp544XiUvPbVKtOA/txLi9Q==
   /tinycolor2/1.4.1:
     dev: false
     resolution:
@@ -887,6 +978,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-T3PVJ6uz8i0HzPxOF9SWzWAlfN/DavlpQqepn22xgve/5QecC+XMCAtmUNnY7C9StehaV6exjUCI801lOI7QlQ==
+  /value-equal/0.4.0:
+    dev: false
+    resolution:
+      integrity: sha512-x+cYdNnaA3CxvMaTX0INdTCN8m8aF2uY9BvEqmxuYp8bL09cs/kWVQPVGcA35fMktdOsP69IgU7wFj/61dJHEw==
   /warning/2.1.0:
     dependencies:
       loose-envify: 1.4.0
@@ -916,3 +1011,4 @@ specifiers:
   antd: ^3.13.2
   axios: ^0.18.0
   lodash: ^4.17.11
+  react-router-dom: ^5.0.0

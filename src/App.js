@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 import HeaderMenu from './components/Menu/Menu';
 
-import ListMovies from './components/ListMovies/ListMovies'
+import Home from './components/Home/Home';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 
 import "antd/dist/antd.css";
 import './App.css';
@@ -14,20 +16,26 @@ const {
 class App extends Component {
   render() {
     return (
-      <div className="App">
-       <Layout className="layout">
-          <HeaderMenu />
-          <Content className="mainContent-outer">
-            <div className="mainContent">
-              <ListMovies title="Trending This Week"/>
-              <ListMovies title="Popular"/>
-            </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Movies App ©2019 Created by Amit Patil
-          </Footer>
-        </Layout>,     
-      </div>
+      <BrowserRouter>
+            <div className="App">
+            <Layout className="layout">
+               <HeaderMenu />
+               <Content className="mainContent-outer">
+                 <div className="mainContent">
+                  <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/:name" component={MovieDetails}/>
+                    <Route component={Home}/>
+                  </Switch>                 
+                 </div>
+               </Content>
+               <Footer style={{ textAlign: 'center' }}>
+                 Movies App ©2019 Created by Amit Patil
+               </Footer>
+             </Layout>   
+           </div>                 
+
+      </BrowserRouter>              
     );
   }
 }
