@@ -1,11 +1,12 @@
 .mainContent-outer{
-  padding: 50px 0px 0px;
+  /* padding: 50px 0px 0px; */
 }
 .mainContent{
+  min-height: 800px;
   padding-top: 20px;
   background: #fff;
   padding: 24px;
-  min-height: 280;  
+  background-size: cover; 
 }
 .ant-spin{
   margin: 0 auto;

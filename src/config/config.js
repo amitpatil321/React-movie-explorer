@@ -1,2 +1,5 @@
 export const API_KEY = "08308f4c5d9eb1e0301d7a1887838bec"; 
 export const DEFAULT_POSTER = "/images/noposter.png"; 
+
+// Routes
+export const MOVIE_DETAILS_PAGE = "/movie/"

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { AutoComplete } from 'antd';
 import debounce from 'lodash/debounce';
+// import {find} from 'lodash';
 import { withRouter } from 'react-router-dom';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
 
 const Option = AutoComplete.Option;
-  
+
 class SearchMovies extends Component {
     state = {
         dataSource: [],
@@ -40,13 +41,16 @@ class SearchMovies extends Component {
     }
 
     _onSelect = (value, options) => {
-        console.log(options);
+        if(!value) return;
+        
+        // Get all details of selected moview and pass to next page
+        let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
+        
         let name = options.props.text;
         name = name.replace(/ /g,"-");
-        // this.props.history.push("/movie");
         this.props.history.push({
-            pathname: '/'+name,
-            state: { movieId : value }
+            pathname: CONFIG.MOVIE_DETAILS_PAGE+name,
+            state: { movie : movieDetails }
         })        
     }    
 
@@ -57,7 +61,7 @@ class SearchMovies extends Component {
                 dataSource={dataSource.map(this._renderMovieName)}
                 style={{ width: 400 }}
                 onSelect={this._onSelect}
-                onSearch={debounce(this.handleSearch, 200)}
+                onSearch={debounce(this.handleSearch, 300)} // Add some delay to search
                 placeholder="Search Movie..."
                 optionLabelProp="text"
             />              
