@@ -20,28 +20,26 @@ class ListMovies extends Component {
         let list;
         let movies = [];
         setTimeout(() => {
-            let movie = [];
             API.getPopularMovies().then(response => {
                 list = Object.keys(response.results).map(movie => {
-                
-                // save movie for later use
-                movies.push(response.results[movie])
-                    
-                let movie_name = "";
-                let { id, title, name, poster_path, vote_average } = response.results[movie];
-                
-                // Few movies have name property while most of them have title propertly.
-                if(title === undefined && name === undefined)
-                    return;
-                
-                // Check if title is undefined
-                movie_name = (title) ? title : name;
+                    // save movie for later use
+                    movies.push(response.results[movie]);
 
-                return (
-                    <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
-                        <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
-                    </Col>
-                );             
+                    let movie_name = "";
+                    let { id, title, name, poster_path, vote_average } = response.results[movie];
+                    
+                    // Few movies have name property while most of them have title propertly.
+                    if(title === undefined && name === undefined)
+                        return null;
+                    
+                    // Check if title is undefined
+                    movie_name = (title) ? title : name;
+
+                    return (
+                        <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
+                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
+                        </Col>
+                    );             
                 }); // We need only 12 results
 
                 this.setState({ list : list, movies : movies });

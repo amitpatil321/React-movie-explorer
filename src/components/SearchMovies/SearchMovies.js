@@ -22,7 +22,6 @@ class SearchMovies extends Component {
                 response.results.map(each => {
                     names.push(each);
                 });
-
                 _this.setState({ dataSource : names });
             });
         }else{
@@ -35,7 +34,7 @@ class SearchMovies extends Component {
         let poster_path = (movie.poster_path != null) ? "http://image.tmdb.org/t/p/w185/"+movie.poster_path : CONFIG.DEFAULT_POSTER;
         return (
             <Option key={movie.id} text={movie.title}>
-                <img src={poster_path} width={50} height={60} />&nbsp;{movie.title} ({movie.release_date.split("-")[0]})
+                <img src={poster_path} width={50} height={60} alt={movie.title} />&nbsp;{movie.title} ({movie.release_date.split("-")[0]})
             </Option>
           );        
     }

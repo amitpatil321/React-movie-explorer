@@ -4,5 +4,15 @@
     min-height: 800px;
     display: block;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
+    padding: 20px;
+    opacity: 0.9;
+}
+
+.movieName{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.movieTagline, .overview{
+    font-family: 'Lato', sans-serif;
 }

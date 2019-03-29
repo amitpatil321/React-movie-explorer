@@ -3,7 +3,6 @@ import ListMovies from '../ListMovies/ListMovies';
 
 class Home extends Component {
     componentDidMount(){
-        console.log('Mounted');
         // remove background iamge if any applied
         document.getElementById("mainContent").style.backgroundImage = '';
     }

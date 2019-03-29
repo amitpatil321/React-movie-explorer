@@ -21,3 +21,12 @@ export const searchMovies = (string) => {
         throw new Error("Error fetching movies!");
     });   
 }
+
+export const movieDetails = (movieId) => {
+    return Axios.get("https://api.themoviedb.org/3/movie/"+movieId+"?api_key="+CONFIG.API_KEY).then(response => {
+        return response.data;
+    })
+    .catch((error) => {
+        throw new Error("Error fetching movies!");
+    });   
+}

@@ -1,6 +1,10 @@
+body{
+  font-family: 'Lato', sans-serif;
+}
 .mainContent-outer{
   /* padding: 50px 0px 0px; */
 }
+
 .mainContent{
   min-height: 800px;
   padding-top: 20px;

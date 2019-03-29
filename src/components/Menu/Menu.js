@@ -11,7 +11,6 @@ class HeaderMenu extends Component {
     }
 
     render() {
-      const { dataSource } = this.state;
       return (
         <Header>
           <div className="logo" />
@@ -21,7 +20,7 @@ class HeaderMenu extends Component {
             defaultSelectedKeys={['2']}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="home">Home</Menu.Item>
+            <Menu.Item key="home"><a href="/">Home</a></Menu.Item>
             <Menu.Item key="search" disabled>
               <SearchMovies />
             </Menu.Item>
