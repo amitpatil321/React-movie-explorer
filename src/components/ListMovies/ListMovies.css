@@ -1,3 +1,12 @@
 .moviecard{
    margin-bottom: 10px;
 }
+
+.ant-spin{
+   margin: 0 auto;
+   display: block !important;
+}
+.anticon-spin{
+   font-size: 34px;
+   margin-top: 100px;
+}

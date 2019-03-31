@@ -1,0 +1,16 @@
+---
+  0 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  1 debug pnpm: 
+    isCaseSensitive: false
+    store: "/Users/amitpatil/.pnpm-store/2"
+  2 error pnpm: 
+    message: 
+      code: "ERR_PNPM_MODULES_BREAKING_CHANGE"
+      modulesPath: "/Users/amitpatil/Udemy/react/moviesdb/node_modules"
+    err: 
+      name: "Error"
+      message: "The node_modules structure at \"/Users/amitpatil/Udemy/react/moviesdb/node_modules\" is not compatible with the current pnpm version. Run \"pnpm install --force\" to recreate node_modules."
+      code: "ERR_PNPM_MODULES_BREAKING_CHANGE"
+      stack: "Error: The node_modules structure at \"/Users/amitpatil/Udemy/react/moviesdb/node_modules\" is not compatible with the current pnpm version. Run \"pnpm install --force\" to recreate node_modules.\n    at Object.checkCompatibility [as default] (/usr/local/pnpm-global/1/node_modules/.registry.npmjs.org/pnpm/3.0.1/node_modules/pnpm/lib/node_modules/supi/lib/getContext/checkCompatibility/index.js:19:15)\n    at Promise.all.importers.map (/usr/local/pnpm-global/1/node_modules/.registry.npmjs.org/pnpm/3.0.1/node_modules/pnpm/lib/node_modules/supi/lib/getContext/index.js:87:41)\n    at Array.map (<anonymous>)\n    at validateNodeModules (/usr/local/pnpm-global/1/node_modules/.registry.npmjs.org/pnpm/3.0.1/node_modules/pnpm/lib/node_modules/supi/lib/getContext/index.js:77:33)\n    at Object.getContext [as default] (/usr/local/pnpm-global/1/node_modules/.registry.npmjs.org/pnpm/3.0.1/node_modules/pnpm/lib/node_modules/supi/lib/getContext/index.js:18:15)\n    at process._tickCallback (internal/process/next_tick.js:68:7)"

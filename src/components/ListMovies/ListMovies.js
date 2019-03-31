@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Spin } from 'antd';
+import { Row, Col, Spin, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 import Alert from '../Alert/Alert.js';
@@ -9,46 +9,46 @@ import * as CONFIG from '../../config/config';
 
 import './ListMovies.css';
 
+const antIcon = <Icon type="loading" spin />;
+
 class ListMovies extends Component {
     state = {
         error : null,
-        list : <Spin ></Spin>,
+        list : <Spin indicator={antIcon}></Spin>,
         movies : {}
     }
 
     componentDidMount (){
         let list;
         let movies = [];
-        setTimeout(() => {
-            API.getPopularMovies().then(response => {
-                list = Object.keys(response.results).map(movie => {
-                    // save movie for later use
-                    movies.push(response.results[movie]);
+        API.getPopularMovies().then(response => {
+            list = Object.keys(response.results).map(movie => {
+                // save movie for later use
+                movies.push(response.results[movie]);
 
-                    let movie_name = "";
-                    let { id, title, name, poster_path, vote_average } = response.results[movie];
-                    
-                    // Few movies have name property while most of them have title propertly.
-                    if(title === undefined && name === undefined)
-                        return null;
-                    
-                    // Check if title is undefined
-                    movie_name = (title) ? title : name;
+                let movie_name = "";
+                let { id, title, name, poster_path, vote_average } = response.results[movie];
+                
+                // Few movies have name property while most of them have title propertly.
+                if(title === undefined && name === undefined)
+                    return null;
+                
+                // Check if title is undefined
+                movie_name = (title) ? title : name;
 
-                    return (
-                        <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
-                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
-                        </Col>
-                    );             
-                }); // We need only 12 results
+                return (
+                    <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
+                        <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
+                    </Col>
+                );             
+            }); // We need only 12 results
 
-                this.setState({ list : list, movies : movies });
+            this.setState({ list : list, movies : movies });
 
-            }).catch((error) => {
-                let errorBox = <Alert type="error" message={error.toString()} />
-                this.setState({ error : errorBox, list : null })
-            });
-        }, 1000);    
+        }).catch((error) => {
+            let errorBox = <Alert type="error" message={error.toString()} />
+            this.setState({ error : errorBox, list : null })
+        });
     }
     
     // Movie card clicked
