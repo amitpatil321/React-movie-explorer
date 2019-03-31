@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Layout } from 'antd';
+import { Link } from 'react-router-dom';
 import SearchMovies from '../SearchMovies/SearchMovies';
 const { Header } = Layout;
 
@@ -20,7 +21,7 @@ class HeaderMenu extends Component {
             defaultSelectedKeys={['2']}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="home"><a href="/">Home</a></Menu.Item>
+            <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
             <Menu.Item key="search" disabled>
               <SearchMovies />
             </Menu.Item>
