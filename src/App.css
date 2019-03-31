@@ -38,3 +38,7 @@ hr{
   margin: 5px 0px 5px 0px;  
   border-top: 1px solid #e8e8e8;
 }
+.ant-layout-footer{
+  background: #001529;
+  color: #fff;
+}
