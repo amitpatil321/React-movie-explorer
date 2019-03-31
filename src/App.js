@@ -32,7 +32,7 @@ class App extends Component {
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-              Movies App ©2019 Created by Amit Patil
+              TMDB React Movies App ©{new Date().getFullYear()}
             </Footer>
           </Layout>   
         </div>                 
