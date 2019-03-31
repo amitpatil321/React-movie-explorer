@@ -46,7 +46,7 @@ class ListMovies extends Component {
 
             }).catch((error) => {
                 let errorBox = <Alert type="error" message={error.toString()} />
-                this.setState({ error : errorBox })
+                this.setState({ error : errorBox, list : null })
             });
         }, 1000);    
     }
