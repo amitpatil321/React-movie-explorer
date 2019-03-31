@@ -7,8 +7,9 @@ const { Meta } = Card;
 const MovieCard = props => {
     return (<Card
         hoverable
+        bordered
         style={{ width: 240 }}
-        cover={<img alt={props.title} src={ "http://image.tmdb.org/t/p/w185/"+props.poster } />}
+        cover={<img alt={props.title} src={ "http://image.tmdb.org/t/p/w342/"+props.poster } />}
         className="eachcard"
     >
         <Meta
