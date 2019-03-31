@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Col, Spin, Icon } from 'antd';
+import { Row, Col, Spin, Icon, Empty } from 'antd';
 import { withRouter } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 import Alert from '../Alert/Alert.js';
 import MovieCard from '../Card/Card';
@@ -22,7 +23,7 @@ class ListMovies extends Component {
         let list;
         let movies = [];
         API.getPopularMovies().then(response => {
-            list = Object.keys(response.results).map(movie => {
+            list = Object.keys(response.results).map((movie, index) => {
                 // save movie for later use
                 movies.push(response.results[movie]);
 
@@ -38,7 +39,9 @@ class ListMovies extends Component {
 
                 return (
                     <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
-                        <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
+                        <Fade delay={index * 30}>
+                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
+                        </Fade>
                     </Col>
                 );             
             }); // We need only 12 results
@@ -47,7 +50,7 @@ class ListMovies extends Component {
 
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, list : null })
+            this.setState({ error : errorBox, list : <Empty /> })
         });
     }
     
@@ -55,7 +58,7 @@ class ListMovies extends Component {
     _movieSelected = (id) => {
         let movieDetails = this.state.movies.find(movie => movie.id === id);
 
-        let name = movieDetails.title;
+        let name = (movieDetails.title) ? movieDetails.title : movieDetails.name;
         name = name.replace(/ /g,"-");
         this.props.history.push({
             pathname: CONFIG.MOVIE_DETAILS_PAGE+name,
