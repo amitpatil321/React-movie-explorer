@@ -44,7 +44,7 @@ class ListMovies extends Component {
                         </Fade>
                     </Col>
                 );             
-            }); // We need only 12 results
+            }).slice(0, 18); // We need only 18 results
 
             this.setState({ list : list, movies : movies });
 
