@@ -28,7 +28,7 @@ class ListMovies extends Component {
                 movies.push(response.results[movie]);
 
                 let movie_name = "";
-                let { id, title, name, poster_path, vote_average } = response.results[movie];
+                let { id, title, name, poster_path, vote_average, overview } = response.results[movie];
                 
                 // Few movies have name property while most of them have title propertly.
                 if(title === undefined && name === undefined)
@@ -40,7 +40,7 @@ class ListMovies extends Component {
                 return (
                     <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
                         <Fade delay={index * 30}>
-                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} />
+                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} desc={overview} />
                         </Fade>
                     </Col>
                 );             
