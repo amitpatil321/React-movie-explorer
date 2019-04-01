@@ -60,11 +60,16 @@ class MovieDetails extends Component {
     _getCast(casts){
         return casts.map((person, index) => {
             // show only top 8 cast members
-            if(index > 7) return;
+            if(index > 7) return null;
+
+            // Check if photo is null ?
+            let pic = "/images/nophoto.jpg";
+            if(person.profile_path)
+                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
             return <Col span={3} key={index}>
                 <Zoom delay={index * 80}>
                     <Link to={"/person/"+person.id+"/"+person.name}>
-                        <img src={"https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path} className="actorPic"/>
+                        <img src={pic} className="actorPic" alt={person.name}/>
                         <p>
                             <strong>{person.name}</strong><br />
                             <i>{person.character}</i>
