@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Row, Col, Typography, Tag, Divider, Empty, Avatar } from 'antd';
+import { Row, Col, Typography, Tag, Divider, Empty, Tooltip } from 'antd';
 import { Fade,Zoom } from 'react-reveal';
 import { Link } from 'react-router-dom';
 
 import * as API from '../../API/MoviesAPI';
 import './MovieDetails.css'
 import Alert from '../Alert/Alert.js';
+import * as CONFIG from '../../config/config';
 
 const { Title, Paragraph } = Typography;
 
@@ -52,23 +53,37 @@ class MovieDetails extends Component {
 
     _getProductionCompanies(companies){
         let arrCompanies = Object.keys(companies);
-        return arrCompanies.map((element, index) => 
-            index == arrCompanies.length - 1 ? <Link to={"/company/"+companies[element].name} key={index}>{companies[element].name}</Link> : [<Link to={"/company/"+companies[element].name} key={index}>{companies[element].name}</Link>, ", "]
-        )
+        let pic, company;
+        return arrCompanies.map((element, index) => {
+            company = companies[element];
+            pic = CONFIG.NO_LOGO_PHOTO;
+            if(company.logo_path)
+                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;        
+
+            return (
+                <Col span={3} key={index}>
+                    <Zoom delay={index * 80}>
+                        <Tooltip placement="bottom" title={company.name}>
+                            <Link to={CONFIG.PRODUCTION_COMPANY+company.id+"/"+company.name}>
+                                <img src={pic} alt={company.name} width={50}/>
+                                {/* <p>{company.name}</p> */}
+                            </Link>
+                        </Tooltip>
+                    </Zoom>        
+                </Col>
+            );          
+        }).slice(0, 8); // We need only 8 results;
     }
 
     _getCast(casts){
         return casts.map((person, index) => {
-            // show only top 8 cast members
-            if(index > 7) return null;
-
             // Check if photo is null ?
-            let pic = "/images/nophoto.jpg";
+            let pic = CONFIG.NO_PERSON_PHOTO;
             if(person.profile_path)
                 pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
             return <Col span={3} key={index}>
                 <Zoom delay={index * 80}>
-                    <Link to={"/person/"+person.id+"/"+person.name}>
+                    <Link to={CONFIG.PERSON_PROFILE+person.id+"/"+person.name}>
                         <img src={pic} className="actorPic" alt={person.name}/>
                         <p>
                             <strong>{person.name}</strong><br />
@@ -77,7 +92,7 @@ class MovieDetails extends Component {
                     </Link>
                 </Zoom>        
             </Col>
-        });
+        }).slice(0, 8); // We need only 8 results;
     }
 
     render() {

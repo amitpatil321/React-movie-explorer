@@ -2,4 +2,10 @@ export const API_KEY = "08308f4c5d9eb1e0301d7a1887838bec";
 export const DEFAULT_POSTER = "/images/noposter.png"; 
 
 // Routes
-export const MOVIE_DETAILS_PAGE = "/movie/"
+export const MOVIE_DETAILS_PAGE = "/movie/";
+export const PRODUCTION_COMPANY = "/company/";
+export const PERSON_PROFILE = "/person/";
+
+// constants
+export const NO_PERSON_PHOTO = "/images/nophoto.jpg";
+export const NO_LOGO_PHOTO = "/images/no_logo.jpg";
