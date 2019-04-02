@@ -17,9 +17,13 @@
 }
 .movieName{
     font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: 10px;
 }
 .movieTagline, .overview{
     font-family: 'Lato', sans-serif;
+}
+.prodCompanies{
+    margin-top: 20px;    
 }
 .prodCompanies a{
     font-size: 16px;

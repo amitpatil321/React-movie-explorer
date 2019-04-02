@@ -4,9 +4,10 @@ import { Fade,Zoom } from 'react-reveal';
 import { Link } from 'react-router-dom';
 
 import * as API from '../../API/MoviesAPI';
-import './MovieDetails.css'
-import Alert from '../Alert/Alert.js';
 import * as CONFIG from '../../config/config';
+import Alert from '../Alert/Alert.js';
+import MovieMeta from '../MovieMeta/MovieMeta';
+import './MovieDetails.css'
 
 const { Title, Paragraph } = Typography;
 
@@ -33,7 +34,6 @@ class MovieDetails extends Component {
         // Load movie cast
         API.movieCast(movieId).then(response => {
             let details = { ...this.state.movie, ...response };
-            console.log(details);
             this.setState({ movie : details });            
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
@@ -147,14 +147,16 @@ class MovieDetails extends Component {
                                 </Col>
                                 
                                 <Col span={17} offset={1} className="prodCompanies">
-                                    <Divider>Production Companies</Divider>
                                     {companies}
                                 </Col>  
-                             
+                                
+                                <Col span={17} offset={1}>
+                                    <MovieMeta movie={this.state.movie}/>
+                                </Col>
+
                             </Row>
                             <Row>
                                 <Col span={24} className="cast">
-                                    <Divider>Cast And Crew</Divider>
                                     {casts}
                                 </Col>
                             </Row>
