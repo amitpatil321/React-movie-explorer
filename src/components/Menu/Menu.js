@@ -4,16 +4,9 @@ import { Link } from 'react-router-dom';
 import SearchMovies from '../SearchMovies/SearchMovies';
 const { Header } = Layout;
 
-// const Search        = Input.Search;
-
-class HeaderMenu extends Component {
-    state = {
-      
-    }
-
-    render() {
+const HeaderMenu = (props) => {
       return (
-        <Header>
+        <Header style={{ position: 'fixed', zIndex: 1, width: '100%', paddingBottom: "70px"}}>
           <div className="logo" />
           <Menu
             theme="dark"
@@ -28,7 +21,6 @@ class HeaderMenu extends Component {
           </Menu>
         </Header>        
       )
-    }
 }  
 
 export default HeaderMenu;
