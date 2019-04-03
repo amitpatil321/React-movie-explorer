@@ -38,15 +38,18 @@ class ListMovies extends Component {
                 movie_name = (title) ? title : name;
 
                 return (
-                    <Col span={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
+                    <Col xs={12} lg={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
                         <Fade delay={index * 30}>
                             <MovieCard title={movie_name} poster={poster_path} rating={vote_average} desc={overview} />
                         </Fade>
                     </Col>
                 );             
-            }).slice(0, 18); // We need only 18 results
+            }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
 
             this.setState({ list : list, movies : movies });
+
+            // Apply random background image
+            this._applyBg();
 
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
@@ -66,12 +69,20 @@ class ListMovies extends Component {
         })
     }
 
+    _applyBg(){
+        var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
+
+        let backdrop_path = this.state.movies[randomnumber].backdrop_path;
+
+        let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
+        document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
+    }
+
     render(){
         return(
             <>
                 <Row>
-                    <Col span={20}><h2>{this.props.title}</h2></Col>
-                    <Col span={4} className="float-right"><h3><a href="#">View All</a></h3></Col>
+                    <Col span={24}><h2>{this.props.title}</h2></Col>
                 </Row>
                 <hr />
                 <Row gutter={16}>
