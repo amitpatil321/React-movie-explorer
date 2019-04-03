@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Typography, Tag, Divider, Empty, Tooltip } from 'antd';
+import { Row, Col, Typography, Empty } from 'antd';
 import { Fade,Zoom } from 'react-reveal';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,9 @@ import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
+import Tags from '../Tags/Tags';
+import ProdCompanies from '../ProdCompanies/ProdCompanies';
+
 import './MovieDetails.css'
 
 const { Title, Paragraph } = Typography;
@@ -45,36 +48,6 @@ class MovieDetails extends Component {
         this.setState({ movie : this.props.history.location.state.movie });
     }
 
-    _getTags(){
-        return this.state.movie.genres.map(genre => {
-            return <Tag key={genre.id} color={'#'+Math.random().toString(16).substr(-6)}>{genre.name}</Tag>
-        });
-    }
-
-    _getProductionCompanies(companies){
-        let arrCompanies = Object.keys(companies);
-        let pic, company;
-        return arrCompanies.map((element, index) => {
-            company = companies[element];
-            pic = CONFIG.NO_LOGO_PHOTO;
-            if(company.logo_path)
-                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;        
-
-            return (
-                <Col xs={6} lg={3} key={index}>
-                    <Zoom delay={index * 80}>
-                        <Tooltip placement="bottom" title={company.name}>
-                            <Link to={CONFIG.PRODUCTION_COMPANY+company.id+"/"+company.name}>
-                                <img src={pic} alt={company.name} width={50}/>
-                                {/* <p>{company.name}</p> */}
-                            </Link>
-                        </Tooltip>
-                    </Zoom>        
-                </Col>
-            );          
-        }).slice(0, CONFIG.COMPANIES_PER_PAGE); // We need only 8 results;
-    }
-
     _getCast(casts){
         return casts.map((person, index) => {
             // Check if photo is null ?
@@ -87,7 +60,7 @@ class MovieDetails extends Component {
                         <img src={pic} className="actorPic" alt={person.name}/>
                         <p>
                             <strong>{person.name}</strong><br />
-                            <i>{person.character}</i>
+                            <i className="charName">As {person.character}</i>
                         </p>
                     </Link>
                 </Zoom>        
@@ -105,23 +78,19 @@ class MovieDetails extends Component {
             return this.state.error;
 
         if(this.state.movie){
-            console.log(this.state.movie);
+            console.log("inside render");
             // Destructuring
-            let { title, name, production_companies, genres, backdrop_path, poster_path, tagline, overview, cast } = this.state.movie;
+            let { title, name, backdrop_path, poster_path, tagline, overview, cast } = this.state.movie;
 
             // Check whether title OR name provided
             title = (title) ? title : name;
-            
-            // List movie production companies
-            if(production_companies)
-                companies = this._getProductionCompanies(production_companies);
 
             if(cast){
                 casts = this._getCast(cast);
             }
 
-            if(genres)
-                tags = this._getTags();
+            // if(genres)
+            //     tags = this._getTags();
 
             let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
                 document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';
@@ -142,12 +111,14 @@ class MovieDetails extends Component {
                                         <Paragraph className="overview">
                                             {overview}
                                         </Paragraph>
-                                        <div className="tags">{tags}</div>
+                                        <div className="tags">
+                                            <Tags movie = {this.state.movie} />
+                                        </div>
                                     </Fade>
                                 </Col>
                                 
                                 <Col xs={24} lg={16} className="prodCompanies" type="flex">
-                                    {companies}
+                                    <ProdCompanies movie = {this.state.movie} />
                                 </Col>  
                                 
                                 <Col xs={24} lg={16}>
