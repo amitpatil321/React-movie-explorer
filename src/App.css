@@ -12,6 +12,9 @@ body{
   padding: 24px;
   background-size: cover; 
 }
+.mainContent h2{
+  color: #fff;
+}
 .ant-menu{
   line-height: 70px !important; 
 }

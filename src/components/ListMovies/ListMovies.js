@@ -70,11 +70,12 @@ class ListMovies extends Component {
     }
 
     _applyBg(){
+        // generate random number
         var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
-
+        // get image 
         let backdrop_path = this.state.movies[randomnumber].backdrop_path;
-
         let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
+        // Apply image as bg
         document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
     }
 

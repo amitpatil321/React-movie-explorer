@@ -58,7 +58,9 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
-
+.charName{
+    color: #4e4e4e;
+}
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
