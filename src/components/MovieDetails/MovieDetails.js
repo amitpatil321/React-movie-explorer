@@ -61,7 +61,7 @@ class MovieDetails extends Component {
                 pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;        
 
             return (
-                <Col span={3} key={index}>
+                <Col xs={6} lg={3} key={index}>
                     <Zoom delay={index * 80}>
                         <Tooltip placement="bottom" title={company.name}>
                             <Link to={CONFIG.PRODUCTION_COMPANY+company.id+"/"+company.name}>
@@ -72,7 +72,7 @@ class MovieDetails extends Component {
                     </Zoom>        
                 </Col>
             );          
-        }).slice(0, 8); // We need only 8 results;
+        }).slice(0, CONFIG.COMPANIES_PER_PAGE); // We need only 8 results;
     }
 
     _getCast(casts){
@@ -81,7 +81,7 @@ class MovieDetails extends Component {
             let pic = CONFIG.NO_PERSON_PHOTO;
             if(person.profile_path)
                 pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
-            return <Col span={3} key={index}>
+            return <Col xs={12} lg={3} key={index}>
                 <Zoom delay={index * 80}>
                     <Link to={CONFIG.PERSON_PROFILE+person.id+"/"+person.name}>
                         <img src={pic} className="actorPic" alt={person.name}/>
@@ -92,7 +92,7 @@ class MovieDetails extends Component {
                     </Link>
                 </Zoom>        
             </Col>
-        }).slice(0, 8); // We need only 8 results;
+        }).slice(0, CONFIG.CAST_PER_PAGE); // We need only 8 results;
     }
 
     render() {
@@ -128,12 +128,12 @@ class MovieDetails extends Component {
                 return (
                         <div className="movieDetails">
                             <Row gutter={16}>
-                                <Col span={6}>                    
+                                <Col xs={24} lg={7} className="moviePoster">                    
                                     <Fade>
                                         <img src={"http://image.tmdb.org/t/p/w342"+poster_path} alt={title} width="294px"/>
                                     </Fade>
                                 </Col>
-                                <Col span={17} offset={1}>
+                                <Col xs={{span:24, offset : 0}} lg={16} offset={1}>
                                     <Fade>
                                         <Title className="movieName">
                                             {title}
@@ -142,15 +142,15 @@ class MovieDetails extends Component {
                                         <Paragraph className="overview">
                                             {overview}
                                         </Paragraph>
-                                        <div>{tags}</div>
+                                        <div className="tags">{tags}</div>
                                     </Fade>
                                 </Col>
                                 
-                                <Col span={17} offset={1} className="prodCompanies">
+                                <Col xs={24} lg={16} className="prodCompanies" type="flex">
                                     {companies}
                                 </Col>  
                                 
-                                <Col span={17} offset={1}>
+                                <Col xs={24} lg={16}>
                                     <MovieMeta movie={this.state.movie}/>
                                 </Col>
 

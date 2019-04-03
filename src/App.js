@@ -22,7 +22,7 @@ class App extends Component {
         <div className="App">
         <Layout className="layout">
             <HeaderMenu />
-            <Content className="mainContent-outer">
+            <Content xs={24} className="mainContent-outer">
               <div className="mainContent" id="mainContent">
               <Switch>
                 <Route path="/" exact component={Home}/>

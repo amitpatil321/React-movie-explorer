@@ -2,7 +2,7 @@ body{
   font-family: 'Lato', sans-serif;
 }
 .mainContent-outer{
-  /* padding: 50px 0px 0px; */
+  margin-top: 70px;
 }
 
 .mainContent{
@@ -11,6 +11,9 @@ body{
   background: #fff;
   padding: 24px;
   background-size: cover; 
+}
+.ant-menu{
+  line-height: 70px !important; 
 }
 .ant-spin{
   margin: 0 auto;
@@ -41,4 +44,12 @@ hr{
 .ant-layout-footer{
   background: #001529;
   color: #fff;
+}
+
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .mainContent{
+    padding: 10px;
+  }
 }

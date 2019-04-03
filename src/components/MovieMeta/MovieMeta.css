@@ -14,3 +14,10 @@
     font-size: 24px;
     display: block;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .movieMeta span{
+        padding-bottom: 5px; 
+    }
+}

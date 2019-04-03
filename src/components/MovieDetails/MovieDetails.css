@@ -19,8 +19,14 @@
     font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 10px;
 }
+.moviePoster img{
+    max-width:100%;
+}
 .movieTagline, .overview{
     font-family: 'Lato', sans-serif;
+}
+.overview{
+    font-size: 18px;
 }
 .prodCompanies{
     margin-top: 20px;    
@@ -36,6 +42,9 @@
 .cast{
     text-align: center;
 }
+.cast a, .cast a:hover{
+    color: #000;
+}
 .cast img{
     border: 1px solid #888;
     padding: 2px;
@@ -49,3 +58,39 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .movieDetails{
+      width: 100%;
+      padding: 5px;
+    }
+    h1.ant-typography, .ant-typography h1{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    .movieName, .movieTagline, .moviePoster{
+        text-align: center;
+    }
+    .moviePoster img{
+        /* width: 100%;         */
+        object-fit: cover;
+        width: 100%;
+    }
+    .tags{
+        text-align: center;
+    }
+    .ant-tag{
+        height : 25px !important;
+        line-height : 23px !important;
+        font-weight : 900 !important;
+        padding : 0 6px !important;
+        font-size: 14px !important;
+        margin-bottom: 10px !important;
+    }
+    .prodCompanies img{
+        margin-bottom: 5px;
+        display: block;
+    }
+  }

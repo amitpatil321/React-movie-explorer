@@ -1,5 +1,6 @@
 .moviecard{
    margin-bottom: 10px;
+   padding: 0px !important;
 }
 .ant-spin{
    margin: 0 auto;
@@ -11,4 +12,10 @@
 }
 .eachcard{
    width: 220px !important;
+}
+
+@media only screen and (max-width: 768px) {
+   .moviecard{
+      padding: 0px !important;
+   } 
 }
