@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Col, Typography, Empty } from 'antd';
-import { Fade,Zoom } from 'react-reveal';
-import { Link } from 'react-router-dom';
+import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
 import Tags from '../Tags/Tags';
+import Cast from '../Cast/Cast';
 import ProdCompanies from '../ProdCompanies/ProdCompanies';
 
 import './MovieDetails.css'
@@ -23,49 +23,33 @@ class MovieDetails extends Component {
 
     componentDidMount(){
         // Show whatever we have quickly and then we load more details later
-        this.setState({ movie : this.props.location.state.movie });
-        // Load other details
-        let movieId = this.props.location.state.movie.id;
-        API.movieDetails(movieId).then(response => {
-            let details = { ...this.state.movie, ...response };
-            this.setState({ movie : details });
-        }).catch((error) => {
-            let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, ignore : false })
-        });
+        if(this.props.location.state){
+            this.setState({ movie : this.props.location.state.movie });
+            // Load other details
+            let movieId = this.props.location.state.movie.id;
+            API.movieDetails(movieId).then(response => {
+                let details = { ...this.state.movie, ...response };
+                this.setState({ movie : details });
+            }).catch((error) => {
+                let errorBox = <Alert type="error" message={error.toString()} />
+                this.setState({ error : errorBox, ignore : false })
+            });
 
-        // Load movie cast
-        API.movieCast(movieId).then(response => {
-            let details = { ...this.state.movie, ...response };
-            this.setState({ movie : details });            
-        }).catch((error) => {
-            let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, ignore :  true })
-        });
+            // Load movie cast
+            API.movieCast(movieId).then(response => {
+                let details = { ...this.state.movie, ...response };
+                this.setState({ movie : details });            
+            }).catch((error) => {
+                let errorBox = <Alert type="error" message={error.toString()} />
+                this.setState({ error : errorBox, ignore :  true })
+            });
+        }else
+            this.props.history.push(CONFIG.ROUTES.HOME)
+
     }
 
     componentWillReceiveProps(){
         this.setState({ movie : this.props.history.location.state.movie });
-    }
-
-    _getCast(casts){
-        return casts.map((person, index) => {
-            // Check if photo is null ?
-            let pic = CONFIG.NO_PERSON_PHOTO;
-            if(person.profile_path)
-                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
-            return <Col xs={12} lg={3} key={index}>
-                <Zoom delay={index * 80}>
-                    <Link to={CONFIG.PERSON_PROFILE+person.id+"/"+person.name}>
-                        <img src={pic} className="actorPic" alt={person.name}/>
-                        <p>
-                            <strong>{person.name}</strong><br />
-                            <i className="charName">As {person.character}</i>
-                        </p>
-                    </Link>
-                </Zoom>        
-            </Col>
-        }).slice(0, CONFIG.CAST_PER_PAGE); // We need only 8 results;
     }
 
     render() {
@@ -78,27 +62,20 @@ class MovieDetails extends Component {
             return this.state.error;
 
         if(this.state.movie){
-            console.log("inside render");
             // Destructuring
-            let { title, name, backdrop_path, poster_path, tagline, overview, cast } = this.state.movie;
+            let { title, name, backdrop_path, poster_path, tagline, overview } = this.state.movie;
 
             // Check whether title OR name provided
             title = (title) ? title : name;
 
-            if(cast){
-                casts = this._getCast(cast);
-            }
-
-            // if(genres)
-            //     tags = this._getTags();
-
+            // Set background image
             let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
                 document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';
+                
                 return (
                         <div className="movieDetails">
                             <Row gutter={16}>
-                                <Col xs={24} lg={7} className="moviePoster">                    
-                                    <Fade>
+                                <Col xs={24} lg={7} className="moviePoster">                  <Fade>
                                         <img src={"http://image.tmdb.org/t/p/w342"+poster_path} alt={title} width="294px"/>
                                     </Fade>
                                 </Col>
@@ -128,7 +105,7 @@ class MovieDetails extends Component {
                             </Row>
                             <Row>
                                 <Col span={24} className="cast">
-                                    {casts}
+                                    <Cast movie={this.state.movie}/>
                                 </Col>
                             </Row>
                         </div>
