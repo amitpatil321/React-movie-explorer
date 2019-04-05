@@ -48,7 +48,7 @@ class SearchMovies extends Component {
         let name = options.props.text;
         name = name.replace(/ /g,"-");
         this.props.history.push({
-            pathname: CONFIG.MOVIE_DETAILS_PAGE+name,
+            pathname: CONFIG.ROUTES.MOVIE+name,
             state: { movie : movieDetails }
         })        
     }    

@@ -9,7 +9,7 @@ const ProdCompanies = (props) => {
     if(props.movie.production_companies){
         let company,pic;
         return props.movie.production_companies.map((company, index) => {
-            pic = CONFIG.NO_LOGO_PHOTO;
+            pic = CONFIG.NO_PHOTO.LOGO;
             if(company.logo_path)
                 pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;        
 
@@ -17,7 +17,7 @@ const ProdCompanies = (props) => {
                 <Col xs={6} lg={3} key={index}>
                     <Zoom delay={index * 80}>
                         <Tooltip placement="bottom" title={company.name}>
-                            <Link to={CONFIG.PRODUCTION_COMPANY+company.id+"/"+company.name}>
+                            <Link to={CONFIG.ROUTES.PRODUCTION+company.id+"/"+company.name}>
                                 <img src={pic} alt={company.name} width={50}/>
                                 {/* <p>{company.name}</p> */}
                             </Link>

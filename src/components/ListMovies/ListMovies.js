@@ -7,6 +7,7 @@ import Alert from '../Alert/Alert.js';
 import MovieCard from '../Card/Card';
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
+import { makeUrl } from '../Utils/Utils';
 
 import './ListMovies.css';
 
@@ -62,11 +63,10 @@ class ListMovies extends Component {
         let movieDetails = this.state.movies.find(movie => movie.id === id);
 
         let name = (movieDetails.title) ? movieDetails.title : movieDetails.name;
-        name = name.replace(/ /g,"-");
         this.props.history.push({
-            pathname: CONFIG.MOVIE_DETAILS_PAGE+name,
+            pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
             state: { movie : movieDetails }
-        })
+        });
     }
 
     _applyBg(){

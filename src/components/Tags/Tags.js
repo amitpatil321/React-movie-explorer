@@ -1,6 +1,9 @@
 import React from 'react';
 import { Tag } from 'antd';
+import { Link } from 'react-router-dom';
+
 import * as CONFIG from '../../config/config';
+import { makeUrl } from '../Utils/Utils';
 
 const Tags = (props) => {
 
@@ -11,7 +14,11 @@ const Tags = (props) => {
 
     if(props.movie.genres){
         return props.movie.genres.map(genre => {
-            return <Tag key={genre.id} color={randomColor()}>{genre.name}</Tag>
+            return (
+                <Link key={genre.id} to={CONFIG.ROUTES.GENRE+genre.id+"/"+makeUrl(genre.name)}>
+                    <Tag key={genre.id} color={randomColor()}>{genre.name}</Tag>
+                </Link>
+             );
         });         
     }
     return null;
