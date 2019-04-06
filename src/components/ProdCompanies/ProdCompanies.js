@@ -7,7 +7,7 @@ import * as CONFIG from '../../config/config';
 
 const ProdCompanies = (props) => {
     if(props.movie.production_companies){
-        let company,pic;
+        let pic;
         return props.movie.production_companies.map((company, index) => {
             pic = CONFIG.NO_PHOTO.LOGO;
             if(company.logo_path)
