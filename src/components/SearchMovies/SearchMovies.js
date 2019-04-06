@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AutoComplete } from 'antd';
+import { AutoComplete, Rate } from 'antd';
 import debounce from 'lodash/debounce';
 // import {find} from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -36,16 +36,17 @@ class SearchMovies extends Component {
         // Check if poster image availabe
         let poster_path = (movie.poster_path) ? 
         CONFIG.IMAGE_SIZE.SMALL+movie.poster_path : CONFIG.NO_PHOTO.POSTER;        
-        
+
         return (
             <Option key={movie.id} text={movie.title}>
                 <img src={poster_path} width={50} height={60} alt={movie.title} />
                 <div className="searchItem">
                     &nbsp;<strong>{movie.title}</strong>
-                    &nbsp;({movie.release_date.split("-")[0]})
+                    &nbsp;{(movie.release_date) ? "("+movie.release_date.split("-")[0]+")" : '' }
                     <div>
                         {(movie.overview) ? movie.overview.substring(0,50)+"..." : ''}
                     </div>
+                    <div><Rate allowHalf defaultValue={movie.vote_average / 2} tooltips={movie.rating} disabled /></div>
                 </div>    
             </Option>
           );        
