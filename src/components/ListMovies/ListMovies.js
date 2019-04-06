@@ -50,7 +50,7 @@ class ListMovies extends Component {
             this.setState({ list : list, movies : movies });
 
             // Apply random background image
-            this._applyBg();
+            // this._applyBg();
 
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
@@ -61,7 +61,6 @@ class ListMovies extends Component {
     // Movie card clicked
     _movieSelected = (id) => {
         let movieDetails = this.state.movies.find(movie => movie.id === id);
-
         let name = (movieDetails.title) ? movieDetails.title : movieDetails.name;
         this.props.history.push({
             pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
