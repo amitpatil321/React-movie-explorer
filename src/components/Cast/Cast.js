@@ -7,8 +7,8 @@ import * as CONFIG from '../../config/config';
 import { makeUrl } from '../Utils/Utils';
 
 const Cast = (props) => {
-    if(props.movie.cast){
-        return props.movie.cast.map((person, index) => {
+    if(props.movie.credits){
+        return props.movie.credits.cast.map((person, index) => {
             // Check if photo is null ?
             let pic = CONFIG.NO_PHOTO.PERSON;
             if(person.profile_path)
