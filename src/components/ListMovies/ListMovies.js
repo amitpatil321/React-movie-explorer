@@ -48,10 +48,6 @@ class ListMovies extends Component {
             }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
 
             this.setState({ list : list, movies : movies });
-
-            // Apply random background image
-            // this._applyBg();
-
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
             this.setState({ error : errorBox, list : <Empty /> })
@@ -73,7 +69,7 @@ class ListMovies extends Component {
         var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
         // get image 
         let backdrop_path = this.state.movies[randomnumber].backdrop_path;
-        let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
+        let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL + backdrop_path;
         // Apply image as bg
         document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
     }
