@@ -21,15 +21,13 @@ class MovieDetails extends Component {
     }
 
     _loadMovieInfo(movie){
-        // Show whatever details we have, and then load remaining
-        
         let movieId = movie.id;
         API.movieDetails(movieId).then(response => {
             let details = { ...this.state.movie, ...response };
             this.setState({ movie : details });
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox })
+            this.setState({ error : errorBox, movie : null })
         });
     }
 
@@ -41,8 +39,10 @@ class MovieDetails extends Component {
     }
 
     componentDidUpdate(){
-        if(this.state.movie.id != this.props.history.location.state.movie.id)
-            this._loadMovieInfo(this.props.history.location.state.movie);
+        if(this.state.movie){
+            if(this.state.movie.id != this.props.history.location.state.movie.id)
+                this._loadMovieInfo(this.props.history.location.state.movie);
+        }
     }
 
     render() {
