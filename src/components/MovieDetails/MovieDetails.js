@@ -17,47 +17,31 @@ const { Title, Paragraph } = Typography;
 class MovieDetails extends Component {
     state = {
         movie : null,
-        error : null,
-        ignore : false // Whether to print this error ? "Game of thrones" fails to laod cast, But shows other info, so we dont want to break page just because "cast" isnt there :) 
+        error : null
     }
 
-    // handle API response
-    _handleResponse = (response) => {
-        let details = { ...this.state.movie, ...response };
-        this.setState({ movie : details });
-    }
-    
-    // handle API error
-    _handleError = (error, ignore) => {
-        let errorBox = <Alert type="error" message={error.toString()} />
-        this.setState({ error : errorBox, ignore : ignore })
+    _loadMovieInfo(movie){
+        // Show whatever details we have, and then load remaining
+        this.setState({ movie : movie });
+        let movieId = movie.id;
+        API.movieDetails(movieId).then(response => {
+            let details = { ...this.state.movie, ...response };
+            this.setState({ movie : details });
+        }).catch((error) => {
+            let errorBox = <Alert type="error" message={error.toString()} />
+            this.setState({ error : errorBox })
+        });
     }
 
     componentDidMount(){
-        // Show whatever we have quickly and then we load more details later
         if(this.props.location.state){
-            this.setState({ movie : this.props.location.state.movie });
-            // Load other details
-            let movieId = this.props.location.state.movie.id;
-            API.movieDetails(movieId).then(response => {
-                this._handleResponse(response);
-            }).catch((error) => {
-                this._handleError(error, false);
-            });
-
-            // Load movie cast
-            API.movieCast(movieId).then(response => {
-                this._handleResponse(response);
-            }).catch((error) => {
-                this._handleError(error, true);
-            });
+            this._loadMovieInfo(this.props.location.state.movie);
         }else
             this.props.history.push(CONFIG.ROUTES.HOME)
-
     }
 
-    componentWillReceiveProps(){
-        this.setState({ movie : this.props.history.location.state.movie });
+    componentWillReceiveProps(nextProps){
+        this._loadMovieInfo(nextProps.history.location.state.movie);
     }
 
     render() {
@@ -91,14 +75,18 @@ const MovieInfo = (props) => {
 
         // Check whether title OR name provided
         title = (title) ? title : name;
+        
+        // Check if poster image availabe
+        poster_path = (poster_path) ? 
+        CONFIG.IMAGE_SIZE.MEDIUM+poster_path : CONFIG.NO_PHOTO.POSTER
 
         // Set background image
-        let backgroundImage = "http://image.tmdb.org/t/p/original"+ backdrop_path;
+        let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
             document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';
         return (
             <>
                 <Col xs={24} lg={7} className="moviePoster">                  <Fade>
-                        <img src={"http://image.tmdb.org/t/p/w342"+poster_path} alt={title} width="294px"/>
+                        <img src={poster_path} alt={title} width="294px"/>
                     </Fade>
                 </Col>
                 <Col xs={{span:24, offset : 0}} lg={16} offset={1}>
