@@ -6,9 +6,9 @@ import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
-import Tags from '../Tags/Tags';
-import Cast from '../Cast/Cast';
-import ProdCompanies from '../ProdCompanies/ProdCompanies';
+import MovieTags from '../Tags/Tags';
+import MovieCast from '../Cast/Cast';
+import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
 
 import './MovieDetails.css'
 
@@ -18,7 +18,19 @@ class MovieDetails extends Component {
     state = {
         movie : null,
         error : null,
-        ignore : false // Whether to print this error ?
+        ignore : false // Whether to print this error ? "Game of thrones" fails to laod cast, But shows other info, so we dont want to break page just because "cast" isnt there :) 
+    }
+
+    // handle API response
+    _handleResponse = (response) => {
+        let details = { ...this.state.movie, ...response };
+        this.setState({ movie : details });
+    }
+    
+    // handle API error
+    _handleError = (error, ignore) => {
+        let errorBox = <Alert type="error" message={error.toString()} />
+        this.setState({ error : errorBox, ignore : ignore })
     }
 
     componentDidMount(){
@@ -28,20 +40,16 @@ class MovieDetails extends Component {
             // Load other details
             let movieId = this.props.location.state.movie.id;
             API.movieDetails(movieId).then(response => {
-                let details = { ...this.state.movie, ...response };
-                this.setState({ movie : details });
+                this._handleResponse(response);
             }).catch((error) => {
-                let errorBox = <Alert type="error" message={error.toString()} />
-                this.setState({ error : errorBox, ignore : false })
+                this._handleError(error, false);
             });
 
             // Load movie cast
             API.movieCast(movieId).then(response => {
-                let details = { ...this.state.movie, ...response };
-                this.setState({ movie : details });            
+                this._handleResponse(response);
             }).catch((error) => {
-                let errorBox = <Alert type="error" message={error.toString()} />
-                this.setState({ error : errorBox, ignore :  true })
+                this._handleError(error, true);
             });
         }else
             this.props.history.push(CONFIG.ROUTES.HOME)
@@ -54,21 +62,22 @@ class MovieDetails extends Component {
 
     render() {
         // Handle error and show error message
-        if(this.state.error != null && !this.state.ignore)
+        if(this.state.error != null && this.state.ignore)
             return this.state.error;
 
         if(this.state.movie){
+            let movie = this.state.movie;
             return (
-                    <div className="movieDetails">
-                        <Row gutter={16}>
-                            <MovieInfo movie={this.state.movie} />
-                            <ProductionCompanies movie={this.state.movie} />
-                            <Meta movie={this.state.movie} />
-                        </Row>
-                        <Row>
-                            <MovieCast movie={this.state.movie} />
-                        </Row>
-                    </div>
+                <div className="movieDetails">
+                    <Row gutter={16}>
+                        <MovieInfo movie={movie} />
+                        <Companies movie={movie} />
+                        <Meta movie={movie} />
+                    </Row>
+                    <Row>
+                        <Cast movie={movie} />
+                    </Row>
+                </div>
             );
         }else 
             return (<Empty />);
@@ -102,7 +111,7 @@ const MovieInfo = (props) => {
                             {overview}
                         </Paragraph>
                         <div className="tags">
-                            <Tags movie = {props.movie} />
+                            <MovieTags movie = {props.movie} />
                         </div>
                     </Fade>
                 </Col>
@@ -111,10 +120,10 @@ const MovieInfo = (props) => {
     }      
 }
 
-const ProductionCompanies = (props) => {
+const Companies = (props) => {
     return (
         <Col xs={24} lg={16} className="prodCompanies" type="flex">
-            <ProdCompanies movie = {props.movie} />
+            <MovieProdCompanies movie = {props.movie} />
         </Col>
     );  
 }
@@ -127,10 +136,10 @@ const Meta = (props) => {
     );
 }
 
-const MovieCast = (props) => {
+const Cast = (props) => {
     return (
         <Col span={24} className="cast">
-            <Cast movie={props.movie}/>
+            <MovieCast movie={props.movie}/>
         </Col>
     );    
 }
