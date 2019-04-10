@@ -3,3 +3,7 @@ export function makeUrl(str) {
     if(str)
         return str.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g,"-").toLowerCase();
 }
+
+export function removeBg(){
+    document.getElementById("layout").style.backgroundImage = '';
+}
