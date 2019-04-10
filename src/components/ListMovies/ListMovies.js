@@ -21,37 +21,54 @@ class ListMovies extends Component {
     }
 
     componentDidMount (){
+        switch(this.props.type){
+            case "trending":{
+                API.getPopularMovies().then(response => {
+                    this._listMovies(response);
+                }).catch((error) => {
+                    let errorBox = <Alert type="error" message={error.toString()} />
+                    this.setState({ error : errorBox, list : <Empty /> })
+                });                     
+            }
+            case "genre":{
+                API.withGenre(this.props.id).then(response => {
+                    this._listMovies(response);
+                }).catch((error) => {
+                    let errorBox = <Alert type="error" message={error.toString()} />
+                    this.setState({ error : errorBox, list : <Empty /> })
+                });
+            }
+        }
+    }
+
+    _listMovies(response){
         let list;
         let movies = [];
-        API.getPopularMovies().then(response => {
-            list = Object.keys(response.results).map((movie, index) => {
-                // save movie for later use
-                movies.push(response.results[movie]);
 
-                let movie_name = "";
-                let { id, title, name, poster_path, vote_average, overview } = response.results[movie];
-                
-                // Few movies have name property while most of them have title propertly.
-                if(title === undefined && name === undefined)
-                    return null;
-                
-                // Check if title is undefined
-                movie_name = (title) ? title : name;
+        list = Object.keys(response.results).map((movie, index) => {
+            // save movie for later use
+            movies.push(response.results[movie]);
 
-                return (
-                    <Col xs={12} lg={4} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
-                        <Fade delay={index * 30}>
-                            <MovieCard title={movie_name} poster={poster_path} rating={vote_average} desc={overview} />
-                        </Fade>
-                    </Col>
-                );             
-            }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
+            let movie_name = "";
+            let { id, title, name, poster_path, vote_average, overview } = response.results[movie];
+            
+            // Few movies have name property while most of them have title propertly.
+            if(title === undefined && name === undefined)
+                return null;
+            
+            // Check if title is undefined
+            movie_name = (title) ? title : name;
 
-            this.setState({ list : list, movies : movies });
-        }).catch((error) => {
-            let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, list : <Empty /> })
-        });
+            return (
+                <Col xs={12} lg={6} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
+                    <Fade delay={index * 30}>
+                        <MovieCard title={movie_name} poster={poster_path} rating={vote_average} desc={overview} />
+                    </Fade>
+                </Col>
+            );             
+        }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
+
+        this.setState({ list : list, movies : movies });
     }
     
     // Movie card clicked
@@ -64,15 +81,15 @@ class ListMovies extends Component {
         });
     }
 
-    _applyBg(){
-        // generate random number
-        var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
-        // get image 
-        let backdrop_path = this.state.movies[randomnumber].backdrop_path;
-        let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL + backdrop_path;
-        // Apply image as bg
-        document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
-    }
+    // _applyBg(){
+    //     // generate random number
+    //     var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
+    //     // get image 
+    //     let backdrop_path = this.state.movies[randomnumber].backdrop_path;
+    //     let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL + backdrop_path;
+    //     // Apply image as bg
+    //     document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
+    // }
 
     render(){
         return(

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import ListMovies from '../ListMovies/ListMovies';
 
 class Genre extends Component {
     render() {
+        // console.log(this.props.match.params.id);
         return (
-            <div>
-                This is genre page
-            </div>
+            <>
+                <ListMovies type="genre" id={this.props.match.params.id}/>
+            </>  
         );
     }
 }

@@ -4,6 +4,7 @@ import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
+import { removeBg } from '../Utils/Utils';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
 import MovieTags from '../Tags/Tags';
@@ -20,17 +21,6 @@ class MovieDetails extends Component {
         error : null
     }
 
-    _loadMovieInfo(movie){
-        let movieId = movie.id;
-        API.movieDetails(movieId).then(response => {
-            let details = { ...this.state.movie, ...response };
-            this.setState({ movie : details });
-        }).catch((error) => {
-            let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, movie : null })
-        });
-    }
-
     componentDidMount(){
         if(this.props.location.state){
             this._loadMovieInfo(this.props.location.state.movie);
@@ -45,8 +35,23 @@ class MovieDetails extends Component {
         }
     }
 
+    componentWillUnmount() {
+        // remove background image
+        removeBg();
+    }
+
+    _loadMovieInfo(movie){
+        let movieId = movie.id;
+        API.movieDetails(movieId).then(response => {
+            let details = { ...this.state.movie, ...response };
+            this.setState({ movie : details });
+        }).catch((error) => {
+            let errorBox = <Alert type="error" message={error.toString()} />
+            this.setState({ error : errorBox, movie : null })
+        });
+    }
+
     render() {
-        console.log('Render ');
         // Handle error and show error message
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
@@ -84,10 +89,11 @@ const MovieInfo = (props) => {
 
         // Set background image
         let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
-            document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';
+            document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
         return (
             <>
-                <Col xs={24} lg={7} className="moviePoster">                  <Fade>
+                <Col xs={24} lg={7} className="moviePoster">                  
+                    <Fade>
                         <img src={poster_path} alt={title} width="294px"/>
                     </Fade>
                 </Col>
