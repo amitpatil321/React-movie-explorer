@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-        <Layout className="layout">
+        <Layout className="layout" id="layout">
             <HeaderMenu />
             <Content xs={24} className="mainContent-outer">
               <div className="mainContent" id="mainContent">
