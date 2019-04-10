@@ -7,14 +7,14 @@ body{
 
 .mainContent{
   min-height: 800px;
-  padding-top: 20px;
-  background: #fff;
-  padding: 24px;
-  background-size: cover; 
+  background: #eee;
+  max-width: 1170px;
+  margin: 0 auto;
+  /* background-size: cover;  */
 }
-.mainContent h2{
+/* .mainContent h2{
   color: #fff;
-}
+} */
 .ant-menu{
   line-height: 70px !important; 
 }

@@ -18,6 +18,15 @@ export const ROUTES = {
 
 // constants
 export const NO_PHOTO = {
-    PERSON : "/images/nophoto.jpg",
+    POSTER : "/images/no_poster.jpg",
+    PERSON : "/images/no_photo.jpg",
     LOGO   : "/images/no_logo.jpg"
+}
+
+export const TMDB_IMAGE = "http://image.tmdb.org/t/p/";
+
+export const IMAGE_SIZE = {
+    ORIGINAL : TMDB_IMAGE+"/original/",
+    SMALL    : TMDB_IMAGE+"/w185/",
+    MEDIUM   : TMDB_IMAGE+"/w342/"
 }

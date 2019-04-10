@@ -30,6 +30,10 @@
     overflow: hidden;
   }
   
+  .content img{
+    height: 335px;
+  }
+
   .content .content-overlay {
     background: rgba(0,0,0,0.7);
     position: absolute;

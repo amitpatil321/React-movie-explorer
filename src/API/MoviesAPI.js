@@ -23,7 +23,7 @@ export const searchMovies = (string) => {
 }
 
 export const movieDetails = (movieId) => {
-    return Axios.get("https://api.themoviedb.org/3/movie/"+movieId+"?api_key="+CONFIG.API_KEY).then(response => {
+    return Axios.get("https://api.themoviedb.org/3/movie/"+movieId+"?api_key="+CONFIG.API_KEY+"&append_to_response=credits").then(response => {
         return response.data;
     })
     .catch((error) => {
@@ -31,11 +31,11 @@ export const movieDetails = (movieId) => {
     });   
 }
 
-export const movieCast = (movieId) => {
-    return Axios.get("https://api.themoviedb.org/3/movie/"+movieId+"/credits?api_key="+CONFIG.API_KEY).then(response => {
+export const withGenre = (id) => {
+    return Axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+CONFIG.API_KEY+"&with_genres="+id).then(response => {
         return response.data;
     })
     .catch((error) => {
-        throw new Error("Error fetching movie cast");
-    });   
+        throw new Error("Error fetching movie details");
+    });    
 }

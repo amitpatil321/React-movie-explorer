@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { AutoComplete } from 'antd';
+import { AutoComplete, Rate } from 'antd';
 import debounce from 'lodash/debounce';
 // import {find} from 'lodash';
 import { withRouter } from 'react-router-dom';
 
+import './SearchMovies.css';
 import * as API from '../../API/MoviesAPI';
+import { makeUrl } from '../Utils/Utils';
 import * as CONFIG from '../../config/config';
 
 const Option = AutoComplete.Option;
@@ -31,10 +33,21 @@ class SearchMovies extends Component {
     }    
 
     _renderMovieName(movie){
-        let poster_path = (movie.poster_path != null) ? "http://image.tmdb.org/t/p/w185/"+movie.poster_path : CONFIG.DEFAULT_POSTER;
+        // Check if poster image availabe
+        let poster_path = (movie.poster_path) ? 
+        CONFIG.IMAGE_SIZE.SMALL+movie.poster_path : CONFIG.NO_PHOTO.POSTER;        
+
         return (
             <Option key={movie.id} text={movie.title}>
-                <img src={poster_path} width={50} height={60} alt={movie.title} />&nbsp;{movie.title} ({movie.release_date.split("-")[0]})
+                <img src={poster_path} width={50} height={60} alt={movie.title} />
+                <div className="searchItem">
+                    &nbsp;<strong>{movie.title}</strong>
+                    &nbsp;{(movie.release_date) ? "("+movie.release_date.split("-")[0]+")" : '' }
+                    <div>
+                        {(movie.overview) ? movie.overview.substring(0,50)+"..." : ''}
+                    </div>
+                    <div><Rate allowHalf defaultValue={movie.vote_average / 2} tooltips={movie.rating} disabled /></div>
+                </div>    
             </Option>
           );        
     }
@@ -44,11 +57,9 @@ class SearchMovies extends Component {
         
         // Get all details of selected moview and pass to next page
         let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
-        
         let name = options.props.text;
-        name = name.replace(/ /g,"-");
         this.props.history.push({
-            pathname: CONFIG.ROUTES.MOVIE+name,
+            pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
             state: { movie : movieDetails }
         })        
     }    
