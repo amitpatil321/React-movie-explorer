@@ -32,8 +32,10 @@ class MovieDetails extends Component {
 
     componentDidUpdate(){
         if(this.state.movie){
-            if(this.state.movie.id != this.props.history.location.state.movie.id)
+            // console.log();
+            if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
+            }
         }
     }
 
@@ -44,8 +46,10 @@ class MovieDetails extends Component {
 
     _loadMovieInfo(movie){
         let movieId = movie.id;
+        
         // set loading to true
-        this.setState({ loading : true });
+        if(!this.state.loading)
+            this.setState({ loading : true });
 
         API.movieDetails(movieId).then(response => {
             let details = { ...this.state.movie, ...response };
