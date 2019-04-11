@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Menu, Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import SearchMovies from '../SearchMovies/SearchMovies';
@@ -21,7 +21,7 @@ const HeaderMenu = (props) => {
             >
               <Menu.Item key="home">
                 <Link to="/">
-                  <img className="logo" src="/images/logo.png" />
+                  <img alt="Logo" className="logo" src="/images/logo.png" />
                 </Link>
               </Menu.Item>
               <Menu.Item key="search" disabled>
