@@ -24,14 +24,12 @@ class App extends Component {
         <Layout className="layout" id="layout">
             <HeaderMenu />
             <Content xs={24} className="mainContent-outer">
-              <div className="mainContent" id="mainContent">
               <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path={CONFIG.ROUTES.MOVIE+":name"} component={MovieDetails}/>
                 <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
                 <Route component={Home}/>
               </Switch>                 
-              </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
               TMDB React Movies App ©{new Date().getFullYear()}

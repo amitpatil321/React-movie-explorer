@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Menu, Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import SearchMovies from '../SearchMovies/SearchMovies';
@@ -17,8 +17,13 @@ const HeaderMenu = (props) => {
               mode="horizontal"
               defaultSelectedKeys={['2']}
               style={{ lineHeight: '64px' }}
+              className="appMenu"
             >
-              <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
+              <Menu.Item key="home">
+                <Link to="/">
+                  <img alt="Logo" className="logo" src="/images/logo.png" />
+                </Link>
+              </Menu.Item>
               <Menu.Item key="search" disabled>
                 <SearchMovies />
               </Menu.Item>

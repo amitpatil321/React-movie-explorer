@@ -20,7 +20,7 @@ class SearchMovies extends Component {
         let _this = this;
         let names = [];
         if(value.length){
-            API.searchMovies(value).then(response => {
+            return API.searchMovies(value).then(response => {
                 response.results.map(each => {
                     names.push(each);
                 });

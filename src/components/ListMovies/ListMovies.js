@@ -31,6 +31,7 @@ class ListMovies extends Component {
                         this.setState({ error : errorBox, list : <Empty /> })
                     });                     
                 }
+                break;
                 case "genre":{
                     API.withGenre(this.props.id).then(response => {
                         this._listMovies(response);
@@ -39,6 +40,9 @@ class ListMovies extends Component {
                         this.setState({ error : errorBox, list : <Empty /> })
                     });
                 }
+                break;
+                default:
+                    return null;
             }
         }
     }
