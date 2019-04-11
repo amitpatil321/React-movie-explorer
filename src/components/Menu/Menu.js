@@ -17,8 +17,13 @@ const HeaderMenu = (props) => {
               mode="horizontal"
               defaultSelectedKeys={['2']}
               style={{ lineHeight: '64px' }}
+              className="appMenu"
             >
-              <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
+              <Menu.Item key="home">
+                <Link to="/">
+                  <img className="logo" src="/images/logo.png" />
+                </Link>
+              </Menu.Item>
               <Menu.Item key="search" disabled>
                 <SearchMovies />
               </Menu.Item>
