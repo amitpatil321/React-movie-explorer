@@ -36,6 +36,6 @@ export const withGenre = (id) => {
         return response.data;
     })
     .catch((error) => {
-        throw new Error("Error fetching movie details");
+        throw new Error("Error fetching movies list");
     });    
 }
