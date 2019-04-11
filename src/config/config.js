@@ -1,5 +1,5 @@
 export const API_KEY            = "08308f4c5d9eb1e0301d7a1887838bec"; 
-export const API_BASE_URL       = "https: //api.themoviedb.org/3";
+export const API_BASE_URL       = "https://api.themoviedb.org/3";
 
 export const MOVIES_PER_PAGE    = 20;
 export const CAST_PER_PAGE      = 8;
@@ -23,13 +23,13 @@ export const NO_PHOTO = {
     LOGO   : "/images/no_logo.jpg"
 }
 
-export const TMDB_IMAGE = "http://image.tmdb.org/t/p/";
+export const TMDB_IMAGE = "http://image.tmdb.org/t/p";
 
 // Image sizes
 export const IMAGE_SIZE = {
-    ORIGINAL : TMDB_IMAGE+"/original/",
-    SMALL    : TMDB_IMAGE+"/w185/",
-    MEDIUM   : TMDB_IMAGE+"/w342/"
+    ORIGINAL : TMDB_IMAGE+"/original",
+    SMALL    : TMDB_IMAGE+"/w185",
+    MEDIUM   : TMDB_IMAGE+"/w342"
 }
 
 // Error messages
