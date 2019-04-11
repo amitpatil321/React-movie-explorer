@@ -7,8 +7,8 @@ body{
 
 .mainContent{
   min-height: 800px;
-  background: #eee;
-  max-width: 1170px;
+  /* background: #eee; */
+  max-width: 1170px !important;
   margin: 0 auto;
   /* background-size: cover;  */
 }
@@ -47,8 +47,8 @@ hr{
 .ant-layout-footer{
   background: #001529;
   color: #fff;
+  margin-top: 5%;
 }
-
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

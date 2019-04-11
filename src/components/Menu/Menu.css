@@ -3,6 +3,7 @@
     overflow: auto;
     background: #001529;
 }
+
 .ant-layout-header{
     position: "fixed";
     z-index: 1;
@@ -10,4 +11,16 @@
     padding: 0px 0px 70px 0px !important;
     max-width: 1170px;
     margin: 0 auto;
+}
+
+.appMenu .logo{
+    width: 130px;
+}
+
+.appMenu .ant-menu-item{
+    padding-left: 0px !important;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+    background-color: transparent !important;
 }

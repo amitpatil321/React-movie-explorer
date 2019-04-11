@@ -3,9 +3,9 @@ import Axios from 'axios';
 
 import * as CONFIG from '../config/config';
 
-// Fetch all contacts
+// Fetch all popular movies
 export const getPopularMovies = () => {
-    return MoviesAxios.get("https://api.themoviedb.org/3/trending/all/week").then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/trending/all/week").then(response => {
         return response.data;
     })
     .catch((error) => {
@@ -14,7 +14,7 @@ export const getPopularMovies = () => {
 }
 
 export const searchMovies = (string) => {
-    return Axios.get("https://api.themoviedb.org/3/search/movie?api_key="+CONFIG.API_KEY+"&query="+string).then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/search/movie?query="+string).then(response => {
         return response.data;
     })
     .catch((error) => {
@@ -23,7 +23,7 @@ export const searchMovies = (string) => {
 }
 
 export const movieDetails = (movieId) => {
-    return Axios.get("https://api.themoviedb.org/3/movie/"+movieId+"?api_key="+CONFIG.API_KEY+"&append_to_response=credits").then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/movie/"+movieId+"?append_to_response=credits").then(response => {
         return response.data;
     })
     .catch((error) => {
@@ -32,10 +32,10 @@ export const movieDetails = (movieId) => {
 }
 
 export const withGenre = (id) => {
-    return Axios.get("https://api.themoviedb.org/3/discover/movie?api_key="+CONFIG.API_KEY+"&with_genres="+id).then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie?with_genres="+id).then(response => {
         return response.data;
     })
     .catch((error) => {
-        throw new Error("Error fetching movie details");
+        throw new Error("Error fetching movies list");
     });    
 }

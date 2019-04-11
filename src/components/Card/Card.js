@@ -1,12 +1,10 @@
 import React from 'react';
-import { Card, Rate } from 'antd';
+import { Rate } from 'antd';
 
 import './Card.css';
 import * as CONFIG from '../../config/config';
-const { Meta } = Card;
 
 const MovieCard = props => {
-    console.log(CONFIG.IMAGE_SIZE.MEDIUM);
     return (
         <div className="content">
             <div className="content-overlay"></div>

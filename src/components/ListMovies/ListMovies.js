@@ -21,22 +21,28 @@ class ListMovies extends Component {
     }
 
     componentDidMount (){
-        switch(this.props.type){
-            case "trending":{
-                API.getPopularMovies().then(response => {
-                    this._listMovies(response);
-                }).catch((error) => {
-                    let errorBox = <Alert type="error" message={error.toString()} />
-                    this.setState({ error : errorBox, list : <Empty /> })
-                });                     
-            }
-            case "genre":{
-                API.withGenre(this.props.id).then(response => {
-                    this._listMovies(response);
-                }).catch((error) => {
-                    let errorBox = <Alert type="error" message={error.toString()} />
-                    this.setState({ error : errorBox, list : <Empty /> })
-                });
+        if(this.props){
+            switch(this.props.type){
+                case "trending":{
+                    API.getPopularMovies().then(response => {
+                        this._listMovies(response);
+                    }).catch((error) => {
+                        let errorBox = <Alert type="error" message={error.toString()} />
+                        this.setState({ error : errorBox })
+                    });                     
+                }
+                break;
+                case "genre":{
+                    API.withGenre(this.props.id).then(response => {
+                        this._listMovies(response);
+                    }).catch((error) => {
+                        let errorBox = <Alert type="error" message={error.toString()} />
+                        this.setState({ error : errorBox })
+                    });
+                }
+                break;
+                default:
+                    return null;
             }
         }
     }
@@ -80,16 +86,6 @@ class ListMovies extends Component {
             state: { movie : movieDetails }
         });
     }
-
-    // _applyBg(){
-    //     // generate random number
-    //     var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
-    //     // get image 
-    //     let backdrop_path = this.state.movies[randomnumber].backdrop_path;
-    //     let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL + backdrop_path;
-    //     // Apply image as bg
-    //     document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
-    // }
 
     render(){
         return(
