@@ -10,6 +10,7 @@ body{
   background: #eee;
   max-width: 1170px;
   margin: 0 auto;
+  margin-bottom: 10%;
   /* background-size: cover;  */
 }
 /* .mainContent h2{
