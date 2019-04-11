@@ -6,6 +6,7 @@ import HeaderMenu from './components/Menu/Menu';
 import Home from './components/Home/Home';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Genre from './components/Genre/Genre';
+import ActorProfile from './components/ActorProfile/ActorProfile';
 import * as CONFIG from './config/config';
 
 import "antd/dist/antd.css";
@@ -28,6 +29,7 @@ class App extends Component {
                 <Route path="/" exact component={Home}/>
                 <Route path={CONFIG.ROUTES.MOVIE+":name"} component={MovieDetails}/>
                 <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
+                <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
                 <Route component={Home}/>
               </Switch>                 
             </Content>

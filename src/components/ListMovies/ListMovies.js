@@ -28,7 +28,7 @@ class ListMovies extends Component {
                         this._listMovies(response);
                     }).catch((error) => {
                         let errorBox = <Alert type="error" message={error.toString()} />
-                        this.setState({ error : errorBox, list : <Empty /> })
+                        this.setState({ error : errorBox })
                     });                     
                 }
                 break;
@@ -37,7 +37,7 @@ class ListMovies extends Component {
                         this._listMovies(response);
                     }).catch((error) => {
                         let errorBox = <Alert type="error" message={error.toString()} />
-                        this.setState({ error : errorBox, list : <Empty /> })
+                        this.setState({ error : errorBox })
                     });
                 }
                 break;
@@ -86,16 +86,6 @@ class ListMovies extends Component {
             state: { movie : movieDetails }
         });
     }
-
-    // _applyBg(){
-    //     // generate random number
-    //     var randomnumber = Math.floor(Math.random() * (CONFIG.MOVIES_PER_PAGE - 0 + 1)) + 0;
-    //     // get image 
-    //     let backdrop_path = this.state.movies[randomnumber].backdrop_path;
-    //     let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL + backdrop_path;
-    //     // Apply image as bg
-    //     document.getElementById("mainContent").style.backgroundImage = 'url("'+backgroundImage+'")';        
-    // }
 
     render(){
         return(

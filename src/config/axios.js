@@ -3,7 +3,7 @@ import * as CONFIG from './config';
 
 const instance = axios.create();
 
-// request header
+// Append config key to every request header
 instance.interceptors.request.use((config) => {
     config.params = { api_key : CONFIG.API_KEY };
     return config;
