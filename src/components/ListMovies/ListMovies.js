@@ -21,22 +21,24 @@ class ListMovies extends Component {
     }
 
     componentDidMount (){
-        switch(this.props.type){
-            case "trending":{
-                API.getPopularMovies().then(response => {
-                    this._listMovies(response);
-                }).catch((error) => {
-                    let errorBox = <Alert type="error" message={error.toString()} />
-                    this.setState({ error : errorBox, list : <Empty /> })
-                });                     
-            }
-            case "genre":{
-                API.withGenre(this.props.id).then(response => {
-                    this._listMovies(response);
-                }).catch((error) => {
-                    let errorBox = <Alert type="error" message={error.toString()} />
-                    this.setState({ error : errorBox, list : <Empty /> })
-                });
+        if(this.props){
+            switch(this.props.type){
+                case "trending":{
+                    API.getPopularMovies().then(response => {
+                        this._listMovies(response);
+                    }).catch((error) => {
+                        let errorBox = <Alert type="error" message={error.toString()} />
+                        this.setState({ error : errorBox, list : <Empty /> })
+                    });                     
+                }
+                case "genre":{
+                    API.withGenre(this.props.id).then(response => {
+                        this._listMovies(response);
+                    }).catch((error) => {
+                        let errorBox = <Alert type="error" message={error.toString()} />
+                        this.setState({ error : errorBox, list : <Empty /> })
+                    });
+                }
             }
         }
     }
