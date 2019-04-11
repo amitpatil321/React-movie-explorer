@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Typography, Empty } from 'antd';
+import { Row, Col, Typography, Empty, Spin, Icon } from 'antd';
 import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
@@ -14,11 +14,13 @@ import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
 import './MovieDetails.css'
 
 const { Title, Paragraph } = Typography;
+const antIcon = <Icon type="loading" spin />;
 
 class MovieDetails extends Component {
     state = {
         movie : null,
-        error : null
+        error : null,
+        loading : false
     }
 
     componentDidMount(){
@@ -42,12 +44,15 @@ class MovieDetails extends Component {
 
     _loadMovieInfo(movie){
         let movieId = movie.id;
+        // set loading to true
+        this.setState({ loading : true });
+
         API.movieDetails(movieId).then(response => {
             let details = { ...this.state.movie, ...response };
-            this.setState({ movie : details });
+            this.setState({ movie : details, loading : false });
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
-            this.setState({ error : errorBox, movie : null })
+            this.setState({ error : errorBox, movie : null, loading : false })
         });
     }
 
@@ -70,8 +75,11 @@ class MovieDetails extends Component {
                     </Row>
                 </div>
             );
-        }else 
+        }else{
+            if(this.state.loading)
+                return (<Spin indicator={antIcon}></Spin>);
             return (<Empty />);
+        }
     }
 }
 
