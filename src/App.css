@@ -10,7 +10,6 @@ body{
   background: #eee;
   max-width: 1170px;
   margin: 0 auto;
-  margin-bottom: 10%;
   /* background-size: cover;  */
 }
 /* .mainContent h2{
@@ -48,8 +47,8 @@ hr{
 .ant-layout-footer{
   background: #001529;
   color: #fff;
+  margin-top: 5%;
 }
-
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

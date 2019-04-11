@@ -11,9 +11,9 @@ class Home extends Component {
 
     render() {
         return (
-            <>
+            <div className="mainContent" id="mainContent">
                 <ListMovies type="trending"/>
-            </>    
+            </div>    
         );
     }
 }
