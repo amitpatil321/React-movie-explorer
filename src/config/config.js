@@ -1,6 +1,5 @@
 export const API_KEY            = "08308f4c5d9eb1e0301d7a1887838bec"; 
 export const API_BASE_URL       = "https: //api.themoviedb.org/3";
-export const DEFAULT_POSTER     = "/images/noposter.png"; 
 
 export const MOVIES_PER_PAGE    = 20;
 export const CAST_PER_PAGE      = 8;
