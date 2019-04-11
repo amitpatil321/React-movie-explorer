@@ -1,10 +1,8 @@
 import React from 'react';
-import { Card, Rate } from 'antd';
+import { Rate } from 'antd';
 
 import './Card.css';
 import * as CONFIG from '../../config/config';
-import MovieTags from '../Tags/Tags';
-const { Meta } = Card;
 
 const MovieCard = props => {
     return (
