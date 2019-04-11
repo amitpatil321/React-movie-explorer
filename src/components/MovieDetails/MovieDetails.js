@@ -82,7 +82,7 @@ class MovieDetails extends Component {
         }else{
             if(this.state.loading)
                 return (<Spin indicator={antIcon}></Spin>);
-            return (<Empty />);
+            return (<Empty description={ "Failed to load movie details! Please try again" } />);
         }
     }
 }
