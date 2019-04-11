@@ -41,6 +41,8 @@ class ListMovies extends Component {
                     });
                 }
                 break;
+                default:
+                    return null;
             }
         }
     }
