@@ -7,3 +7,10 @@ export function makeUrl(str) {
 export function removeBg(){
     document.getElementById("layout").style.backgroundImage = '';
 }
+
+export function getAge(birthdate){
+    var birthdate = new Date(birthdate);
+    var cur = new Date();
+    var diff = cur-birthdate;
+    return Math.floor(diff/31536000000);    
+}
