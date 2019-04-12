@@ -40,7 +40,7 @@ export default class ActorProfile extends Component {
       console.log(this.state.profile);
       return (
         <div className="mainContent" id="mainContent">
-          <div className="movieDetails">
+          <div className="actorDetails">
             <ProfileDetails profile={this.state.profile} />
           </div>
         </div>
