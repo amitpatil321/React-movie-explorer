@@ -78,6 +78,7 @@
     -webkit-transition: all 0.3s ease-in-out 0s;
     -moz-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
+    color: #fff;
   }
   
   .content:hover .content-details{
@@ -94,7 +95,12 @@
     text-transform: uppercase;
     font-size: 18px;
   }
-  
+
+  .content-details strong{
+    color: rgba(6, 252, 88, 0.933);
+    font-size: 16px;
+  }
+
   .content-details p{
     color: #fff;
     font-size: 0.8em; 
