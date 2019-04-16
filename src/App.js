@@ -33,7 +33,7 @@ class App extends Component {
                 <Route component={Home}/>
               </Switch>                 
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
+            <Footer>
               TMDB React Movies App ©{new Date().getFullYear()}
             </Footer>
           </Layout>   
