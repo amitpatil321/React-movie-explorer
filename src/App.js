@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Layout, BackTop } from 'antd';
 import HeaderMenu from './components/Menu/Menu';
 
 import Home from './components/Home/Home';
@@ -36,6 +36,7 @@ class App extends Component {
             <Footer>
               TMDB React Movies App ©{new Date().getFullYear()}
             </Footer>
+            <BackTop />
           </Layout>   
         </div>                 
       </BrowserRouter>              
