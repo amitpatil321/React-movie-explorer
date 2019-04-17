@@ -108,7 +108,7 @@ const CastCrew = (props) => {
             let movie_name = (title) ? title : name; 
             
             return (
-                <Col xs={6} lg={4} key={id} id={id} className="moviecard castMovies">
+                <Col xs={6} lg={4} key={id+Math.random()} id={id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
                         <MovieCard 
                             key    = {id} 
