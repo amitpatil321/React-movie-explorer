@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Icon, Spin, Empty } from 'antd';
+import { Icon, Spin, Empty, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 
 import Alert from '../Alert/Alert.js';
 import ProfileDetails from '../ProfileDetails/ProfileDetails';
@@ -37,9 +38,20 @@ export default class ActorProfile extends Component {
         return (<Spin indicator={antIcon}></Spin>);
     
     if(this.state.profile && !this.state.loading){
-      console.log(this.state.profile);
       return (
         <div className="mainContent" id="mainContent">
+          <Breadcrumb>
+              <Breadcrumb.Item key="home">
+                  <Link to="/"><Icon type="home" /> Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item key="Movie Details">
+                  <a href="javascript:;" onClick={() => this.props.history.goBack()}>{this.props.location.state.movie_name}</a>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                {this.state.profile.name}
+              </Breadcrumb.Item>              
+          </Breadcrumb> 
+
           <div className="actorDetails">
             <ProfileDetails profile={this.state.profile} />
           </div>

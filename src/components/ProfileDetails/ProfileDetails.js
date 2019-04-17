@@ -3,7 +3,7 @@ import { Row, Col, Typography, Tabs, Icon, Empty } from 'antd';
 import { Fade } from 'react-reveal';
 import filter from 'lodash/filter';
 import Lightbox from 'react-lightbox-component';
-// import Gallery from 'react-waterfall-gallery'
+import 'react-lightbox-component/build/css/index.css'
 import ShowMoreText from 'react-show-more-text';
 
 import './ProfileDetails.css';
@@ -127,30 +127,27 @@ const CastCrew = (props) => {
 }
 
 const Photos = (props) => {
-    // console.log(props.list);
     if(props.list.length){
         let image_list = [];
         filter(props.list, function(each) {
             image_list.push({ 
                 src : CONFIG.IMAGE_SIZE.MEDIUM+each.file_path,
-                title: 'image title',
-                description: 'image description'
+                title: ' ',
+                description: ' '
             });
         });
 
-        return (<Lightbox 
-            images={image_list} 
-            thumbnailWidth='150px'
-            thumbnailHeight='150px'
-        />
-
-
-        // return <Gallery
-        //     images={image_list}
-        //     step="200"
-        // />   
-    }
-        // return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
+        return (
+            <Fade>    
+                <Lightbox 
+                    images={image_list}
+                    thumbnailWidth='250px'
+                    thumbnailHeight='auto'
+                />
+            </Fade>    
+        );
+    }else
+        return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
 
 export default ProfileDetails;

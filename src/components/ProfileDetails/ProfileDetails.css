@@ -20,6 +20,10 @@
     min-height: 100px;
 }
 
+.ant-breadcrumb{
+    margin-top: -20px !important;
+}
+
 /* .personProfilePic:hover{
     border-color: rgb(184, 183, 183);
 } */
@@ -49,6 +53,7 @@ ul.personMeta li:last-child:after { content: none; }
     opacity: 0.9;    
     box-shadow : 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
     border-radius: 6px;
+    margin-bottom: 80px;
 }
 
 .actorDetails{

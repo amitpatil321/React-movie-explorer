@@ -7,15 +7,25 @@ import * as CONFIG from '../../config/config';
 import { makeUrl } from '../Utils/Utils';
 
 const Cast = (props) => {
+    // Destructuring
+    let { title, name } = props.movie;
+
+    // Check whether title OR name provided
+    title = (title) ? title : name;
+
     if(props.movie.credits){
         return props.movie.credits.cast.map((person, index) => {
             // Check if photo is null ?
             let pic = CONFIG.NO_PHOTO.PERSON;
             if(person.profile_path)
                 pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
+
             return <Col xs={12} lg={3} key={index}>
                 <Zoom delay={index * 80}>
-                    <Link to={CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name)}>
+                    <Link 
+                        to={{ pathname : CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name), 
+                        state : { movie_name : title } }} 
+                    >
                         <img src={pic} className="actorPic" alt={person.name}/>
                         <p>
                             <strong>{person.name}</strong><br />
@@ -24,7 +34,7 @@ const Cast = (props) => {
                     </Link>
                 </Zoom>        
             </Col>
-        }).slice(0, CONFIG.CAST_PER_PAGE); // We need only 8 results;
+        }).slice(0, CONFIG.CAST_PER_PAGE); // Showing only limited results;
     }
     return null;
 };
