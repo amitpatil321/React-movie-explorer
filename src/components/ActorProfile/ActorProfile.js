@@ -15,8 +15,6 @@ export default class ActorProfile extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props);
-
     if(this.props.match.params.id){
       this.setState({ loading : true })
 
