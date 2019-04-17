@@ -4,6 +4,7 @@ import { Layout, BackTop } from 'antd';
 import HeaderMenu from './components/Menu/Menu';
 
 import Home from './components/Home/Home';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Genre from './components/Genre/Genre';
 import ActorProfile from './components/ActorProfile/ActorProfile';
@@ -17,7 +18,7 @@ const {
 } = Layout;
  
 class App extends Component {
-  
+
   render() {    
     return (
       <BrowserRouter>
@@ -25,13 +26,15 @@ class App extends Component {
         <Layout className="layout" id="layout">
             <HeaderMenu />
             <Content xs={24} className="mainContent-outer">
-              <Switch>
-                <Route path="/" exact component={Home}/>
-                <Route path={CONFIG.ROUTES.MOVIE+":name"} component={MovieDetails}/>
-                <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
-                <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
-                <Route component={Home}/>
-              </Switch>                 
+              <ScrollToTop>
+                <Switch>
+                  <Route path="/" exact component={Home}/>
+                  <Route path={CONFIG.ROUTES.MOVIE+":name"} component={MovieDetails}/>
+                  <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
+                  <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
+                  <Route component={Home}/>
+                </Switch>
+              </ScrollToTop>                   
             </Content>
             <Footer>
               TMDB React Movies App ©{new Date().getFullYear()}
