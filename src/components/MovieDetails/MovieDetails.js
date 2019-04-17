@@ -33,7 +33,6 @@ class MovieDetails extends Component {
 
     componentDidUpdate(){
         if(this.state.movie){
-            // console.log();
             if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
             }
@@ -47,7 +46,7 @@ class MovieDetails extends Component {
 
     _loadMovieInfo(movie){
         let movieId = movie.id;
-        
+    
         // set loading to true
         if(!this.state.loading)
             this.setState({ loading : true });
