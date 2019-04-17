@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Typography, Empty, Spin, Icon } from 'antd';
+import { Link } from 'react-router-dom';
+import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb } from 'antd';
 import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
@@ -104,6 +105,12 @@ const MovieInfo = (props) => {
             document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
         return (
             <>
+                <Breadcrumb>
+                    <Breadcrumb.Item key="home">
+                        <Link to="/"><Icon type="home" /> Home</Link>
+                    </Breadcrumb.Item>
+                </Breadcrumb>
+                <br />
                 <Col xs={24} lg={7} className="moviePoster">                  
                     <Fade>
                         <img src={poster_path} alt={title} width="294px"/>
