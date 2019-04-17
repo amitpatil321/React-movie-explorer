@@ -18,7 +18,7 @@ export const ROUTES = {
 
 // image constants
 export const NO_PHOTO = {
-    POSTER : "/images/no_poster.jpg",
+    POSTER : "/images/no_poster.PNG",
     PERSON : "/images/no_photo.jpg",
     LOGO   : "/images/no_logo.jpg"
 }
