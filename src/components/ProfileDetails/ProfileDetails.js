@@ -1,6 +1,9 @@
 import React from 'react';
 import { Row, Col, Typography, Tabs, Icon, Empty } from 'antd';
 import { Fade } from 'react-reveal';
+import filter from 'lodash/filter';
+import Lightbox from 'react-lightbox-component';
+// import Gallery from 'react-waterfall-gallery'
 import ShowMoreText from 'react-show-more-text';
 
 import './ProfileDetails.css';
@@ -12,7 +15,7 @@ const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
 
 const ProfileDetails = props => {
-
+    // console.log(props.profile);
     return (
         <>
             <Row gutter={24} className="personProfile">
@@ -76,15 +79,16 @@ const BasicInfo = (props) => {
 }
 
 const OtherInfo = (props) => {
-    const cast = (props.profile.movie_credits.cast) ? 
-    <CastCrew list={props.profile.movie_credits.cast} /> : '';
-    const crew = (props.profile.movie_credits.crew) ? 
-    <CastCrew list={props.profile.movie_credits.crew} /> : '';
+    const cast = <CastCrew list={props.profile.movie_credits.cast} />;
+    const crew = <CastCrew list={props.profile.movie_credits.crew} />;
+    const pics = <Photos list={props.profile.images.profiles} />;
 
     return (
         <Col xs={{span:24, offset : 0}} lg={24} offset={1}>
             <Tabs defaultActiveKey="1">
-                <TabPane tab="Photos" key="1">Photos</TabPane>
+                <TabPane tab="Photos" key="1">
+                    {pics}
+                </TabPane>
                 <TabPane tab="Cast" key="2">
                     {cast}    
                 </TabPane>
@@ -101,7 +105,7 @@ const CastCrew = (props) => {
         return props.list.map((movie, index) => {
             let { id, title, name, poster_path, vote_average, overview, job } = movie;
             // Check if title is undefined
-            let movie_name = (title) ? title : name;   
+            let movie_name = (title) ? title : name; 
             
             return (
                 <Col xs={6} lg={4} key={id} id={id} className="moviecard castMovies">
@@ -118,9 +122,35 @@ const CastCrew = (props) => {
                 </Col>
             );    
         });
-    }else{
+    }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
+}
+
+const Photos = (props) => {
+    // console.log(props.list);
+    if(props.list.length){
+        let image_list = [];
+        filter(props.list, function(each) {
+            image_list.push({ 
+                src : CONFIG.IMAGE_SIZE.MEDIUM+each.file_path,
+                title: 'image title',
+                description: 'image description'
+            });
+        });
+
+        return (<Lightbox 
+            images={image_list} 
+            thumbnailWidth='150px'
+            thumbnailHeight='150px'
+        />
+
+
+        // return <Gallery
+        //     images={image_list}
+        //     step="200"
+        // />   
     }
+        // return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
 
 export default ProfileDetails;
