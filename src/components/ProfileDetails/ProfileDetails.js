@@ -103,21 +103,11 @@ const OtherInfo = (props) => {
 const CastCrew = (props) => {
     if(props.list.length){
         return props.list.map((movie, index) => {
-            let { id, title, name, poster_path, vote_average, overview, job } = movie;
-            // Check if title is undefined
-            let movie_name = (title) ? title : name; 
-            
+            console.log(movie);
             return (
-                <Col xs={6} lg={4} key={id+Math.random()} id={id} className="moviecard castMovies">
+                <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
-                        <MovieCard 
-                            key    = {id} 
-                            title  = {movie_name} 
-                            poster = {poster_path} 
-                            rating = {vote_average} 
-                            desc   = {overview}
-                            job    = {job} 
-                        />
+                        <MovieCard movie={movie} />
                     </Fade>    
                 </Col>
             );    
