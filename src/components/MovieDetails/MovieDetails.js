@@ -25,10 +25,17 @@ class MovieDetails extends Component {
     }
 
     componentDidMount(){
-        if(this.props.location.state){
+        // Check if user came by clicking movie card
+        // and if we have movie details ?
+        if(this.props.location.state)
             this._loadMovieInfo(this.props.location.state.movie);
-        }else
-            this.props.history.push(CONFIG.ROUTES.HOME)
+        else{
+            // If user came by entering url and not clicking movie card ?
+            if(this.props.match.params.id)
+                this._loadMovieInfo({ id : this.props.match.params.id });
+            else
+                this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
+        }
     }
 
     componentDidUpdate(){
