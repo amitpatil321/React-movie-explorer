@@ -13,7 +13,7 @@ class MovieCard extends Component {
         let movie = this.props.movie;
         let name = (movie.title) ? movie.title : movie.name;
         this.props.history.push({
-            pathname: CONFIG.ROUTES.MOVIE+"/"+movie.id+"/"+makeUrl(name),
+            pathname: CONFIG.ROUTES.MOVIE+movie.id+"/"+makeUrl(name),
             state: { movie : movie }
         });
     }

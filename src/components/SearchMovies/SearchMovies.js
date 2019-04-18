@@ -60,7 +60,7 @@ class SearchMovies extends Component {
         let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
         let name = options.props.text;
         this.props.history.push({
-            pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
+            pathname: CONFIG.ROUTES.MOVIE+movieDetails.id+"/"+makeUrl(name),
             state: { movie : movieDetails }
         })        
     }    
