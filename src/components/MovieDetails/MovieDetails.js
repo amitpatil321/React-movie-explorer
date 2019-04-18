@@ -39,6 +39,7 @@ class MovieDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
+        // console.log(prevProps.location, this.props.location);
         if(this.state.movie && this.state.movie.id != this.props.match.params.id){
             if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
@@ -77,7 +78,7 @@ class MovieDetails extends Component {
             return (
                 <div className="movieDetails">
                     <Row gutter={16}>
-                        <MovieInfo movie={movie} />
+                        <MovieInfo movie={movie} referer={this.props}/>
                         <Companies movie={movie} />
                         <Meta movie={movie} />
                     </Row>
@@ -109,16 +110,17 @@ const MovieInfo = (props) => {
         // Set background image
         let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
             document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
+        
+        
+
+        // check if referer is there ?
         return (
             <>
-                <Breadcrumb>
-                    <Breadcrumb.Item key="home">
-                        <Link to="/"><Icon type="home" /> Home</Link>
-                    </Breadcrumb.Item>
-                </Breadcrumb>
-                <br />
-                <Col xs={24} lg={7} className="moviePoster">                  
-                    <Fade>
+                <Fade>
+                    <BreadcrumbLinks referer={props.referer} />
+                    <br />
+                </Fade>    
+                <Col xs={24} lg={7} className="moviePoster">         <Fade>
                         <img src={poster_path} alt={title} width="294px"/>
                     </Fade>
                 </Col>
@@ -163,6 +165,38 @@ const Cast = (props) => {
             <MovieCast movie={props.movie}/>
         </Col>
     );    
+}
+
+const BreadcrumbLinks = (props) => {
+    let links, movie, url, name;
+    if(props.referer.location.state && props.referer.location.state.referer && props.referer.location.state.referer !== "/"){
+        // get movie name
+        movie = props.referer.location.state.name
+        // Gte referer url
+        url = props.referer.location.state.referer;
+        // extract name from referer
+        name = url.split("/")[3].replace("-"," ");
+        // capitalize name
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+
+    return (
+        <Breadcrumb>
+            <Breadcrumb.Item key="home">
+                <Link to="/"><Icon type="home" /> Home</Link>
+            </Breadcrumb.Item>
+            {(name) ?
+               <Breadcrumb.Item key="referer">
+                    <Link to={url}>{name}</Link>
+               </Breadcrumb.Item>            
+            : ''}
+            {(movie) ? 
+                <Breadcrumb.Item key="movie">
+                    {movie}
+                </Breadcrumb.Item>            
+            : ''}
+        </Breadcrumb>    
+    )        
 }
 
 export default MovieDetails;

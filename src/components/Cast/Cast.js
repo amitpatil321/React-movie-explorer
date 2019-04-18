@@ -24,7 +24,7 @@ const Cast = (props) => {
                 <Zoom delay={index * 80}>
                     <Link 
                         to={{ pathname : CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name), 
-                        state : { movie_name : title } }} 
+                        state : { movie_name : title, referer : window.location.pathname } }} 
                     >
                         <img src={pic} className="actorPic" alt={person.name}/>
                         <p>
