@@ -66,7 +66,6 @@ class SearchMovies extends Component {
     }    
 
     render() {
-        console.log('inside');
         const { dataSource } = this.state;
         return (
             <AutoComplete
