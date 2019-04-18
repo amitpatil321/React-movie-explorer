@@ -38,8 +38,8 @@ class MovieDetails extends Component {
         }
     }
 
-    componentDidUpdate(){
-        if(this.state.movie){
+    componentDidUpdate(prevProps){
+        if(this.state.movie && this.state.movie.id != this.props.match.params.id){
             if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
             }
