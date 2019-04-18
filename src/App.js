@@ -29,7 +29,7 @@ class App extends Component {
               <ScrollToTop>
                 <Switch>
                   <Route path="/" exact component={Home}/>
-                  <Route path={CONFIG.ROUTES.MOVIE+":name"} component={MovieDetails}/>
+                  <Route path={CONFIG.ROUTES.MOVIE+":id/:name"} component={MovieDetails}/>
                   <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
                   <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
                   <Route component={Home}/>
