@@ -15,17 +15,19 @@ const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
 
 const ProfileDetails = props => {
-    // console.log(props.profile);
-    return (
-        <>
-            <Row gutter={24} className="personProfile">
-                <BasicInfo profile={props.profile} />
-            </Row>
-            <Row gutter={24} className="personProfile">
-                <OtherInfo profile={props.profile} />
-            </Row>
-        </>    
-    )
+    if(props.profile){
+        return (
+            <>
+                <Row gutter={24} className="personProfile">
+                    <BasicInfo profile={props.profile} />
+                </Row>
+                <Row gutter={24} className="personProfile">
+                    <OtherInfo profile={props.profile} />
+                </Row>
+            </>    
+        )
+    }
+    return <Empty description={CONFIG.ERRORS.NO_DATA_FOUND}></Empty>
 }
 
 const BasicInfo = (props) => {
