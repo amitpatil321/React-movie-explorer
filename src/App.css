@@ -12,7 +12,7 @@ html, body{
 }
 
 .layout{
-  background-size: cover;
+  background-size: contain;
 }
 
 .mainContent{
