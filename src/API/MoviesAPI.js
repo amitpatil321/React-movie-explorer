@@ -1,5 +1,4 @@
 import MoviesAxios from '../config/axios';
-import Axios from 'axios';
 
 import * as CONFIG from '../config/config';
 
