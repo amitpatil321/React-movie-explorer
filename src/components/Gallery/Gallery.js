@@ -1,13 +1,23 @@
 import React from 'react';
+import { Empty } from 'antd';
+import { Fade } from 'react-reveal';
+import filter from 'lodash/filter';
+import Lightbox from 'react-lightbox-component';
 
-const Photos = (props) => {
+import * as CONFIG from '../../config/config';
+
+const Gallery = (props) => {
     if(props.list.length){
-        let image_list = [];
+        let image_list = [], quality;
+
+        quality = CONFIG.IMAGE_SIZE.ORIGINAL
+        
         filter(props.list, function(each) {
             image_list.push({ 
-                src : CONFIG.IMAGE_SIZE.MEDIUM+each.file_path,
+                src : quality+each.file_path,
                 title: ' ',
-                description: ' '
+                description: ' ',
+                thumbnail : CONFIG.IMAGE_SIZE.MEDIUM+each.file_path
             });
         });
 
@@ -23,3 +33,5 @@ const Photos = (props) => {
     }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
+
+export default Gallery
