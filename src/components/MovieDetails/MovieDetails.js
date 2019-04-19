@@ -85,6 +85,9 @@ class MovieDetails extends Component {
                     <Row>
                         <Cast movie={movie} />
                     </Row>
+                    <Row>
+                        <Gallery movie={movie} />
+                    </Row>                    
                 </div>
             );
         }else{
@@ -111,8 +114,6 @@ const MovieInfo = (props) => {
         let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
             document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
         
-        
-
         // check if referer is there ?
         return (
             <>
@@ -167,12 +168,20 @@ const Cast = (props) => {
     );    
 }
 
+const Gallery = (props) => {
+    if(props.movie.images){
+        
+    }
+    else
+        return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW} />
+}
+
 const BreadcrumbLinks = (props) => {
     let links, movie, url, name;
     if(props.referer.location.state && props.referer.location.state.referer && props.referer.location.state.referer !== "/"){
         // get movie name
         movie = props.referer.location.state.name
-        // Gte referer url
+        // Get referer url
         url = props.referer.location.state.referer;
         // extract name from referer
         name = url.split("/")[3].replace("-"," ");

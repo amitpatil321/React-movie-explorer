@@ -1,5 +1,4 @@
 import MoviesAxios from '../config/axios';
-import Axios from 'axios';
 
 import * as CONFIG from '../config/config';
 
@@ -23,7 +22,7 @@ export const searchMovies = (string) => {
 }
 
 export const movieDetails = (movieId) => {
-    return MoviesAxios.get(CONFIG.API_BASE_URL+"/movie/"+movieId+"?append_to_response=credits").then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/movie/"+movieId+"?append_to_response=credits,images,videos").then(response => {
         return response.data;
     })
     .catch((error) => {
