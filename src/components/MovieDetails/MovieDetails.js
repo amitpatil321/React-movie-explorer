@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb } from 'antd';
+import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb, Tabs } from 'antd';
 import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
@@ -11,11 +11,14 @@ import MovieMeta from '../MovieMeta/MovieMeta';
 import MovieTags from '../Tags/Tags';
 import MovieCast from '../Cast/Cast';
 import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
+import Gallery from '../Gallery/Gallery';
+import Videos from '../Videos/Videos';
 
 import './MovieDetails.css'
 
 const { Title, Paragraph } = Typography;
 const antIcon = <Icon type="loading" spin />;
+const TabPane = Tabs.TabPane;
 
 class MovieDetails extends Component {
     state = {
@@ -69,12 +72,21 @@ class MovieDetails extends Component {
     }
 
     render() {
+        let backdrops, posters, videos;
+
         // Handle error and show error message
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
 
         if(this.state.movie){
             let movie = this.state.movie;
+            
+            backdrops = movie.images.backdrops;
+            posters   = movie.images.posters;
+            videos   = movie.videos.results;
+            // posters   = movie.images.posters;
+
+
             return (
                 <div className="movieDetails">
                     <Row gutter={16}>
@@ -86,7 +98,20 @@ class MovieDetails extends Component {
                         <Cast movie={movie} />
                     </Row>
                     <Row>
-                        <Gallery movie={movie} />
+                        <Tabs defaultActiveKey="1">
+                            <TabPane tab={"Videos ("+videos.length+")"} key="1">
+                                <Videos list={videos} />
+                            </TabPane>
+                            <TabPane tab={"Images ("+backdrops.length+")"} key="2">
+                                <Pics list={backdrops} />
+                            </TabPane>
+                            <TabPane tab={"Posters ("+posters.length+")"} key="3">
+                                <Pics list={posters} />
+                            </TabPane>
+                            <TabPane tab="Reviews" key="4">
+                                Reviews
+                            </TabPane>                            
+                        </Tabs>                        
                     </Row>                    
                 </div>
             );
@@ -168,10 +193,9 @@ const Cast = (props) => {
     );    
 }
 
-const Gallery = (props) => {
-    if(props.movie.images){
-        
-    }
+const Pics = (props) => {
+    if(props.list)
+        return <Gallery list={props.list} />
     else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW} />
 }
