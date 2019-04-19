@@ -85,6 +85,9 @@ class MovieDetails extends Component {
                     <Row>
                         <Cast movie={movie} />
                     </Row>
+                    <Row>
+                        <Gallery movie={movie} />
+                    </Row>                    
                 </div>
             );
         }else{
@@ -111,8 +114,6 @@ const MovieInfo = (props) => {
         let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
             document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
         
-        
-
         // check if referer is there ?
         return (
             <>
@@ -165,6 +166,14 @@ const Cast = (props) => {
             <MovieCast movie={props.movie}/>
         </Col>
     );    
+}
+
+const Gallery = (props) => {
+    if(props.movie.images){
+        
+    }
+    else
+        return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW} />
 }
 
 const BreadcrumbLinks = (props) => {
