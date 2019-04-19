@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row, Col, Typography, Tabs, Icon, Empty } from 'antd';
 import { Fade } from 'react-reveal';
-import filter from 'lodash/filter';
-import Lightbox from 'react-lightbox-component';
 import 'react-lightbox-component/build/css/index.css'
 import ShowMoreText from 'react-show-more-text';
 
@@ -10,6 +8,7 @@ import './ProfileDetails.css';
 import * as CONFIG from '../../config/config';
 import { getAge } from '../Utils/Utils';
 import MovieCard from '../Card/Card';
+import Gallery from '../Gallery/Gallery';
 
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
@@ -83,7 +82,7 @@ const BasicInfo = (props) => {
 const OtherInfo = (props) => {
     const cast = <CastCrew list={props.profile.movie_credits.cast} />;
     const crew = <CastCrew list={props.profile.movie_credits.crew} />;
-    const pics = <Photos list={props.profile.images.profiles} />;
+    const pics = <Gallery list={props.profile.images.profiles} />;
 
     return (
         <Col xs={{span:24, offset : 0}} lg={24} offset={1}>
@@ -105,7 +104,7 @@ const OtherInfo = (props) => {
 const CastCrew = (props) => {
     if(props.list.length){
         return props.list.map((movie, index) => {
-            console.log(movie);
+            // console.log(movie);
             return (
                 <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
