@@ -38,15 +38,21 @@ export default class ActorProfile extends Component {
         return (<Spin indicator={antIcon}></Spin>);
     
     if(this.state.profile && !this.state.loading){
+      let movie_name = '';
+      if(this.props.location.state && this.props.location.state.movie_name)
+        movie_name = this.props.location.state.movie_name;
+
       return (
         <div className="mainContent" id="mainContent">
           <Breadcrumb>
               <Breadcrumb.Item key="home">
                   <Link to="/"><Icon type="home" /> Home</Link>
               </Breadcrumb.Item>
-              <Breadcrumb.Item key="Movie Details">
-                  <a href="javascript:;" onClick={() => this.props.history.goBack()}>{this.props.location.state.movie_name}</a>
-              </Breadcrumb.Item>
+              {(movie_name.length) ? 
+                <Breadcrumb.Item key="Movie Details">
+                    <a href="javascript:;" onClick={() => this.props.history.goBack()}>{movie_name}</a>
+                </Breadcrumb.Item>
+              : '' }  
               <Breadcrumb.Item>
                 {this.state.profile.name}
               </Breadcrumb.Item>              

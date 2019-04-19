@@ -35,5 +35,6 @@ export const IMAGE_SIZE = {
 // Error messages
 export const ERRORS = {
     PROFILE_NOT_FOUND : "Error fetching person profile!",
-    NOTHING_TO_SHOW   : "Nothing to show!"
+    NOTHING_TO_SHOW   : "Nothing to show!",
+    NO_DATA_FOUND     : "No data found!"
 }

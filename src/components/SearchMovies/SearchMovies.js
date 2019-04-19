@@ -13,26 +13,25 @@ const Option = AutoComplete.Option;
 
 class SearchMovies extends Component {
     state = {
-        dataSource : [],
-        searchText : ''
+        dataSource: [],
     }
 
-    handleSearch = (value) => {
+    _handleSearch = (value) => {
+        // Create a reference to "this" 
         let _this = this;
-        let names = []; 
+        let names = [];
         if(value.length){
-            this.setState({ searchText : value });
             return API.searchMovies(value).then(response => {
                 response.results.map(each => {
                     names.push(each);
                 });
                 _this.setState({ dataSource : names });
-            });                
+            });
         }else{
             //clear results if input is blank
-            this.setState({ dataSource : [] });
+            _this.setState({ dataSource : [] });
         }
-    }
+    }    
 
     _renderMovieName(movie){
         // Check if poster image availabe
@@ -56,40 +55,31 @@ class SearchMovies extends Component {
 
     _onSelect = (value, options) => {
         if(!value) return;
-
-        // clear search text
-        this.setState({ searchText : '' })
-
+        
         // Get all details of selected moview and pass to next page
         let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
         let name = options.props.text;
         this.props.history.push({
-            pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
+            pathname: CONFIG.ROUTES.MOVIE+movieDetails.id+"/"+makeUrl(name),
             state: { movie : movieDetails }
-        })
+        })        
     }    
-
-    shouldComponentUpdate(nextProps, nextState){
-        if(this.state.searchText !== nextState.searchText)
-            return true;
-        return false;    
-    }
 
     render() {
         const { dataSource } = this.state;
         return (
             <AutoComplete
-                value           = {this.state.searchText}
-                dataSource      = {dataSource.map(this._renderMovieName)}
-                style           = {{ width: 400 }}
-                onSelect        = {this._onSelect}
-                onSearch        = {this.handleSearch} // Add some delay to search
-                placeholder     = "Search Movie..."
-                optionLabelProp = "text"
-                allowClear      = {true}
+                dataSource={dataSource.map(this._renderMovieName)}
+                style={{ width: 400 }}
+                onSelect={this._onSelect}
+                onSearch={debounce(this._handleSearch,1000)} // Add some delay to search
+                placeholder="Search Movie..."
+                optionLabelProp="text"
+                allowClear = {true}
             />              
         );
     }
 }
+
 
 export default withRouter(SearchMovies);

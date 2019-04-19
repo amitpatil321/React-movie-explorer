@@ -15,17 +15,19 @@ const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
 
 const ProfileDetails = props => {
-    // console.log(props.profile);
-    return (
-        <>
-            <Row gutter={24} className="personProfile">
-                <BasicInfo profile={props.profile} />
-            </Row>
-            <Row gutter={24} className="personProfile">
-                <OtherInfo profile={props.profile} />
-            </Row>
-        </>    
-    )
+    if(props.profile){
+        return (
+            <>
+                <Row gutter={24} className="personProfile">
+                    <BasicInfo profile={props.profile} />
+                </Row>
+                <Row gutter={24} className="personProfile">
+                    <OtherInfo profile={props.profile} />
+                </Row>
+            </>    
+        )
+    }
+    return <Empty description={CONFIG.ERRORS.NO_DATA_FOUND}></Empty>
 }
 
 const BasicInfo = (props) => {
@@ -103,21 +105,11 @@ const OtherInfo = (props) => {
 const CastCrew = (props) => {
     if(props.list.length){
         return props.list.map((movie, index) => {
-            let { id, title, name, poster_path, vote_average, overview, job } = movie;
-            // Check if title is undefined
-            let movie_name = (title) ? title : name; 
-            
+            console.log(movie);
             return (
-                <Col xs={6} lg={4} key={id} id={id} className="moviecard castMovies">
+                <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
-                        <MovieCard 
-                            key    = {id} 
-                            title  = {movie_name} 
-                            poster = {poster_path} 
-                            rating = {vote_average} 
-                            desc   = {overview}
-                            job    = {job} 
-                        />
+                        <MovieCard movie={movie} />
                     </Fade>    
                 </Col>
             );    

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col, Spin, Icon, Empty } from 'antd';
-import { withRouter } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 
 import Alert from '../Alert/Alert.js';
 import MovieCard from '../Card/Card';
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
-import { makeUrl } from '../Utils/Utils';
 
 import './ListMovies.css';
 
@@ -51,24 +49,15 @@ class ListMovies extends Component {
         let list;
         let movies = [];
 
-        list = Object.keys(response.results).map((movie, index) => {
+        list = Object.keys(response.results).map((each_movie, index) => {
+            let movie = response.results[each_movie];
             // save movie for later use
-            movies.push(response.results[movie]);
-
-            let movie_name = "";
-            let { id, title, name, poster_path, vote_average, overview } = response.results[movie];
-            
-            // Few movies have name property while most of them have title propertly.
-            if(title === undefined && name === undefined)
-                return null;
-            
-            // Check if title is undefined
-            movie_name = (title) ? title : name;
+            movies.push(movie);
 
             return (
-                <Col xs={12} lg={6} key={id} id={id} className="moviecard" onClick={() => this._movieSelected(id)}>
+                <Col xs={12} lg={6} key={movie.id} id={movie.id} className="moviecard">
                     <Fade delay={index * 30}>
-                        <MovieCard title={movie_name} poster={poster_path} rating={vote_average} desc={overview} />
+                        <MovieCard movie={ movie } />
                     </Fade>
                 </Col>
             );             
@@ -77,16 +66,6 @@ class ListMovies extends Component {
         this.setState({ list : list, movies : movies });
     }
     
-    // Movie card clicked
-    _movieSelected = (id) => {
-        let movieDetails = this.state.movies.find(movie => movie.id === id);
-        let name = (movieDetails.title) ? movieDetails.title : movieDetails.name;
-        this.props.history.push({
-            pathname: CONFIG.ROUTES.MOVIE+makeUrl(name),
-            state: { movie : movieDetails }
-        });
-    }
-
     render(){
         return(
             <>
@@ -104,4 +83,4 @@ class ListMovies extends Component {
     }
 }
 
-export default withRouter(ListMovies);
+export default ListMovies;
