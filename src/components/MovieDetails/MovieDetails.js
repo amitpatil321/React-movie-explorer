@@ -172,7 +172,7 @@ const BreadcrumbLinks = (props) => {
     if(props.referer.location.state && props.referer.location.state.referer && props.referer.location.state.referer !== "/"){
         // get movie name
         movie = props.referer.location.state.name
-        // Gte referer url
+        // Get referer url
         url = props.referer.location.state.referer;
         // extract name from referer
         name = url.split("/")[3].replace("-"," ");
