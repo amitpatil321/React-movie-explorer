@@ -8,13 +8,11 @@ import * as CONFIG from '../../config/config';
 
 const Gallery = (props) => {
     if(props.list.length){
-        let image_list = [], quality;
+        let image_list = [];
 
-        quality = CONFIG.IMAGE_SIZE.ORIGINAL
-        
         filter(props.list, function(each) {
             image_list.push({ 
-                src : quality+each.file_path,
+                src : CONFIG.IMAGE_SIZE.ORIGINAL+each.file_path,
                 title: ' ',
                 description: ' ',
                 thumbnail : CONFIG.IMAGE_SIZE.MEDIUM+each.file_path
