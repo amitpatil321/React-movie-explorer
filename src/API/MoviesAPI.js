@@ -22,7 +22,7 @@ export const searchMovies = (string) => {
 }
 
 export const movieDetails = (movieId) => {
-    return MoviesAxios.get(CONFIG.API_BASE_URL+"/movie/"+movieId+"?append_to_response=credits,images,videos").then(response => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/movie/"+movieId+"?append_to_response=credits,images,videos,reviews,similar").then(response => {
         return response.data;
     })
     .catch((error) => {

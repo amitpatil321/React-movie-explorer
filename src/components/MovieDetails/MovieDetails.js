@@ -79,6 +79,7 @@ class MovieDetails extends Component {
             return this.state.error;
 
         if(this.state.movie){
+            console.log(this.state.movie)
             let movie = this.state.movie;
             
             backdrops = movie.images.backdrops;
