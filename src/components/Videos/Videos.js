@@ -39,9 +39,6 @@ const Videos = (props) => {
 
         return (
             <>
-                visible : {(visible) ? "true" : "false"}<br/>
-                playing : {(isPlaying) ? "true" : "false"}<br/>
-                Id : {videoId}
                 <Fade>
                     <Lightbox 
                         images={videos}
