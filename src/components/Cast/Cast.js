@@ -26,7 +26,9 @@ const Cast = (props) => {
                         to={{ pathname : CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name), 
                         state : { movie_name : title, referer : window.location.pathname } }} 
                     >
-                        <img src={pic} className="actorPic" alt={person.name}/>
+                        <img src={pic} className="actorPic" alt={person.name} 
+                            onError={(e)=>{e.target.onerror = null; e.target.src=CONFIG.NO_PHOTO.PERSON}} // Show default image in case if it fails loading actual image
+                        />
                         <p>
                             <strong>{person.name}</strong><br />
                             <i className="charName">As {person.character}</i>
