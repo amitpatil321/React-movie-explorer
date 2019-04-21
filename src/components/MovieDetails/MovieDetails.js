@@ -130,8 +130,8 @@ const MovieInfo = (props) => {
         let { title, name, backdrop_path, poster_path, tagline, overview } = props.movie;
 
         // Check whether title OR name provided
-        title = (title) ? title : name;
-        
+        title   = (title) ? title : name;
+
         // Check if poster image availabe
         poster_path = (poster_path) ? 
         CONFIG.IMAGE_SIZE.MEDIUM+poster_path : CONFIG.NO_PHOTO.POSTER
