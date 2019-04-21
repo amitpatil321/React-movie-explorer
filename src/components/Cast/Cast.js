@@ -18,7 +18,7 @@ const Cast = (props) => {
             // Check if photo is null ?
             let pic = CONFIG.NO_PHOTO.PERSON;
             if(person.profile_path)
-                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+person.profile_path;
+                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2"+person.profile_path;
 
             return <Col xs={12} lg={3} key={index}>
                 <Zoom delay={index * 80}>
