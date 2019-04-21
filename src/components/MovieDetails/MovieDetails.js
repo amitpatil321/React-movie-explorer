@@ -15,6 +15,7 @@ import Gallery from '../Gallery/Gallery';
 import Videos from '../Videos/Videos';
 
 import './MovieDetails.css'
+import Reviews from '../Reviews/Reviews';
 
 const { Title, Paragraph } = Typography;
 const antIcon = <Icon type="loading" spin />;
@@ -72,7 +73,7 @@ class MovieDetails extends Component {
     }
 
     render() {
-        let backdrops, posters, videos;
+        let backdrops, posters, videos, reviews;
 
         // Handle error and show error message
         if(this.state.error != null && this.state.ignore)
@@ -84,9 +85,8 @@ class MovieDetails extends Component {
             
             backdrops = movie.images.backdrops;
             posters   = movie.images.posters;
-            videos   = movie.videos.results;
-            // posters   = movie.images.posters;
-
+            videos    = movie.videos.results;
+            reviews   = movie.reviews.results;
 
             return (
                 <div className="movieDetails">
@@ -109,8 +109,8 @@ class MovieDetails extends Component {
                             <TabPane tab={"Posters ("+posters.length+")"} key="3">
                                 <Pics list={posters} />
                             </TabPane>
-                            <TabPane tab="Reviews" key="4">
-                                Reviews
+                            <TabPane tab={"Reviews ("+reviews.length+")"} key="4">
+                                <Reviews list={reviews}/>
                             </TabPane>                            
                         </Tabs>                        
                     </Row>                    
