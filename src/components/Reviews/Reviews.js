@@ -12,7 +12,7 @@ const Reviews = (props) => {
                         author={review.author}
                         avatar={(
                             <Avatar
-                            src={"https://www.themoviedb.org/u/"+review.author}
+                            src={CONFIG.NO_PHOTO.PERSON}
                             alt={review.author}
                             />
                         )}
