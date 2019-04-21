@@ -2,10 +2,19 @@ import React from 'react';
 import { Row, Col, Icon } from 'antd';
 import CountUp from 'react-countup';
 import { Flip } from 'react-reveal';
+import { map } from 'lodash';
 
 import './MovieMeta.css';
 
 const MovieMeta = (props) => {
+    let { release_date, runtime, budget, revenue, vote_average, spoken_languages } = props.movie;
+
+    release_date     = (release_date) ? release_date : 'NA';
+    runtime          = (runtime) ? <CountUp end={runtime} delay={1} separator ="," suffix=" mins" /> : 'NA';
+    budget           = (budget) ? <CountUp end={budget} delay={1} separator= "," prefix="$" /> : 'NA';
+    revenue          = (revenue) ? <CountUp end={revenue} delay={1} separator="," prefix="$" /> : 'NA';
+    vote_average     = (vote_average) ? <CountUp end={vote_average} delay={1} decimals={1} suffix=" / 10" duration={3} /> : 'NA';
+    spoken_languages = (spoken_languages) ? map(spoken_languages, 'name').join(", ") : '';
 
     return (
         <>
@@ -14,26 +23,20 @@ const MovieMeta = (props) => {
                     <p>Original Release</p>    
                     <Flip top cascade>
                         <span>
-                            {(props.movie.release_date) ? 
-                                props.movie.release_date : 'NA'
-                            }
+                            {release_date}
                         </span>
                     </Flip>    
                 </Col>
                 <Col xs={12} lg={8}>
                     <p>Running Time</p>
                     <span>
-                        {(props.movie.runtime) ? 
-                            <CountUp end={props.movie.runtime} delay={1} separator="," suffix=" mins" />
-                         : 'NA'   
-                        }
+                        {runtime}
                     </span>
                 </Col>
                 <Col xs={12} lg={8}>
                     <p>Budget</p>
                     <span>
-                        {(props.movie.budget) ? 
-                            <CountUp end={props.movie.budget} delay={1} separator="," prefix="$" /> : 'NA' }
+                        {budget}
                     </span>
                 </Col>
             {/* </Row> */}
@@ -41,25 +44,19 @@ const MovieMeta = (props) => {
                 <Col xs={12} lg={8}>
                     <p>Box Office</p>
                     <span>
-                        {(props.movie.revenue) ? 
-                            <CountUp end={props.movie.revenue} delay={1} separator="," prefix="$" /> : 'NA' }
+                        {revenue}
                     </span>
                 </Col>
                 <Col xs={12} lg={8}>
                     <p>Vote Average</p>
                     <span>
-                        {(props.movie.vote_average) ? 
-                            <CountUp end={props.movie.vote_average} delay={1} decimals={1} suffix=" / 10" duration={3} />
-                            : 'NA'
-                        }
+                        {vote_average}
                     </span>
                 </Col>
                 <Col xs={12} lg={8}>
-                    <p>Website</p>
+                    <p>Languages</p>
                     <span>
-                        {(props.movie.homepage) ? 
-                            <a href={props.movie.homepage} target="_blank"><Icon type="global" /></a> : 'NA'
-                        }
+                        {spoken_languages}
                     </span>
                 </Col>                
             </Row>            
