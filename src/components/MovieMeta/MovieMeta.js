@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 import CountUp from 'react-countup';
 import { Flip } from 'react-reveal';
 
@@ -10,7 +10,7 @@ const MovieMeta = (props) => {
     return (
         <>
             <Row className="movieMeta">
-                <Col xs={24} lg={12}>
+                <Col xs={12} lg={8}>
                     <p>Original Release</p>    
                     <Flip top cascade>
                         <span>
@@ -20,7 +20,7 @@ const MovieMeta = (props) => {
                         </span>
                     </Flip>    
                 </Col>
-                <Col xs={24} lg={12}>
+                <Col xs={12} lg={8}>
                     <p>Running Time</p>
                     <span>
                         {(props.movie.runtime) ? 
@@ -29,16 +29,23 @@ const MovieMeta = (props) => {
                         }
                     </span>
                 </Col>
-            </Row>
-            <Row className="movieMeta">
-                <Col xs={24} lg={12}>
+                <Col xs={12} lg={8}>
+                    <p>Budget</p>
+                    <span>
+                        {(props.movie.budget) ? 
+                            <CountUp end={props.movie.budget} delay={1} separator="," prefix="$" /> : 'NA' }
+                    </span>
+                </Col>
+            {/* </Row> */}
+            {/* <Row className="movieMeta"> */}
+                <Col xs={12} lg={8}>
                     <p>Box Office</p>
                     <span>
                         {(props.movie.revenue) ? 
                             <CountUp end={props.movie.revenue} delay={1} separator="," prefix="$" /> : 'NA' }
                     </span>
                 </Col>
-                <Col xs={24} lg={12}>
+                <Col xs={12} lg={8}>
                     <p>Vote Average</p>
                     <span>
                         {(props.movie.vote_average) ? 
@@ -47,6 +54,14 @@ const MovieMeta = (props) => {
                         }
                     </span>
                 </Col>
+                <Col xs={12} lg={8}>
+                    <p>Website</p>
+                    <span>
+                        {(props.movie.homepage) ? 
+                            <a href={props.movie.homepage} target="_blank"><Icon type="global" /></a> : 'NA'
+                        }
+                    </span>
+                </Col>                
             </Row>            
         </>    
     )
