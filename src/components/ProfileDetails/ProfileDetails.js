@@ -10,8 +10,6 @@ import { getAge } from '../Utils/Utils';
 import MovieCard from '../Card/Card';
 import Gallery from '../Gallery/Gallery';
 
-const PERPAGE = 18;
-
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
 
@@ -94,16 +92,21 @@ const OtherInfo = (props) => {
 
     return (
         <Col xs={{span:24, offset : 0}} lg={24} offset={1}>
-            <Tabs defaultActiveKey="1">
-                <TabPane tab={"Photos ("+totalPics+")"} key="1">
+            {/* Reset current page to 1 with tabChange */}
+            <Tabs defaultActiveKey="1" onChange={()=>changePage(1)}> 
+                <TabPane tab={"Photos ("+totalPics+")"} key="1" >
+                    {(totalPics > CONFIG.META_ITEMS_PERPAGE)  ? 
+                        <Pagination total={totalPics} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : ''}
                     {pics}
                 </TabPane>
                 <TabPane tab={"Cast ("+totalCast+")"} key="2" style={{ textAlign : "center" }}>
-                    <Pagination total={totalCast} pageSize={PERPAGE} onChange={(page)=>changePage(page)} />
-                    <br />
+                    {(totalCast > CONFIG.META_ITEMS_PERPAGE) ? 
+                        <Pagination total={totalCast} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
                     {cast}
                 </TabPane>
                 <TabPane tab={"Crew ("+totalCrew+")"} key="3">
+                    {(totalCrew > CONFIG.META_ITEMS_PERPAGE) ? 
+                    <Pagination total={totalCrew} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
                     {crew}    
                 </TabPane>
             </Tabs>
@@ -112,9 +115,10 @@ const OtherInfo = (props) => {
 }
 
 const CastCrew = (props) => {
+
     if(props.list.length){
-        const indexOfLastItem = props.currentPage * PERPAGE;        
-        const indexOfFirstItem = indexOfLastItem - PERPAGE;
+        const indexOfLastItem = props.currentPage * CONFIG.META_ITEMS_PERPAGE;        
+        const indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
         const currentList = props.list.slice(indexOfFirstItem, indexOfLastItem);
 
         return currentList.map((movie, index) => {
