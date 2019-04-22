@@ -80,20 +80,20 @@ const BasicInfo = (props) => {
 }
 
 const OtherInfo = (props) => {
+    const pics = <Gallery list={props.profile.images.profiles} />;
     const cast = <CastCrew list={props.profile.movie_credits.cast} />;
     const crew = <CastCrew list={props.profile.movie_credits.crew} />;
-    const pics = <Gallery list={props.profile.images.profiles} />;
 
     return (
         <Col xs={{span:24, offset : 0}} lg={24} offset={1}>
             <Tabs defaultActiveKey="1">
-                <TabPane tab="Photos" key="1">
+                <TabPane tab={"Photos ("+props.profile.images.profiles.length+")"} key="1">
                     {pics}
                 </TabPane>
-                <TabPane tab="Cast" key="2">
+                <TabPane tab={"Cast ("+props.profile.movie_credits.cast.length+")"} key="2">
                     {cast}    
                 </TabPane>
-                <TabPane tab="Crew" key="3">
+                <TabPane tab={"Crew ("+props.profile.movie_credits.crew.length+")"} key="3">
                     {crew}    
                 </TabPane>
             </Tabs>
