@@ -10,6 +10,7 @@ import * as CONFIG from '../../config/config';
 import './Videos.css'
 
 const Videos = (props) => {
+    // React hooks
     const [visible, _showModal]   = useState(false);
     const [videoId, _setVideoId]  = useState();
     const [isPlaying, _setPlaying] = useState(false);
@@ -30,9 +31,9 @@ const Videos = (props) => {
 
     if(props.list.length){
         let videos = [];
-        
+
         filter(props.list, function(video) {
-            videos.push({ 
+            videos.push({
                 src : "https://img.youtube.com/vi/"+video.key+"/0.jpg"
             });
         });
@@ -40,7 +41,7 @@ const Videos = (props) => {
         return (
             <>
                 <Fade>
-                    <Lightbox 
+                    <Lightbox
                         images={videos}
                         thumbnailWidth='250px'
                         thumbnailHeight='auto'
@@ -56,7 +57,7 @@ const Videos = (props) => {
                                     }
                                 } />
                             )
-                        }}                    
+                        }}
                     />
                 </Fade>
                 <Modal
@@ -68,17 +69,17 @@ const Videos = (props) => {
                     maskClosable = {false}
                     onCancel     = {() => _closeVideo()}
                 >
-                    {(videoId) ? 
-                        <ReactPlayer 
-                            url      = {'https: //www.youtube.com/watch?v='+videoId} 
-                            playing  = {isPlaying} 
+                    {(videoId) ?
+                        <ReactPlayer
+                            url      = {'https: //www.youtube.com/watch?v='+videoId}
+                            playing  = {isPlaying}
                             controls = {true}
                             width    = {700}
                             height   = {400}
                         />
-                    : '' }    
-                </Modal>                
-            </>    
+                    : '' }
+                </Modal>
+            </>
         );
     }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
