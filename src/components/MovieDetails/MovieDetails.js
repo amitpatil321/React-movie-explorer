@@ -25,7 +25,8 @@ class MovieDetails extends Component {
     state = {
         movie : null,
         error : null,
-        loading : false
+        loading : false,
+        currPage : 1
     }
 
     componentDidMount(){
@@ -99,9 +100,12 @@ class MovieDetails extends Component {
                         <Cast movie={movie} />
                     </Row>
                     <Row>
-                        <Tabs defaultActiveKey="1">
+                        <Tabs defaultActiveKey="1" onChange={()=> this.setState({ currPage : 1 })}>
                             <TabPane tab={"Videos ("+videos.length+")"} key="1">
-                                <Videos list={videos} />
+                                {( videos.length > CONFIG.META_ITEMS_PERPAGE)  ?
+                                    <Pagination total={videos.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>this.setState({ currPage : page })} />
+                                : ''}
+                                <Videos list={videos} currentPage={this.state.currPage}/>
                             </TabPane>
                             <TabPane tab={"Images ("+backdrops.length+")"} key="2">
                                 <Pics list={backdrops} />

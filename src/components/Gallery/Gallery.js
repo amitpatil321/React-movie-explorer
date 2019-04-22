@@ -10,9 +10,9 @@ const Gallery = (props) => {
     if(props.list.length){
         let image_list = [];
         let currentList = props.list;
-        let indexOfLastItem, indexOfFirstItem;
 
         if(props.currentPage){
+            let indexOfLastItem, indexOfFirstItem;
             indexOfLastItem  = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
             indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
             currentList      = props.list.slice(indexOfFirstItem, indexOfLastItem);

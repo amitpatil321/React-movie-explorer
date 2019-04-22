@@ -31,8 +31,19 @@ const Videos = (props) => {
 
     if(props.list.length){
         let videos = [];
+        let list = props.list;
 
-        filter(props.list, function(video) {
+        if(props.currentPage){
+            let indexOfLastItem, indexOfFirstItem;
+            indexOfLastItem  = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
+            indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
+            list             = props.list.slice(indexOfFirstItem, indexOfLastItem);
+        }
+
+
+        console.log(list);
+
+        filter(list, function(video) {
             videos.push({
                 src : "https://img.youtube.com/vi/"+video.key+"/0.jpg"
             });
@@ -42,17 +53,17 @@ const Videos = (props) => {
             <>
                 <Fade>
                     <Lightbox
-                        images={videos}
-                        thumbnailWidth='250px'
-                        thumbnailHeight='auto'
-                        renderImageFunc={(idx, image, toggleLightbox, width, height) => {
+                        images          = {videos}
+                        thumbnailWidth  = '250px'
+                        thumbnailHeight = 'auto'
+                        renderImageFunc = {(idx, image, toggleLightbox, width, height) => {
                             return (
                             <img
-                                key={idx}
-                                src={image.src}
-                                className='lightbox-img-thumbnail'
-                                style={{width: width, height: height}}
-                                onClick={() => {
+                                key       = {idx}
+                                src       = {image.src}
+                                className = 'lightbox-img-thumbnail'
+                                style     = {{width: width, height: height}}
+                                onClick   = {() => {
                                         _playVideo(idx)
                                     }
                                 } />
