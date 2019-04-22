@@ -1,6 +1,6 @@
 /*
 .ant-card-cover{
-    overflow: hidden;    
+    overflow: hidden;
 }
 .ant-card-cover img {
     max-width: 100%;
@@ -20,7 +20,7 @@
     text-align: center;
     margin-bottom: 10px;
   }
-  
+
   .content {
     cursor: pointer;
     position: relative;
@@ -30,7 +30,7 @@
     overflow: hidden;
     min-height: 425px;
   }
-  
+
   .content .content-overlay {
     background: rgba(0,0,0,0.7);
     position: absolute;
@@ -45,11 +45,11 @@
     -moz-transition: all 0.4s ease-in-out 0s;
     transition: all 0.4s ease-in-out 0s;
   }
-  
+
   .content:hover .content-overlay{
     opacity: 1;
   }
-  
+
   .content-image{
     width: 100%;
     -moz-transition: all 0.3s;
@@ -62,7 +62,7 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-  
+
   .content-details {
     position: absolute;
     text-align: center;
@@ -80,7 +80,7 @@
     transition: all 0.3s ease-in-out 0s;
     color: #fff;
   }
-  
+
   .content:hover .content-details{
     top: 50%;
     left: 50%;
@@ -103,9 +103,9 @@
 
   .content-details p{
     color: #fff;
-    font-size: 0.8em; 
+    font-size: 0.8em;
   }
-  
+
   .fadeIn-bottom{
     top: 80%;
   }
