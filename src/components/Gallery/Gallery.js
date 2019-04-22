@@ -10,15 +10,16 @@ const Gallery = (props) => {
     if(props.list.length){
         let image_list = [];
         let currentList = props.list;
+        let indexOfLastItem, indexOfFirstItem;
 
         if(props.currentPage){
-            const indexOfLastItem = props.currentPage * CONFIG.META_ITEMS_PERPAGE;        
-            const indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
-            const currentList = props.list.slice(indexOfFirstItem, indexOfLastItem);
+            indexOfLastItem  = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
+            indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
+            currentList      = props.list.slice(indexOfFirstItem, indexOfLastItem);
         }
 
         filter(currentList, function(each) {
-            image_list.push({ 
+            image_list.push({
                 src : CONFIG.IMAGE_SIZE.ORIGINAL+each.file_path,
                 title: ' ',
                 description: ' ',
@@ -27,13 +28,13 @@ const Gallery = (props) => {
         });
 
         return (
-            <Fade>    
-                <Lightbox 
+            <Fade>
+                <Lightbox
                     images={image_list}
                     thumbnailWidth='168px'
                     thumbnailHeight='auto'
                 />
-            </Fade>    
+            </Fade>
         );
     }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
