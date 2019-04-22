@@ -16,6 +16,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
     "react-show-more-text": "^1.0.4",
+    "react-sticky": "^6.0.3",
     "scrollreveal": "^4.0.5",
     "wow.js": "^1.2.2"
   },
