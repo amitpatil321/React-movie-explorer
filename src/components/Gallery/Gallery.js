@@ -23,7 +23,7 @@ const Gallery = (props) => {
             <Fade>    
                 <Lightbox 
                     images={image_list}
-                    thumbnailWidth='250px'
+                    thumbnailWidth='168px'
                     thumbnailHeight='auto'
                 />
             </Fade>    
