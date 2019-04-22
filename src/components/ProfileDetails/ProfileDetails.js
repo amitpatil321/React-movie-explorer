@@ -1,5 +1,5 @@
-import React from 'react';
-import { Row, Col, Typography, Tabs, Icon, Empty } from 'antd';
+import React, {useState} from 'react';
+import { Row, Col, Typography, Tabs, Icon, Empty, Pagination } from 'antd';
 import { Fade } from 'react-reveal';
 import 'react-lightbox-component/build/css/index.css'
 import ShowMoreText from 'react-show-more-text';
@@ -9,6 +9,8 @@ import * as CONFIG from '../../config/config';
 import { getAge } from '../Utils/Utils';
 import MovieCard from '../Card/Card';
 import Gallery from '../Gallery/Gallery';
+
+const PERPAGE = 18;
 
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
@@ -80,20 +82,28 @@ const BasicInfo = (props) => {
 }
 
 const OtherInfo = (props) => {
-    const pics = <Gallery list={props.profile.images.profiles} />;
-    const cast = <CastCrew list={props.profile.movie_credits.cast} />;
-    const crew = <CastCrew list={props.profile.movie_credits.crew} />;
+    let [currPage, changePage] = useState(1);
+
+    const pics = <Gallery list={props.profile.images.profiles} currentPage={currPage} />;
+    const cast = <CastCrew list={props.profile.movie_credits.cast} currentPage={currPage} />;
+    const crew = <CastCrew list={props.profile.movie_credits.crew} currentPage={currPage} />;
+
+    const totalPics = props.profile.images.profiles.length;
+    const totalCast = props.profile.movie_credits.cast.length;
+    const totalCrew = props.profile.movie_credits.crew.length;
 
     return (
         <Col xs={{span:24, offset : 0}} lg={24} offset={1}>
             <Tabs defaultActiveKey="1">
-                <TabPane tab={"Photos ("+props.profile.images.profiles.length+")"} key="1">
+                <TabPane tab={"Photos ("+totalPics+")"} key="1">
                     {pics}
                 </TabPane>
-                <TabPane tab={"Cast ("+props.profile.movie_credits.cast.length+")"} key="2">
-                    {cast}    
+                <TabPane tab={"Cast ("+totalCast+")"} key="2" style={{ textAlign : "center" }}>
+                    <Pagination total={totalCast} pageSize={PERPAGE} onChange={(page)=>changePage(page)} />
+                    <br />
+                    {cast}
                 </TabPane>
-                <TabPane tab={"Crew ("+props.profile.movie_credits.crew.length+")"} key="3">
+                <TabPane tab={"Crew ("+totalCrew+")"} key="3">
                     {crew}    
                 </TabPane>
             </Tabs>
@@ -103,8 +113,11 @@ const OtherInfo = (props) => {
 
 const CastCrew = (props) => {
     if(props.list.length){
-        return props.list.map((movie, index) => {
-            // console.log(movie);
+        const indexOfLastItem = props.currentPage * PERPAGE;        
+        const indexOfFirstItem = indexOfLastItem - PERPAGE;
+        const currentList = props.list.slice(indexOfFirstItem, indexOfLastItem);
+
+        return currentList.map((movie, index) => {
             return (
                 <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
@@ -112,7 +125,7 @@ const CastCrew = (props) => {
                     </Fade>    
                 </Col>
             );    
-        });
+        })
     }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
