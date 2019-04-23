@@ -13,7 +13,7 @@ class Home extends Component {
         return (
             <div className="mainContent" id="mainContent">
                 <ListMovies type="trending"/>
-            </div>    
+            </div>
         );
     }
 }

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb, Tabs } from 'antd';
+import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb, Tabs, Pagination } from 'antd';
 import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
@@ -25,21 +25,16 @@ class MovieDetails extends Component {
     state = {
         movie : null,
         error : null,
-        loading : false
+        loading : false,
+        currPage : 1
     }
 
     componentDidMount(){
-        // Check if user came by clicking movie card
-        // and if we have movie details ?
-        if(this.props.location.state)
-            this._loadMovieInfo(this.props.location.state.movie);
-        else{
-            // If user came by entering url and not clicking movie card ?
-            if(this.props.match.params.id)
-                this._loadMovieInfo({ id : this.props.match.params.id });
-            else
-                this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
-        }
+        // If user came by entering url and not clicking movie card ?
+        if(this.props.match.params.id)
+            this._loadMovieInfo({ id : this.props.match.params.id });
+        else
+            this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
     }
 
     componentDidUpdate(prevProps){
@@ -58,7 +53,6 @@ class MovieDetails extends Component {
 
     _loadMovieInfo(movie){
         let movieId = movie.id;
-    
         // set loading to true
         if(!this.state.loading)
             this.setState({ loading : true });
@@ -79,10 +73,12 @@ class MovieDetails extends Component {
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
 
+        console.log(this.state.movie);
+
         if(this.state.movie){
             console.log(this.state.movie)
             let movie = this.state.movie;
-            
+
             backdrops = movie.images.backdrops;
             posters   = movie.images.posters;
             videos    = movie.videos.results;
@@ -99,9 +95,12 @@ class MovieDetails extends Component {
                         <Cast movie={movie} />
                     </Row>
                     <Row>
-                        <Tabs defaultActiveKey="1">
+                        <Tabs defaultActiveKey="1" onChange={()=> this.setState({ currPage : 1 })}>
                             <TabPane tab={"Videos ("+videos.length+")"} key="1">
-                                <Videos list={videos} />
+                                {( videos.length > CONFIG.META_ITEMS_PERPAGE)  ?
+                                    <Pagination current={this.state.currPage} total={videos.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>this.setState({ currPage : page })} />
+                                : ''}
+                                <Videos list={videos} currentPage={this.state.currPage}/>
                             </TabPane>
                             <TabPane tab={"Images ("+backdrops.length+")"} key="2">
                                 <Pics list={backdrops} />
@@ -111,9 +110,9 @@ class MovieDetails extends Component {
                             </TabPane>
                             <TabPane tab={"Reviews ("+reviews.length+")"} key="4">
                                 <Reviews list={reviews}/>
-                            </TabPane>                            
-                        </Tabs>                        
-                    </Row>                    
+                            </TabPane>
+                        </Tabs>
+                    </Row>
                 </div>
             );
         }else{
@@ -133,20 +132,20 @@ const MovieInfo = (props) => {
         title   = (title) ? title : name;
 
         // Check if poster image availabe
-        poster_path = (poster_path) ? 
+        poster_path = (poster_path) ?
         CONFIG.IMAGE_SIZE.MEDIUM+poster_path : CONFIG.NO_PHOTO.POSTER
 
         // Set background image
         let backgroundImage = CONFIG.IMAGE_SIZE.ORIGINAL+ backdrop_path;
             document.getElementById("layout").style.backgroundImage = 'url("'+backgroundImage+'")';
-        
+
         // check if referer is there ?
         return (
             <>
                 <Fade>
                     <BreadcrumbLinks referer={props.referer} />
                     <br />
-                </Fade>    
+                </Fade>
                 <Col xs={24} lg={7} className="moviePoster">         <Fade>
                         <img src={poster_path} alt={title} width="294px"/>
                     </Fade>
@@ -165,9 +164,9 @@ const MovieInfo = (props) => {
                         </div>
                     </Fade>
                 </Col>
-            </>       
+            </>
         );
-    }      
+    }
 }
 
 const Companies = (props) => {
@@ -175,7 +174,7 @@ const Companies = (props) => {
         <Col xs={24} lg={16} className="prodCompanies" type="flex">
             <MovieProdCompanies movie = {props.movie} />
         </Col>
-    );  
+    );
 }
 
 const Meta = (props) => {
@@ -191,13 +190,21 @@ const Cast = (props) => {
         <Col span={24} className="cast">
             <MovieCast movie={props.movie}/>
         </Col>
-    );    
+    );
 }
 
 const Pics = (props) => {
-    if(props.list)
-        return <Gallery list={props.list} />
-    else
+    if(props.list){
+        let [currPage, changePage] = useState(1);
+        return (
+            <>
+                {(props.list.length > CONFIG.META_ITEMS_PERPAGE)  ?
+                    <Pagination current={currPage} total={props.list.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} />
+                    : ''}
+                <Gallery list={props.list} currentPage={currPage} />
+            </>
+        )
+    }else
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW} />
 }
 
@@ -222,15 +229,15 @@ const BreadcrumbLinks = (props) => {
             {(name) ?
                <Breadcrumb.Item key="referer">
                     <Link to={url}>{name}</Link>
-               </Breadcrumb.Item>            
+               </Breadcrumb.Item>
             : ''}
-            {(movie) ? 
+            {(movie) ?
                 <Breadcrumb.Item key="movie">
                     {movie}
-                </Breadcrumb.Item>            
+                </Breadcrumb.Item>
             : ''}
-        </Breadcrumb>    
-    )        
+        </Breadcrumb>
+    )
 }
 
 export default MovieDetails;

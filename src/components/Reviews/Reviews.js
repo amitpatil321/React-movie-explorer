@@ -23,9 +23,9 @@ const Reviews = (props) => {
                                 less='Read less'
                             >
                                 {review.content}
-                            </ShowMoreText>                             
+                            </ShowMoreText>
                         )}
-                    />                    
+                    />
                 </React.Fragment>
             )
         });

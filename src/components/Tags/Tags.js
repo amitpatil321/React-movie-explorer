@@ -19,7 +19,7 @@ const Tags = (props) => {
                     <Tag key={genre.id} color={randomColor()}>{genre.name}</Tag>
                 </Link>
              );
-        });         
+        });
     }
     return null;
 };

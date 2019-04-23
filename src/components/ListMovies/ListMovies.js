@@ -27,7 +27,7 @@ class ListMovies extends Component {
                     }).catch((error) => {
                         let errorBox = <Alert type="error" message={error.toString()} />
                         this.setState({ error : errorBox })
-                    });                     
+                    });
                 }
                 break;
                 case "genre":{
@@ -60,12 +60,12 @@ class ListMovies extends Component {
                         <MovieCard movie={ movie } />
                     </Fade>
                 </Col>
-            );             
+            );
         }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
 
         this.setState({ list : list, movies : movies });
     }
-    
+
     render(){
         return(
             <>
@@ -76,7 +76,7 @@ class ListMovies extends Component {
                 <Row gutter={16}>
                     {this.state.error}
                     {this.state.list}
-                </Row>  
+                </Row>
 
             </>
         )

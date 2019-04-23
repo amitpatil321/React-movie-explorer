@@ -11,7 +11,7 @@ const antIcon = <Icon type="loading" spin />;
 
 export default class ActorProfile extends Component {
   state = {
-    loading : false  
+    loading : false
   }
 
   componentDidMount(){
@@ -22,7 +22,7 @@ export default class ActorProfile extends Component {
         this.setState({ profile : response, loading : false })
       }).catch((error) => {
         let errorBox = <Alert type="error" message={error.toString()} />
-        this.setState({ error : errorBox, profile : null, loading : false })      
+        this.setState({ error : errorBox, profile : null, loading : false })
       });
 
     }else // If id isnt provided then, redirect to home
@@ -33,10 +33,10 @@ export default class ActorProfile extends Component {
     // Handle error and show error message
     if(this.state.error != null)
       return this.state.error;
-    
+
     if(this.state.loading)
         return (<Spin indicator={antIcon}></Spin>);
-    
+
     if(this.state.profile && !this.state.loading){
       let movie_name = '';
       if(this.props.location.state && this.props.location.state.movie_name)
@@ -48,15 +48,15 @@ export default class ActorProfile extends Component {
               <Breadcrumb.Item key="home">
                   <Link to="/"><Icon type="home" /> Home</Link>
               </Breadcrumb.Item>
-              {(movie_name.length) ? 
+              {(movie_name.length) ?
                 <Breadcrumb.Item key="Movie Details">
                     <a href="javascript:;" onClick={() => this.props.history.goBack()}>{movie_name}</a>
                 </Breadcrumb.Item>
-              : '' }  
+              : '' }
               <Breadcrumb.Item>
                 {this.state.profile.name}
-              </Breadcrumb.Item>              
-          </Breadcrumb> 
+              </Breadcrumb.Item>
+          </Breadcrumb>
 
           <div className="actorDetails">
             <ProfileDetails profile={this.state.profile} />

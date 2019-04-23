@@ -18,7 +18,7 @@ export const searchMovies = (string) => {
     })
     .catch((error) => {
         throw new Error("Error fetching movies!");
-    });   
+    });
 }
 
 export const movieDetails = (movieId) => {
@@ -27,7 +27,7 @@ export const movieDetails = (movieId) => {
     })
     .catch((error) => {
         throw new Error("Error fetching movie details");
-    });   
+    });
 }
 
 export const withGenre = (id) => {
@@ -36,5 +36,5 @@ export const withGenre = (id) => {
     })
     .catch((error) => {
         throw new Error("Error fetching movies list");
-    });    
+    });
 }

@@ -22,11 +22,11 @@ const Cast = (props) => {
 
             return <Col xs={12} lg={3} key={index}>
                 <Zoom delay={index * 80}>
-                    <Link 
-                        to={{ pathname : CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name), 
-                        state : { movie_name : title, referer : window.location.pathname } }} 
+                    <Link
+                        to={{ pathname : CONFIG.ROUTES.PERSON+person.id+"/"+makeUrl(person.name),
+                        state : { movie_name : title, referer : window.location.pathname } }}
                     >
-                        <img src={pic} className="actorPic" alt={person.name} 
+                        <img src={pic} className="actorPic" alt={person.name}
                             onError={(e)=>{e.target.onerror = null; e.target.src=CONFIG.NO_PHOTO.PERSON}} // Show default image in case if it fails loading actual image
                         />
                         <p>
@@ -34,7 +34,7 @@ const Cast = (props) => {
                             <i className="charName">As {person.character}</i>
                         </p>
                     </Link>
-                </Zoom>        
+                </Zoom>
             </Col>
         }).slice(0, CONFIG.CAST_PER_PAGE); // Showing only limited results;
     }
