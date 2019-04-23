@@ -96,17 +96,17 @@ const OtherInfo = (props) => {
             <Tabs defaultActiveKey="1" onChange={()=>changePage(1)}>
                 <TabPane tab={"Photos ("+totalPics+")"} key="1" >
                     {(totalPics > CONFIG.META_ITEMS_PERPAGE)  ?
-                        <Pagination total={totalPics} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : ''}
+                        <Pagination current={currPage} total={totalPics} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : ''}
                     {pics}
                 </TabPane>
                 <TabPane tab={"Cast ("+totalCast+")"} key="2" style={{ textAlign : "center" }}>
                     {(totalCast > CONFIG.META_ITEMS_PERPAGE) ?
-                        <Pagination total={totalCast} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
+                        <Pagination current={currPage} total={totalCast} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
                     {cast}
                 </TabPane>
                 <TabPane tab={"Crew ("+totalCrew+")"} key="3">
                     {(totalCrew > CONFIG.META_ITEMS_PERPAGE) ?
-                    <Pagination total={totalCrew} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
+                    <Pagination current={currPage} total={totalCrew} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} /> : '' }
                     {crew}
                 </TabPane>
             </Tabs>

@@ -30,17 +30,11 @@ class MovieDetails extends Component {
     }
 
     componentDidMount(){
-        // Check if user came by clicking movie card
-        // and if we have movie details ?
-        if(this.props.location.state)
-            this._loadMovieInfo(this.props.location.state.movie);
-        else{
-            // If user came by entering url and not clicking movie card ?
-            if(this.props.match.params.id)
-                this._loadMovieInfo({ id : this.props.match.params.id });
-            else
-                this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
-        }
+        // If user came by entering url and not clicking movie card ?
+        if(this.props.match.params.id)
+            this._loadMovieInfo({ id : this.props.match.params.id });
+        else
+            this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
     }
 
     componentDidUpdate(prevProps){
@@ -59,7 +53,6 @@ class MovieDetails extends Component {
 
     _loadMovieInfo(movie){
         let movieId = movie.id;
-
         // set loading to true
         if(!this.state.loading)
             this.setState({ loading : true });
@@ -79,6 +72,8 @@ class MovieDetails extends Component {
         // Handle error and show error message
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
+
+        console.log(this.state.movie);
 
         if(this.state.movie){
             console.log(this.state.movie)
@@ -103,7 +98,7 @@ class MovieDetails extends Component {
                         <Tabs defaultActiveKey="1" onChange={()=> this.setState({ currPage : 1 })}>
                             <TabPane tab={"Videos ("+videos.length+")"} key="1">
                                 {( videos.length > CONFIG.META_ITEMS_PERPAGE)  ?
-                                    <Pagination total={videos.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>this.setState({ currPage : page })} />
+                                    <Pagination current={this.state.currPage} total={videos.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>this.setState({ currPage : page })} />
                                 : ''}
                                 <Videos list={videos} currentPage={this.state.currPage}/>
                             </TabPane>
@@ -204,7 +199,7 @@ const Pics = (props) => {
         return (
             <>
                 {(props.list.length > CONFIG.META_ITEMS_PERPAGE)  ?
-                    <Pagination total={props.list.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} />
+                    <Pagination current={currPage} total={props.list.length} pageSize={CONFIG.META_ITEMS_PERPAGE} onChange={(page)=>changePage(page)} />
                     : ''}
                 <Gallery list={props.list} currentPage={currPage} />
             </>
