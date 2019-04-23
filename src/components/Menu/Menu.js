@@ -29,8 +29,8 @@ const HeaderMenu = (props) => {
               </Menu.Item>
             </Menu>
           </Header>
-        </div>        
+        </div>
       )
-}  
+}
 
 export default HeaderMenu;

@@ -27,3 +27,5 @@ pnpm-debug\.log
 pnpm-lock\.yaml
 
 src/TODO
+
+package-lock\.json

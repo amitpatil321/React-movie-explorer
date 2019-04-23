@@ -11,7 +11,7 @@ People.profile = (id) => {
     })
     .catch((error) => {
         throw new Error(CONFIG.ERRORS.PROFILE_NOT_FOUND);
-    });    
+    });
 }
 
 export default People;

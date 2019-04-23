@@ -17,7 +17,7 @@ class SearchMovies extends Component {
     }
 
     _handleSearch = (value) => {
-        // Create a reference to "this" 
+        // Create a reference to "this"
         let _this = this;
         let names = [];
         if(value.length){
@@ -31,12 +31,12 @@ class SearchMovies extends Component {
             //clear results if input is blank
             _this.setState({ dataSource : [] });
         }
-    }    
+    }
 
     _renderMovieName(movie){
         // Check if poster image availabe
-        let poster_path = (movie.poster_path) ? 
-        CONFIG.IMAGE_SIZE.SMALL+movie.poster_path : CONFIG.NO_PHOTO.POSTER;        
+        let poster_path = (movie.poster_path) ?
+        CONFIG.IMAGE_SIZE.SMALL+movie.poster_path : CONFIG.NO_PHOTO.POSTER;
 
         return (
             <Option key={movie.id} text={movie.title}>
@@ -48,22 +48,22 @@ class SearchMovies extends Component {
                         {(movie.overview) ? movie.overview.substring(0,50)+"..." : ''}
                     </div>
                     <div><Rate allowHalf defaultValue={movie.vote_average / 2} tooltips={movie.rating} disabled /></div>
-                </div>    
+                </div>
             </Option>
-          );        
+          );
     }
 
     _onSelect = (value, options) => {
         if(!value) return;
-        
+
         // Get all details of selected moview and pass to next page
         let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
         let name = options.props.text;
         this.props.history.push({
             pathname: CONFIG.ROUTES.MOVIE+movieDetails.id+"/"+makeUrl(name),
             state: { movie : movieDetails }
-        })        
-    }    
+        })
+    }
 
     render() {
         const { dataSource } = this.state;
@@ -76,7 +76,7 @@ class SearchMovies extends Component {
                 placeholder="Search Movie..."
                 optionLabelProp="text"
                 allowClear = {true}
-            />              
+            />
         );
     }
 }

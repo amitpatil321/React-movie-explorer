@@ -1,7 +1,7 @@
-export const API_KEY            = "08308f4c5d9eb1e0301d7a1887838bec"; 
+export const API_KEY            = "08308f4c5d9eb1e0301d7a1887838bec";
 export const API_BASE_URL       = "https://api.themoviedb.org/3";
 
-// Movie detaisl page 
+// Movie detaisl page
 export const MOVIES_PER_PAGE    = 20;
 export const CAST_PER_PAGE      = 8;
 export const COMPANIES_PER_PAGE = 8;

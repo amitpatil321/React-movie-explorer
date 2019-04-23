@@ -16,10 +16,10 @@ import './App.css';
 const {
   Footer, Content,
 } = Layout;
- 
+
 class App extends Component {
 
-  render() {    
+  render() {
     return (
       <BrowserRouter>
         <div className="App">
@@ -34,15 +34,15 @@ class App extends Component {
                   <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
                   <Route component={Home}/>
                 </Switch>
-              </ScrollToTop>                   
+              </ScrollToTop>
             </Content>
             <Footer>
               TMDB React Movies App ©{new Date().getFullYear()}
             </Footer>
             <BackTop />
-          </Layout>   
-        </div>                 
-      </BrowserRouter>              
+          </Layout>
+        </div>
+      </BrowserRouter>
     );
   }
 }

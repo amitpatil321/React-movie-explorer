@@ -11,7 +11,7 @@ const ProdCompanies = (props) => {
         return props.movie.production_companies.map((company, index) => {
             pic = CONFIG.NO_PHOTO.LOGO;
             if(company.logo_path)
-                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;        
+                pic = "https://image.tmdb.org/t/p/w264_and_h264_bestv2/"+company.logo_path;
 
             return (
                 <Col xs={6} lg={3} key={index}>
@@ -22,10 +22,10 @@ const ProdCompanies = (props) => {
                                 {/* <p>{company.name}</p> */}
                             </Link>
                         </Tooltip>
-                    </Zoom>        
+                    </Zoom>
                 </Col>
-            );          
-        }).slice(0, CONFIG.COMPANIES_PER_PAGE); // We need only 8 results;        
+            );
+        }).slice(0, CONFIG.COMPANIES_PER_PAGE); // We need only 8 results;
     }
     return null;
 };
