@@ -4,6 +4,7 @@ import { Layout, BackTop } from 'antd';
 import HeaderMenu from './components/Menu/Menu';
 
 import Home from './components/Home/Home';
+import Discover from './components/Discover/Discover';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Genre from './components/Genre/Genre';
@@ -28,7 +29,8 @@ class App extends Component {
             <Content xs={24} className="mainContent-outer">
               <ScrollToTop>
                 <Switch>
-                  <Route path="/" exact component={Home}/>
+                  <Route path="/" exact component={discover}/>
+                  {/* <Route path="/" component={Discover}/> */}
                   <Route path={CONFIG.ROUTES.MOVIE+":id/:name"} component={MovieDetails}/>
                   <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
                   <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
