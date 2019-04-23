@@ -32,7 +32,7 @@ const Videos = (props) => {
     if(props.list.length){
         let videos = [];
         let list = props.list;
-
+        console.log(props.currentPage);
         if(props.currentPage){
             let indexOfLastItem, indexOfFirstItem;
             indexOfLastItem  = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
@@ -54,7 +54,7 @@ const Videos = (props) => {
                 <Fade>
                     <Lightbox
                         images          = {videos}
-                        thumbnailWidth  = '250px'
+                        thumbnailWidth  = '168px'
                         thumbnailHeight = 'auto'
                         renderImageFunc = {(idx, image, toggleLightbox, width, height) => {
                             return (

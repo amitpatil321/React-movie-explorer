@@ -19,7 +19,7 @@ const MovieMeta = (props) => {
     return (
         <>
             <Row className="movieMeta">
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Original Release</p>
                     <Flip top cascade>
                         <span>
@@ -27,20 +27,20 @@ const MovieMeta = (props) => {
                         </span>
                     </Flip>
                 </Col>
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Running Time</p>
                     <span>
                         {runtime}
                     </span>
                 </Col>
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Budget</p>
                     <span>
                         {budget}
                     </span>
                 </Col>
-            {/* </Row> */}
-            {/* <Row className="movieMeta"> */}
+            </Row>
+            <Row className="movieMeta">
                 <Col xs={12} lg={8}>
                     <p>Box Office</p>
                     <span>
