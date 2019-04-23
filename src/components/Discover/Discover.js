@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { Row, Col, Select } from 'antd';
 
-import { range } from 'lodash/range';
+import { range } from 'lodash';
 
 const Option = Select.Option;
 
 export default class Discover extends Component {
 
   render() {
-    let yearsRange = range(1900,new Date().getFullYear, 1);
+    let yearsRange  = range(parseInt(new Date().getFullYear()), 1989, -1);
+    let yearOptions = [];
+    yearsRange.forEach((year) =>{
+        yearOptions.push(<Option value={year} key={year}>{year}</Option>);
+    });
+
+    console.log(yearOptions);
+
     return (
       <>
         <Row>
@@ -17,14 +24,10 @@ export default class Discover extends Component {
                 <Col>
                     Year
                     <Select defaultValue="None">
-                    {
-                        yearsRange.map(each => {
-                            return <Option value={each}>{each}</Option>
-                        })
-                    }
+                        {yearOptions}
                     </Select>
                 </Col>
-            </Row> 
+            </Row>
         </Row>
       </>
     )
