@@ -2,6 +2,16 @@ import MoviesAxios from '../config/axios';
 
 import * as CONFIG from '../config/config';
 
+// Discover movies api
+export const discover = (filters) => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie"+filters).then(response => {
+        return response.data;
+    })
+    .catch((error) => {
+        throw new Error("Error fetching movies!");
+    });
+}
+
 // Fetch all popular movies
 export const getPopularMovies = () => {
     return MoviesAxios.get(CONFIG.API_BASE_URL+"/trending/all/week").then(response => {

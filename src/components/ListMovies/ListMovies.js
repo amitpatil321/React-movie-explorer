@@ -18,6 +18,17 @@ class ListMovies extends Component {
         movies : {}
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps){
+            API.discover(this.props.filter).then(response => {
+                this._listMovies(response);
+            }).catch((error) => {
+                let errorBox = <Alert type="error" message={error.toString()} />
+                this.setState({ error : errorBox })
+            });
+        }
+    }
+
     componentDidMount (){
         if(this.props){
             switch(this.props.type){
@@ -61,7 +72,8 @@ class ListMovies extends Component {
                     </Fade>
                 </Col>
             );
-        }).slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
+        });
+        // .slice(0, CONFIG.MOVIES_PER_PAGE); // We need only 18 results
 
         this.setState({ list : list, movies : movies });
     }
