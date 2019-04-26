@@ -29,6 +29,7 @@
     margin: auto;
     overflow: hidden;
     min-height: 425px;
+    max-height: 425px;
   }
 
   .content .content-overlay {
