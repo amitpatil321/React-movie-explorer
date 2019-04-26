@@ -14,6 +14,7 @@ import MovieCast from '../Cast/Cast';
 import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
 import Gallery from '../Gallery/Gallery';
 import Videos from '../Videos/Videos';
+import Similar from '../Similar/Similar';
 
 import './MovieDetails.css'
 import Reviews from '../Reviews/Reviews';
@@ -39,7 +40,6 @@ class MovieDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
-        // console.log(prevProps.location, this.props.location);
         if(this.state.movie && this.state.movie.id != this.props.match.params.id){
             if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
@@ -68,22 +68,20 @@ class MovieDetails extends Component {
     }
 
     render() {
-        let backdrops, posters, videos, reviews;
+        let backdrops, posters, videos, reviews, similar;
 
         // Handle error and show error message
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
 
-        console.log(this.state.movie);
-
         if(this.state.movie){
-            console.log(this.state.movie)
             let movie = this.state.movie;
 
             backdrops = movie.images.backdrops;
             posters   = movie.images.posters;
             videos    = movie.videos.results;
             reviews   = movie.reviews.results;
+            similar   = movie.similar.results;
 
             return (
                 <div className="movieDetails">
@@ -113,6 +111,12 @@ class MovieDetails extends Component {
                                 <Reviews list={reviews}/>
                             </TabPane>
                         </Tabs>
+                    </Row>
+                    <br/><br/>
+                    <Row>
+                        <h2>You may also like</h2>
+                        <hr />
+                        <Similar list={similar} />
                     </Row>
                 </div>
             );
