@@ -5,6 +5,7 @@ import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
+import { Capitalize } from '../Utils/Utils';
 import { removeBg } from '../Utils/Utils';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
@@ -218,7 +219,7 @@ const BreadcrumbLinks = (props) => {
         // extract name from referer
         name = url.split("/")[3].replace("-"," ");
         // capitalize name
-        name = name.charAt(0).toUpperCase() + name.slice(1);
+        name = Capitalize(name);
     }
 
     return (

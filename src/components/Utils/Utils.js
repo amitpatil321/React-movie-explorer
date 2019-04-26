@@ -14,3 +14,9 @@ export function getAge(birthdate){
     var diff = cur-birthdate;
     return Math.floor(diff/31536000000);
 }
+
+export function Capitalize(string){
+ if(string.length)
+     return string.charAt(0).toUpperCase() + string.slice(1)
+ return false;
+}
