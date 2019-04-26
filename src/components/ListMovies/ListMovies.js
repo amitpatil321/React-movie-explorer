@@ -17,21 +17,24 @@ class ListMovies extends Component {
         error: null,
         movies: [],
         isLoading: false,
-        list: []
+        list: [],
+        topLoader: false
     }
 
     componentDidUpdate(prevProps) {
         if (!isEqual(this.props, prevProps || this.props.page > prevProps.page)) {
-            this.setState({ movies: [] });
-            // If filter parameters changed then only with new data
-            // If filters didnt changed only page number did then concat new data to existing list
+            // If filter parameters changed then clear old movies array
+            // If filters didnt changed only page number did then concat new data to existing movies list
+            if (this.props.filters !== prevProps.filters) {
+                this.setState({ movies: [], topLoader: true });
+            }
             this._getMovies()
         }
     }
 
     componentDidMount() {
         if (this.props) {
-            this._getMovies()
+            this._getMovies();
         }
     }
 
@@ -63,14 +66,12 @@ class ListMovies extends Component {
                 break;
             case "discover":
                 this.setState({ isLoading: true });
-                setTimeout(() => {
-                    API.discover(this.props.filters, this.props.page).then(response => {
-                        this._listMovies(response);
-                    }).catch((error) => {
-                        let errorBox = <Alert type="error" message={error.toString()} />
-                        this.setState({ error: errorBox })
-                    });
-                }, 10000);
+                API.discover(this.props.filters, this.props.page).then(response => {
+                    this._listMovies(response);
+                }).catch((error) => {
+                    let errorBox = <Alert type="error" message={error.toString()} />
+                    this.setState({ error: errorBox })
+                });
                 break;
             default:
                 return null;
@@ -96,11 +97,13 @@ class ListMovies extends Component {
             );
         });
 
-        this.setState({ list: list, isLoading: false });
+        this.setState({ list: list, isLoading: false, topLoader: false });
     }
 
     render() {
 
+        if (this.state.topLoader)
+            return <Spin indicator={antIcon}></Spin>
         return (
             <>
                 <Row>

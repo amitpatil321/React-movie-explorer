@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Select } from 'antd';
 import { map, filter, isEqual } from 'lodash';
 import BottomScrollListener from 'react-bottom-scroll-listener';
+
 import * as CONFIG from '../../config/config.js';
 import ListMovies from '../ListMovies/ListMovies';
 
@@ -117,23 +118,23 @@ class Discover extends Component {
           <Row>
             <h1>Discover New Movies & TV Shows</h1>
             <Row>
-              <Col span={6}>
-                Year<br />
-                <Select defaultValue="None" onChange={(value) => this.setState({ year: value })} style={{ width: 200 }}>
+              <Col span={8}>
+                <strong>Year</strong><br />
+                <Select defaultValue="None" onChange={(value) => this.setState({ year: value })} style={{ width: '95%' }}>
                   <Option value='' key='none'>None</Option>
                   {yearOptions}
                 </Select>
               </Col>
-              <Col span={6}>
-                Sort By<br />
-                <Select defaultValue="None" onChange={(value) => this.setState({ sortby: value })} style={{ width: 200 }}>
+              <Col span={8}>
+                <strong>Sort By</strong><br />
+                <Select defaultValue="None" onChange={(value) => this.setState({ sortby: value })} style={{ width: '95%' }}>
                   <Option value='' key='none'>None</Option>
                   {sortbyOptions}
                 </Select>
               </Col>
-              <Col span={6}>
-                Genres
-                  <Select
+              <Col span={8}>
+                <strong>Genres</strong><br />
+                <Select
                   showSearch
                   allowClear
                   showArrow
@@ -141,7 +142,7 @@ class Discover extends Component {
                   placeholder="Select Genres"
                   value={this.state.genres}
                   onChange={(item) => this.setState({ genres: item })}
-                  style={{ width: '100%' }}
+                  style={{ width: '95%' }}
                 >
                   {genresOptions}
                 </Select>
