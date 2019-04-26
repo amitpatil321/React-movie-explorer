@@ -51,8 +51,10 @@ h2{
 }
 hr{
   /* padding: 5px 0px 5px 0px; */
-  margin: 5px 0px 5px 0px;
-  border-top: 1px solid #e8e8e8;
+  margin: 5px 0px 10px 0px;
+  border: 0;
+  height: 1px;
+  background: rgb(117, 116, 116);
 }
 .ant-layout-footer{
   background: #001529;
