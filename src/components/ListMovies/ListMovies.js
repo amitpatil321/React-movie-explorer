@@ -57,7 +57,7 @@ class ListMovies extends Component {
                 break;
             case "genre":
                 this.setState({ isLoading: true });
-                API.withGenre(this.props.id).then(response => {
+                API.withGenre(this.props.id,this.props.page).then(response => {
                     this._listMovies(response);
                 }).catch((error) => {
                     let errorBox = <Alert type="error" message={error.toString()} />

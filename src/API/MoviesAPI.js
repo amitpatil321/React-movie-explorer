@@ -44,8 +44,8 @@ export const movieDetails = (movieId) => {
     });
 }
 
-export const withGenre = (id) => {
-    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie?with_genres="+id).then(response => {
+export const withGenre = (id, page) => {
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie?with_genres="+id+"&page="+page).then(response => {
         return response.data;
     })
     .catch((error) => {
