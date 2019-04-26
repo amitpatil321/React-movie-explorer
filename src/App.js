@@ -24,17 +24,17 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-        <Layout className="layout" id="layout">
+          <Layout className="layout" id="layout">
             <HeaderMenu />
             <Content xs={24} className="mainContent-outer">
               <ScrollToTop>
                 <Switch>
-                  <Route path="/" exact component={Discover}/>
+                  <Route path="/" exact component={Discover} />
                   {/* <Route path="/" component={Discover}/> */}
-                  <Route path={CONFIG.ROUTES.MOVIE+":id/:name"} component={MovieDetails}/>
-                  <Route path={CONFIG.ROUTES.GENRE+":id/:name"} component={Genre}/>
-                  <Route path={CONFIG.ROUTES.PERSON+":id/:name"} component={ActorProfile}/>
-                  <Route component={Home}/>
+                  <Route path={CONFIG.ROUTES.MOVIE + ":id/:name"} component={MovieDetails} />
+                  <Route path={CONFIG.ROUTES.GENRE + ":id/:name"} component={Genre} />
+                  <Route path={CONFIG.ROUTES.PERSON + ":id/:name"} component={ActorProfile} />
+                  <Route component={Home} />
                 </Switch>
               </ScrollToTop>
             </Content>

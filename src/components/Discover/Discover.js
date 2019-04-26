@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Select } from 'antd';
 import { map, filter, isEqual } from 'lodash';
-
+import BottomScrollListener from 'react-bottom-scroll-listener';
 import * as CONFIG from '../../config/config.js';
 import ListMovies from '../ListMovies/ListMovies';
 
@@ -9,38 +9,39 @@ const Option = Select.Option;
 
 class Discover extends Component {
   state = {
-    year   : '',
-    sortby : '',
-    genres : [],
-    filter : ''
+    year: '',
+    sortby: '',
+    genres: [],
+    filters: {},
+    page: 1
   }
 
-  componentDidMount(){
-    this.setState({ filter : this._makeParams() });
+  componentDidMount() {
+    this.setState({ filters: this._makeParams() });
   }
 
   // fetch results
-  componentDidUpdate(prevProps, prevState){
-    if(this.state.year !== prevState.year ||
-       this.state.sortby !== prevState.sortby ||
-       !isEqual(this.state.genres.sort(), prevState.genres.sort())
-    ){
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.year !== prevState.year ||
+      this.state.sortby !== prevState.sortby ||
+      !isEqual(this.state.genres.sort(), prevState.genres.sort())
+    ) {
       // let params = this._makeParams();
-      this.setState({ filter : this._makeParams() });
+      this.setState({ filters: this._makeParams() });
       return true;
     }
     return false;
   }
 
-  _getYears(){
+  _getYears() {
     let years = [];
-    CONFIG.YEAR_FILTER.forEach((year) =>{
+    CONFIG.YEAR_FILTER.forEach((year) => {
       years.push(<Option value={year} key={year}>{year}</Option>);
     });
     return years;
   }
 
-  _getSortBy(){
+  _getSortBy() {
     let sortby = [];
     // Sortby
     Object.keys(CONFIG.SORTBY_FILTER).forEach((filter, key) => {
@@ -49,7 +50,7 @@ class Discover extends Component {
     return sortby;
   }
 
-  _getGenres(){
+  _getGenres() {
     let genres = [];
     // extract only labels from array of objects
     var genresList = CONFIG.GENRE_FILTER.map(item => item.name);
@@ -62,91 +63,97 @@ class Discover extends Component {
     return genres;
   }
 
-  _makeParams(){
-    let urlString = [];
+  _makeParams() {
+    let urlString = {};
 
-    if(this.state.year)
-      urlString.push("primary_release_year="+this.state.year);
+    if (this.state.year)
+      urlString.primary_release_year = this.state.year;
 
-    if(this.state.sortby){
-      switch(this.state.sortby){
+    if (this.state.sortby) {
+      switch (this.state.sortby) {
         case "pop_desc":
-          urlString.push("sort_by=popularity.desc");
-        break;
+          urlString.sort_by = "popularity.desc";
+          break;
         case "pop_asc":
-          urlString.push("sort_by=popularity.asc");
-        break;
+          urlString.sort_by = "popularity.asc";
+          break;
         case "rate_desc":
-          urlString.push("sort_by=vote_average.desc");
-        break;
+          urlString.sort_by = "vote_average.desc";
+          break;
         case "rate_asc":
-          urlString.push("sort_by=vote_average.asc");
-        break;
+          urlString.sort_by = "vote_average.asc";
+          break;
       }
     }
 
     // Get genre ids array from labels
-    if(this.state.genres.length){
+    if (this.state.genres.length) {
       var filtered = map(this.state.genres, (item) => {
-        return filter(CONFIG.GENRE_FILTER, { "name" : item });
+        return filter(CONFIG.GENRE_FILTER, { "name": item });
       });
       filtered = map(filtered, item => { return item[0].id });
-      urlString.push("with_genres="+filtered.join(","));
+      urlString.with_genres = filtered.join(",");
     }
+    return urlString;
+  }
 
-    return '?'+urlString.join("&");
+  _toBottom = () => {
+    console.log("Reached bottom");
+    let page = this.state.page;
+    this.setState({ page: page + 1 });
   }
 
   render() {
     // Prepare filters
-    let yearOptions = [], sortbyOptions = [], genresOptions=[];
+    let yearOptions = [], sortbyOptions = [], genresOptions = [];
 
-    yearOptions   = this._getYears();
+    yearOptions = this._getYears();
     sortbyOptions = this._getSortBy();
     genresOptions = this._getGenres();
 
     return (
       <>
         <div className="mainContent" id="mainContent">
-        <Row>
+          <Row>
             <h1>Discover New Movies & TV Shows</h1>
             <Row>
-                <Col span={6}>
-                  Year<br/>
-                  <Select defaultValue="None" onChange={(value) => this.setState({ year : value })} style={{ width: 200 }}>
-                      <Option value='' key='none'>None</Option>
-                      {yearOptions}
-                  </Select>
-                </Col>
-                <Col span={6}>
-                  Sort By<br/>
-                  <Select defaultValue="None" onChange={(value) => this.setState({ sortby : value })} style={{ width: 200 }}>
-                      <Option value='' key='none'>None</Option>
-                      {sortbyOptions}
-                  </Select>
-                </Col>
-                <Col span={6}>
-                  Genres
+              <Col span={6}>
+                Year<br />
+                <Select defaultValue="None" onChange={(value) => this.setState({ year: value })} style={{ width: 200 }}>
+                  <Option value='' key='none'>None</Option>
+                  {yearOptions}
+                </Select>
+              </Col>
+              <Col span={6}>
+                Sort By<br />
+                <Select defaultValue="None" onChange={(value) => this.setState({ sortby: value })} style={{ width: 200 }}>
+                  <Option value='' key='none'>None</Option>
+                  {sortbyOptions}
+                </Select>
+              </Col>
+              <Col span={6}>
+                Genres
                   <Select
-                    showSearch
-                    allowClear
-                    showArrow
-                    mode="multiple"
-                    placeholder="Select Genres"
-                    value={this.state.genres}
-                    onChange={(item) => this.setState({ genres : item })}
-                    style={{ width: '100%' }}
-                  >
+                  showSearch
+                  allowClear
+                  showArrow
+                  mode="multiple"
+                  placeholder="Select Genres"
+                  value={this.state.genres}
+                  onChange={(item) => this.setState({ genres: item })}
+                  style={{ width: '100%' }}
+                >
                   {genresOptions}
-                  </Select>
-                </Col>
+                </Select>
+              </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <ListMovies filter={this.state.filter} />
+                <ListMovies type="discover" filters={this.state.filters} page={this.state.page} />
               </Col>
             </Row>
-        </Row>
+          </Row>
+          <BottomScrollListener onBottom={this._toBottom} offset={10} />
         </div>
       </>
     )

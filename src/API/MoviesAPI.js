@@ -3,8 +3,12 @@ import MoviesAxios from '../config/axios';
 import * as CONFIG from '../config/config';
 
 // Discover movies api
-export const discover = (filters) => {
-    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie"+filters).then(response => {
+export const discover = (filters, page) => {
+    // console.log(filters);
+    // console.log(page);
+    let params = Object.keys(filters).map(key => key + '=' + filters[key]).join('&');
+    params = (page) ? params + "&page="+page : '';
+    return MoviesAxios.get(CONFIG.API_BASE_URL+"/discover/movie?"+params).then(response => {
         return response.data;
     })
     .catch((error) => {
