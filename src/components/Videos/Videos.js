@@ -32,16 +32,12 @@ const Videos = (props) => {
     if(props.list.length){
         let videos = [];
         let list = props.list;
-        console.log(props.currentPage);
         if(props.currentPage){
             let indexOfLastItem, indexOfFirstItem;
             indexOfLastItem  = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
             indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
             list             = props.list.slice(indexOfFirstItem, indexOfLastItem);
         }
-
-
-        console.log(list);
 
         filter(list, function(video) {
             videos.push({
