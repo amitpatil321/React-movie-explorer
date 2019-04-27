@@ -210,8 +210,8 @@ const Cast = (props) => {
 }
 
 const Pics = (props) => {
+    let [currPage, changePage] = useState(1);
     if(props.list){
-        let [currPage, changePage] = useState(1);
         return (
             <>
                 {(props.list.length > CONFIG.META_ITEMS_PERPAGE)  ?
