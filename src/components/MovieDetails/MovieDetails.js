@@ -112,12 +112,18 @@ class MovieDetails extends Component {
                             </TabPane>
                         </Tabs>
                     </Row>
-                    <br/><br/>
-                    <Row>
-                        <h2>You may also like</h2>
-                        <hr />
-                        <Similar list={similar} />
-                    </Row>
+                    {(similar.length) ?
+                        (
+                            <>
+                                <br/><br/>
+                                <Row>
+                                    <h2>You may also like</h2>
+                                    <hr />
+                                    <Similar list={similar} />
+                                </Row>
+                            </>
+                        )
+                    : ''}
                 </div>
             );
         }else{
