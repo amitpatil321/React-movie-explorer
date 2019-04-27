@@ -125,6 +125,16 @@
     padding-right: 10px;
     background: linear-gradient(to left,rgb(91,102,244) 10%,rgba(64,64,64,0) 70%);
   }
+  .similarMovies{
+    margin-bottom: 10px;
+    padding: 0px !important;
+    text-align: center;
+  }
+  .similarMovies .content{
+    display: inline-block;
+    min-height: 350px;
+    max-height: 350px;
+  }
 
   .ant-rate{
     font-size: 16px !important;
