@@ -21,7 +21,7 @@ class MovieCard extends Component {
     render(){
         // let movie_name, job, rating, desc;
         let { id, title, name, poster_path, vote_average, overview, job } = this.props.movie;
-
+        let rating = vote_average;
         // Few movies have name property while most of them have title propertly.
         if(title === undefined && name === undefined)
             return null;
@@ -38,9 +38,11 @@ class MovieCard extends Component {
         overview     = (overview) ?
                        <p className="content-text">{overview.substring(0,160)+"..."}</p>
                        : '';
+        rating       = (rating) ? <div className="movieRating">{rating}</div> : '';
         return (
             <div className="content" onClick={() => this._movieSelected(id)}>
                 <div className="content-overlay"></div>
+                {rating}
                 <img alt={title} className="content-image" src={poster_path} />
                 <div className="content-details fadeIn-bottom">
                     <h3 className="content-title">{title}</h3>

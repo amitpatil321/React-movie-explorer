@@ -45,6 +45,7 @@
     -webkit-transition: all 0.4s ease-in-out 0s;
     -moz-transition: all 0.4s ease-in-out 0s;
     transition: all 0.4s ease-in-out 0s;
+    z-index: 1;
   }
 
   .content:hover .content-overlay{
@@ -80,6 +81,7 @@
     -moz-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
     color: #fff;
+    z-index:2;
   }
 
   .content:hover .content-details{
@@ -109,6 +111,22 @@
 
   .fadeIn-bottom{
     top: 80%;
+  }
+
+  .movieRating{
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    color: #fff;
+    opacity: 0.9;
+    width: 100%;
+    padding-right: 10px;
+    background: linear-gradient(to left,rgb(91,102,244) 10%,rgba(64,64,64,0) 70%);
+  }
+
+  .ant-rate{
+    font-size: 16px !important;
   }
 
   @media only screen and (max-width: 768px) {
