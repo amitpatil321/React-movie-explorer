@@ -40,7 +40,7 @@ class MovieDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if(this.state.movie && this.state.movie.id != this.props.match.params.id){
+        if(this.state.movie && this.state.movie.id !== this.props.match.params.id){
             if(this.state.movie.id !== this.props.history.location.state.movie.id){
                 this._loadMovieInfo(this.props.history.location.state.movie);
             }
@@ -214,7 +214,7 @@ const Pics = (props) => {
 }
 
 const BreadcrumbLinks = (props) => {
-    let links, movie, url, name;
+    let movie, url, name;
     if(props.referer.location.state && props.referer.location.state.referer && props.referer.location.state.referer !== "/"){
         // get movie name
         movie = props.referer.location.state.name

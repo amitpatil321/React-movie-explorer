@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty, Comment, Icon, Tooltip, Avatar, } from 'antd';
+import { Empty, Comment, Avatar, } from 'antd';
 import ShowMoreText from 'react-show-more-text';
 import * as CONFIG from '../../config/config';
 

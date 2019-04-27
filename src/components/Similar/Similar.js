@@ -1,10 +1,7 @@
 import React from 'react';
 import { Col} from 'antd';
-import { Link } from 'react-router-dom';
 import { Fade } from 'react-reveal';
 
-import * as CONFIG from '../../config/config';
-import { makeUrl } from '../Utils/Utils';
 import MovieCard from '../Card/Card';
 
 const Similar = (props) => {

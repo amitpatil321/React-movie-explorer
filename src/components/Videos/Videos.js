@@ -59,6 +59,7 @@ const Videos = (props) => {
                                 src       = {image.src}
                                 className = 'lightbox-img-thumbnail'
                                 style     = {{width: width, height: height}}
+                                alt       = ''
                                 onClick   = {() => {
                                         _playVideo(idx)
                                     }

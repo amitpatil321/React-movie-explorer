@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Spin, Icon, Empty } from 'antd';
+import { Row, Col, Spin, Icon } from 'antd';
 import Fade from 'react-reveal/Fade';
 import isEqual from 'lodash/isEqual';
 

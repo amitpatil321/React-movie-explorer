@@ -84,6 +84,8 @@ class Discover extends Component {
         case "rate_asc":
           urlString.sort_by = "vote_average.asc";
           break;
+        default:
+          return false;
       }
     }
 

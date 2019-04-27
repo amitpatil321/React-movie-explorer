@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import ListMovies from '../ListMovies/ListMovies';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 

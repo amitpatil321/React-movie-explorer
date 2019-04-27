@@ -32,13 +32,13 @@ const ProfileDetails = props => {
 const BasicInfo = (props) => {
     let { name, profile_path, biography, birthday, known_for_department, place_of_birth, gender } = props.profile;
 
-    const genderIcon = (gender) ? <li><Icon type={(gender == "1") ? "woman" : "man" } /></li> : '';
+    const genderIcon = (gender) ? <li><Icon type={(gender === "1") ? "woman" : "man" } /></li> : '';
     const bdate      = (birthday) ? <li>{getAge(birthday)} Years</li> : '';
     const dept       = (known_for_department) ? <li>{known_for_department}</li> : '';
     const birthplace = (place_of_birth) ?
                         <li>
-                            <Icon type   = "environment" />&nbsp;
-                            <a href      = {"https://www.google.com/maps/place/"+place_of_birth} target="_blank">
+                            <Icon type = "environment" />&nbsp;
+                            <a href={"https://www.google.com/maps/place/" + place_of_birth} target="_blank" rel="noopener noreferrer">
                                 {place_of_birth}
                             </a>
                         </li> : '';

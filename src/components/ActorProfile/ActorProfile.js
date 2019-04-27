@@ -50,7 +50,7 @@ export default class ActorProfile extends Component {
               </Breadcrumb.Item>
               {(movie_name.length) ?
                 <Breadcrumb.Item key="Movie Details">
-                    <a href="javascript:;" onClick={() => this.props.history.goBack()}>{movie_name}</a>
+                <a href="javascript:;" onClick={() => this.props.history.goBack()} alt={movie_name}>{movie_name}</a>
                 </Breadcrumb.Item>
               : '' }
               <Breadcrumb.Item>

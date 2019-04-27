@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col } from 'antd';
 import CountUp from 'react-countup';
 import { Flip } from 'react-reveal';
 import { map } from 'lodash';
