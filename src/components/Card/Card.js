@@ -44,7 +44,7 @@ class MovieCard extends Component {
             <div className="content" onClick={() => this._movieSelected(id)}>
                 <div className="content-overlay"></div>
                 {rating}
-                <Img alt={title} className="content-image" decode={false} src={poster_path} loader={<Icon type="loading" spin />} />
+                <Img alt={title} className="content-image" src={poster_path} loader={<Icon type="loading" spin />} />
                 <div className="content-details fadeIn-bottom">
                     <h3 className="content-title">{title}</h3>
                     { job }
