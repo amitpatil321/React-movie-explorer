@@ -109,7 +109,7 @@ class ListMovies extends Component {
                 <Row>
                     <Col span={24}><h2>{this.props.title}</h2></Col>
                 </Row>
-                <hr />
+                <br/>
                 <Row gutter={16}>
                     {this.state.error}
                     {this.state.list}
