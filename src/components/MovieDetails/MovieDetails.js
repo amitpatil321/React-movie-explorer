@@ -5,7 +5,7 @@ import { Fade } from 'react-reveal';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
-import { Capitalize } from '../Utils/Utils';
+import { Capitalize, extractUrl } from '../Utils/Utils';
 import { removeBg } from '../Utils/Utils';
 import Alert from '../Alert/Alert.js';
 import MovieMeta from '../MovieMeta/MovieMeta';
@@ -33,17 +33,18 @@ class MovieDetails extends Component {
 
     componentDidMount(){
         // If user came by entering url and not clicking movie card ?
-        if(this.props.match.params.id)
+        if(this.props.match.params.id){
+            // console.log("componentDidMount");
             this._loadMovieInfo({ id : this.props.match.params.id });
-        else
+        }else
             this.props.history.push(CONFIG.ROUTES.HOME) // Redirect to home page if none of the above case matches
     }
 
     componentDidUpdate(prevProps){
-        if(this.state.movie && this.state.movie.id !== this.props.match.params.id){
-            if(this.state.movie.id !== this.props.history.location.state.movie.id){
-                this._loadMovieInfo(this.props.history.location.state.movie);
-            }
+        if (this.state.movie && this.state.movie.id !== parseInt(this.props.match.params.id)){
+            this._loadMovieInfo({ id: this.props.match.params.id}); // Load movie with id in url
+            // remove previous background image
+            removeBg();
         }
     }
 
@@ -61,6 +62,7 @@ class MovieDetails extends Component {
         API.movieDetails(movieId).then(response => {
             let details = { ...this.state.movie, ...response };
             this.setState({ movie : details, loading : false });
+            // console.log("_loadMovieInfo setstate");
         }).catch((error) => {
             let errorBox = <Alert type="error" message={error.toString()} />
             this.setState({ error : errorBox, movie : null, loading : false })
@@ -74,7 +76,10 @@ class MovieDetails extends Component {
         if(this.state.error != null && this.state.ignore)
             return this.state.error;
 
-        if(this.state.movie){
+        if (this.state.loading)
+            return (<Spin indicator={antIcon}></Spin>);
+
+        if(this.state.movie && !this.state.loading){
             let movie = this.state.movie;
 
             backdrops = movie.images.backdrops;
@@ -127,8 +132,6 @@ class MovieDetails extends Component {
                 </div>
             );
         }else{
-            if(this.state.loading)
-                return (<Spin indicator={antIcon}></Spin>);
             return (<Empty description={ "Failed to load movie details! Please try again" } />);
         }
     }
@@ -157,7 +160,8 @@ const MovieInfo = (props) => {
                     <BreadcrumbLinks referer={props.referer} />
                     <br />
                 </Fade>
-                <Col xs={24} lg={7} className="moviePoster">         <Fade>
+                <Col xs={24} lg={7} className="moviePoster">
+                    <Fade>
                         <img src={poster_path} alt={title} width="294px"/>
                     </Fade>
                 </Col>
@@ -220,16 +224,18 @@ const Pics = (props) => {
 }
 
 const BreadcrumbLinks = (props) => {
-    let movie, url, name;
-    if(props.referer.location.state && props.referer.location.state.referer && props.referer.location.state.referer !== "/"){
-        // get movie name
-        movie = props.referer.location.state.name
-        // Get referer url
-        url = props.referer.location.state.referer;
-        // extract name from referer
-        name = url.split("/")[3].replace("-"," ");
-        // capitalize name
-        name = Capitalize(name);
+    let movie_name, referer, referer_link;
+
+    // get movie name
+    if(!props.movie.title)
+        movie_name = (props.referer.location.state) ? props.referer.location.state.name : extractUrl(props.referer.location.pathname, "name");
+
+    // Check if page has referer ?
+    if (props.referer.location && props.referer.location.state){
+        if (props.referer.location.state.referer.length > 1){ // > 1 Because if there is no referer then it holds value "/"
+            referer_link = props.referer.location.state.referer;
+            referer = extractUrl(referer_link, "name") // get movie name from url
+        }
     }
 
     return (
@@ -237,16 +243,14 @@ const BreadcrumbLinks = (props) => {
             <Breadcrumb.Item key="home">
                 <Link to="/"><Icon type="home" /> Home</Link>
             </Breadcrumb.Item>
-            {(name) ?
-               <Breadcrumb.Item key="referer">
-                    <Link to={url}>{name}</Link>
-               </Breadcrumb.Item>
-            : ''}
-            {(movie) ?
-                <Breadcrumb.Item key="movie">
-                    {movie}
-                </Breadcrumb.Item>
-            : ''}
+            {referer ?
+                <Breadcrumb.Item key="referer">
+                    <Link to={referer_link}>{Capitalize(referer)}</Link>
+                </Breadcrumb.Item> : ''
+            }
+            <Breadcrumb.Item key="moviename">
+                {Capitalize(movie_name)}
+            </Breadcrumb.Item>
         </Breadcrumb>
     )
 }
