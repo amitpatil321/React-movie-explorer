@@ -157,7 +157,7 @@ const MovieInfo = (props) => {
         return (
             <>
                 <Fade>
-                    <BreadcrumbLinks referer={props.referer} />
+                    <BreadcrumbLinks referer={props.referer} movie={props.movie}/>
                     <br />
                 </Fade>
                 <Col xs={24} lg={7} className="moviePoster">
@@ -227,12 +227,12 @@ const BreadcrumbLinks = (props) => {
     let movie_name, referer, referer_link;
 
     // get movie name
-    if(!props.movie.title)
-        movie_name = (props.referer.location.state) ? props.referer.location.state.name : extractUrl(props.referer.location.pathname, "name");
+    // movie_name = (props.referer.location.state) ? props.referer.location.state.name : extractUrl(props.referer.location.pathname, "name");
+    movie_name = (props.movie.title) ? props.movie.title : props.movie.name;
 
     // Check if page has referer ?
     if (props.referer.location && props.referer.location.state){
-        if (props.referer.location.state.referer.length > 1){ // > 1 Because if there is no referer then it holds value "/"
+        if (props.referer.location.state.referer && props.referer.location.state.referer.length > 1){ // > 1 Because if there is no referer then it holds value "/"
             referer_link = props.referer.location.state.referer;
             referer = extractUrl(referer_link, "name") // get movie name from url
         }
