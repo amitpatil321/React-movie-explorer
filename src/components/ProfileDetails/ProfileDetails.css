@@ -71,4 +71,8 @@ ul.personMeta li:last-child:after { content: none; }
     content: " ";
     clear: both;
 }
-.castMovies .content { display: inline-block; min-height: 270px; max-height: 270px; }
+.castMovies .content {
+    /* display: inline-block;  */
+    min-height: 270px;
+    max-height: 270px;
+}
