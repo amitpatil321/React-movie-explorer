@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb, Tabs, Pagination } from 'antd';
 import { Fade } from 'react-reveal';
+import Img from 'react-image';
 
 import * as API from '../../API/MoviesAPI';
 import * as CONFIG from '../../config/config';
@@ -162,7 +163,7 @@ const MovieInfo = (props) => {
                 </Fade>
                 <Col xs={24} lg={7} className="moviePoster">
                     <Fade>
-                        <img src={poster_path} alt={title} width="294px"/>
+                        <Img loader={antIcon} src={poster_path} alt={title} width="294px"/>
                     </Fade>
                 </Col>
                 <Col xs={{span:24, offset : 0}} lg={16} offset={1}>

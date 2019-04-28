@@ -30,6 +30,7 @@
     overflow: hidden;
     min-height: 425px;
     max-height: 425px;
+    text-align: center;
   }
 
   .content .content-overlay {

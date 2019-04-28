@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Rate } from 'antd';
+import { Rate, Spin, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
+import Img from 'react-image';
 
 import './Card.css';
 import * as CONFIG from '../../config/config';
@@ -43,7 +44,7 @@ class MovieCard extends Component {
             <div className="content" onClick={() => this._movieSelected(id)}>
                 <div className="content-overlay"></div>
                 {rating}
-                <img alt={title} className="content-image" src={poster_path} />
+                <Img alt={title} className="content-image" decode={false} src={poster_path} loader={<Icon type="loading" spin />} />
                 <div className="content-details fadeIn-bottom">
                     <h3 className="content-title">{title}</h3>
                     { job }

@@ -25,7 +25,12 @@
     font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 10px;
 }
+.moviePoster{
+    text-align: center;
+    min-height: 350px !important;
+}
 .moviePoster img{
+    object-fit: cover;
     max-width:100%;
     border-radius: 6px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),
@@ -98,14 +103,10 @@
         margin-top: 10px;
         margin-bottom: 5px;
     }
-    .movieName, .movieTagline, .moviePoster{
-        text-align: center;
+    .movieName, .movieTagline {
+        text-align : center;
     }
-    .moviePoster img{
-        /* width: 100%;         */
-        object-fit: cover;
-        width: 100%;
-    }
+
     .tags{
         text-align: center;
     }
