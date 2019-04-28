@@ -17,6 +17,17 @@ export function getAge(birthdate){
 
 export function Capitalize(string){
  if(string.length)
-     return string.charAt(0).toUpperCase() + string.slice(1)
+     return string.toTitleCase();
  return false;
+}
+
+export function extractUrl(url, node) {
+    if (url.length > 1){
+        let arr = url.split("/");
+        if(node == "id") // return id from url
+            return arr[2];
+        else if(node == "name") // return movie name
+            return arr[3].replace(/-/g, " ");
+    }
+    return false;
 }
