@@ -1,3 +1,4 @@
+import stringCase from './stringCase'
 export function makeUrl(str) {
     // replace spaces special characters, and spaces with - in a string
     if(str)
@@ -16,8 +17,10 @@ export function getAge(birthdate){
 }
 
 export function Capitalize(string){
- if(string.length)
-     return string.toTitleCase();
+    if (string && string.length){
+        var str = new stringCase(string).titleCase();
+        return str;
+    }
  return false;
 }
 
