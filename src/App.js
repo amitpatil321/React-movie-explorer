@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
 import HeaderMenu from './components/Menu/Menu';
 
-import Home from './components/Home/Home';
+// import Home from './components/Home/Home';
 import Discover from './components/Discover/Discover';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import MovieDetails from './components/MovieDetails/MovieDetails';
@@ -34,7 +34,7 @@ class App extends Component {
                   <Route path={CONFIG.ROUTES.MOVIE + ":id/:name"} component={MovieDetails} />
                   <Route path={CONFIG.ROUTES.GENRE + ":id/:name"} component={Genre} />
                   <Route path={CONFIG.ROUTES.PERSON + ":id/:name"} component={ActorProfile} />
-                  <Route component={Home} />
+                  <Route component={Discover} />
                 </Switch>
               </ScrollToTop>
             </Content>

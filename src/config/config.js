@@ -30,7 +30,7 @@ export const COLORS = ["#EF233C", "#86A397", "#21D19F", "#45B69C", "#522B47", "#
 
 // Routes
 export const ROUTES = {
-    HOME: "/home",
+    HOME: "/",
     MOVIE: "/movie/",
     PRODUCTION: "/company/",
     PERSON: "/person/",
