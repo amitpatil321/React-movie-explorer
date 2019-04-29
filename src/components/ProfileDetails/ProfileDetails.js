@@ -128,7 +128,7 @@ const CastCrew = (props) => {
 
         return currentList.map((movie, index) => {
             return (
-                <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
+                <Col xs={12} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
                         <MovieCard movie={movie} />
                     </Fade>
@@ -139,4 +139,4 @@ const CastCrew = (props) => {
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
 
-export default React.memo(ProfileDetails);
+export default ProfileDetails;

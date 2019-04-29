@@ -7,7 +7,7 @@ import MovieCard from '../Card/Card';
 const Similar = (props) => {
     return props.list.map((movie, index) => {
         return (
-            <Col xs={6} lg={6} key={movie.id + Math.random()} id={movie.id} className="moviecard castMovies">
+            <Col xs={12} lg={6} key={movie.id + Math.random()} id={movie.id} className="moviecard similar">
                 <Fade delay={index * 30}>
                     <MovieCard movie={movie} />
                 </Fade>
@@ -16,4 +16,4 @@ const Similar = (props) => {
     });
 };
 
-export default React.memo(Similar);
+export default Similar;

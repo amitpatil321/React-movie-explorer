@@ -15,4 +15,4 @@ class ScrollToTop extends Component {
   }
 }
 
-export default withRouter(React.memo(ScrollToTop))
+export default withRouter(ScrollToTop)

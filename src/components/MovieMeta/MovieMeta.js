@@ -41,19 +41,19 @@ const MovieMeta = (props) => {
                 </Col>
             </Row>
             <Row className="movieMeta">
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Box Office</p>
                     <span>
                         {revenue}
                     </span>
                 </Col>
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Vote Average</p>
                     <span>
                         {vote_average}
                     </span>
                 </Col>
-                <Col xs={12} lg={8}>
+                <Col xs={8} lg={8}>
                     <p>Languages</p>
                     <span>
                         {spoken_languages}
@@ -64,4 +64,4 @@ const MovieMeta = (props) => {
     )
 }
 
-export default React.memo(MovieMeta);
+export default MovieMeta;
