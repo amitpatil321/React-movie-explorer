@@ -77,4 +77,16 @@ hr{
   .mainContent{
     padding: 10px;
   }
+  /* tabs */
+  .ant-tabs-nav .ant-tabs-tab{
+    margin-right: 5px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+  .ant-tabs-nav-scroll{
+    text-align: center;
+  }
+  .ant-tabs-nav-container{
+    font-size: 13px;
+  }
 }
