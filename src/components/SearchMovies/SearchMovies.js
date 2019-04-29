@@ -69,8 +69,9 @@ class SearchMovies extends Component {
         const { dataSource } = this.state;
         return (
             <AutoComplete
+                className="searchMovies"
                 dataSource={dataSource.map(this._renderMovieName)}
-                style={{ width: 400 }}
+                style={{ width: 230 }}
                 onSelect={this._onSelect}
                 onSearch={debounce(this._handleSearch,1000)} // Add some delay to search
                 placeholder="Search Movie..."
