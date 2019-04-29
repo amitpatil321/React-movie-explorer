@@ -66,7 +66,6 @@ class SearchMovies extends Component {
     }
 
     render() {
-        console.log("Render in search box...");
         const { dataSource } = this.state;
         return (
             <AutoComplete
