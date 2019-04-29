@@ -133,9 +133,19 @@
   @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .content{
-      width: 100%
+      width: 100%;
+      min-height: 295px;
+      max-height: 295px;
     }
-    .moviecard{
+    .moviecard, .content{
       margin-bottom: 0px !important;
+      /* padding-right: 5px !important; */
+      width:98%;
+    }
+    .similar .content{
+      min-height: 290px !important;
+    }
+    .castMovies .content{
+      min-height: 255px !important;
     }
   }

@@ -44,13 +44,12 @@ ul.personMeta li:last-child:after { content: none; }
 
 .actorDetails{
     background: #fff;
-    width: 1170px;
-    min-height: 800px;
+    /* width: 1170px; */
+    /* min-height: 800px; */
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    opacity: 0.9;
     box-shadow : 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
     border-radius: 6px;
     margin-bottom: 80px;
@@ -75,4 +74,21 @@ ul.personMeta li:last-child:after { content: none; }
     /* display: inline-block;  */
     min-height: 270px;
     max-height: 270px;
+}
+
+@media only screen and (max-width: 768px) {
+    .personProfilePic {
+        left: 25%;
+        top: -250px;
+    }
+    .actorDetails{
+        padding-top: 150px;
+    }
+    .personProfile h4{
+        width: 100%;
+        text-align: center;
+    }
+    .lightbox-container img{
+        width: 43% !important;
+    }
 }

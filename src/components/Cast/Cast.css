@@ -1,0 +1,10 @@
+.cast{
+    vertical-align : "top";
+    display: "table-cell";
+}
+
+@media only screen and (max-width: 768px) {
+    .cast{
+       min-height: 200px;
+    }
+}
