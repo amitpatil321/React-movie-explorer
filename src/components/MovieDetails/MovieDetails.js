@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Typography, Empty, Spin, Icon, Breadcrumb, Tabs, Pagination } from 'antd';
 import { Fade } from 'react-reveal';
@@ -9,16 +9,16 @@ import * as CONFIG from '../../config/config';
 import { Capitalize, extractUrl } from '../Utils/Utils';
 import { removeBg } from '../Utils/Utils';
 import Alert from '../Alert/Alert.js';
-import MovieMeta from '../MovieMeta/MovieMeta';
 import MovieTags from '../Tags/Tags';
-import MovieCast from '../Cast/Cast';
 import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
 import Gallery from '../Gallery/Gallery';
 import Videos from '../Videos/Videos';
-import Similar from '../Similar/Similar';
-
 import './MovieDetails.css'
 import Reviews from '../Reviews/Reviews';
+
+const MovieMeta = lazy(() => import('../MovieMeta/MovieMeta'));
+const MovieCast = lazy(() => import('../Cast/Cast'));
+const Similar   = lazy(() => import('../Similar/Similar'));
 
 const { Title, Paragraph } = Typography;
 const antIcon = <Icon type="loading" spin />;
@@ -121,12 +121,14 @@ class MovieDetails extends Component {
                     {(similar.length) ?
                         (
                             <>
-                                <br/><br/>
-                                <Row>
-                                    <h2>You may also like</h2>
-                                    <hr />
-                                    <Similar list={similar} />
-                                </Row>
+                                <Suspense fallback={antIcon} >
+                                    <br/><br/>
+                                    <Row>
+                                        <h2>You may also like</h2>
+                                        <hr />
+                                        <Similar list={similar} />
+                                    </Row>
+                                </Suspense>
                             </>
                         )
                     : ''}
@@ -196,7 +198,9 @@ const Companies = (props) => {
 const Meta = (props) => {
     return (
         <Col xs={24} lg={16}>
-            <MovieMeta movie={props.movie}/>
+            <Suspense fallback={antIcon} >
+                <MovieMeta movie={props.movie}/>
+            </Suspense>
         </Col>
     );
 }
@@ -204,7 +208,9 @@ const Meta = (props) => {
 const Cast = (props) => {
     return (
         <Col span={24} className="cast">
-            <MovieCast movie={props.movie}/>
+            <Suspense fallback={antIcon} >
+                <MovieCast movie={props.movie}/>
+            </Suspense>
         </Col>
     );
 }
@@ -228,7 +234,6 @@ const BreadcrumbLinks = (props) => {
     let movie_name, referer, referer_link;
 
     // get movie name
-    // movie_name = (props.referer.location.state) ? props.referer.location.state.name : extractUrl(props.referer.location.pathname, "name");
     movie_name = (props.movie.title) ? props.movie.title : props.movie.name;
 
     // Check if page has referer ?
