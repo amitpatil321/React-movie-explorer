@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as CONFIG from '../../config/config';
 import { makeUrl } from '../Utils/Utils';
 
-const Tags = (props) => {
+const ListGenres = (props) => {
 
     // Generate random DARK color only
     let randomColor = () => {
@@ -24,4 +24,4 @@ const Tags = (props) => {
     return null;
 };
 
-export default React.memo(Tags);
+export default ListGenres;

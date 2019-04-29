@@ -9,7 +9,7 @@ import * as CONFIG from '../../config/config';
 import { Capitalize, extractUrl } from '../Utils/Utils';
 import { removeBg } from '../Utils/Utils';
 import Alert from '../Alert/Alert.js';
-import MovieTags from '../Tags/Tags';
+import Genres from '../ListGenres/ListGenres';
 import MovieProdCompanies from '../ProdCompanies/ProdCompanies';
 import Gallery from '../Gallery/Gallery';
 import Videos from '../Videos/Videos';
@@ -178,7 +178,7 @@ const MovieInfo = (props) => {
                             {overview}
                         </Paragraph>
                         <div className="tags">
-                            <MovieTags movie = {props.movie} />
+                            <Genres movie = {props.movie} />
                         </div>
                     </Fade>
                 </Col>
