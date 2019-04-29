@@ -30,4 +30,4 @@ const ProdCompanies = (props) => {
     return null;
 };
 
-export default ProdCompanies;
+export default React.memo(ProdCompanies);

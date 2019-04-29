@@ -12,7 +12,6 @@ class Genre extends Component {
         this.setState({ page: page + 1 });
     }
     render() {
-        // console.log(this.props.match.params.id);
         return (
             <div className="mainContent" id="mainContent">
                 <h2>{Capitalize(this.props.match.params.name)}</h2>

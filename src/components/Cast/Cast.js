@@ -40,4 +40,4 @@ const Cast = (props) => {
     return null;
 };
 
-export default Cast;
+export default React.memo(Cast);

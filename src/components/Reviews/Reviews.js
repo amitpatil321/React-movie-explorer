@@ -33,4 +33,4 @@ const Reviews = (props) => {
         return (<Empty description={ CONFIG.ERRORS.NOTHING_TO_SHOW } />);
 };
 
-export default Reviews;
+export default React.memo(Reviews);

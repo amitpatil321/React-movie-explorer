@@ -93,4 +93,4 @@ const Videos = (props) => {
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
 
-export default Videos
+export default React.memo(Videos)

@@ -16,4 +16,4 @@ const Similar = (props) => {
     });
 };
 
-export default Similar;
+export default React.memo(Similar);

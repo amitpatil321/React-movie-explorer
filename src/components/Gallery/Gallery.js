@@ -40,4 +40,4 @@ const Gallery = (props) => {
         return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 }
 
-export default Gallery
+export default React.memo(Gallery)
