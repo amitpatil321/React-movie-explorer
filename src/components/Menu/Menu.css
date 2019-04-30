@@ -16,8 +16,12 @@
     margin: 0 auto;
 }
 
-.appMenu .logo{
+.logo{
+    display: inline-block;
+}
+.logo img{
     width: 130px;
+    padding-right: 10px;
 }
 
 .appMenu .ant-menu-item{
@@ -26,4 +30,11 @@
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
     background-color: transparent !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .logo img{
+    padding-left: 20px;
+    width: 100px;
+  }
 }
