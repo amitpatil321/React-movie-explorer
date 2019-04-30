@@ -16,7 +16,8 @@ class SearchMovies extends Component {
         dataSource: [],
     }
 
-    _handleSearch = (value) => {
+    _handleSearchDebounced = (value) => {
+        console.log("value");
         // Create a reference to "this"
         let _this = this;
         let names = [];
@@ -32,6 +33,8 @@ class SearchMovies extends Component {
             _this.setState({ dataSource : [] });
         }
     }
+
+    _handleSearch = debounce(this._handleSearchDebounced, 500);
 
     _renderMovieName(movie){
         // Check if poster image availabe
@@ -73,7 +76,7 @@ class SearchMovies extends Component {
                 dataSource={dataSource.map(this._renderMovieName)}
                 style={{ width: 230 }}
                 onSelect={this._onSelect}
-                onSearch={debounce(this._handleSearch,1000)} // Add some delay to search
+                onSearch={this._handleSearch} // Add some delay to search
                 placeholder="Search Movie..."
                 optionLabelProp="text"
                 allowClear = {true}
