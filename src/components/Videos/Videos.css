@@ -22,3 +22,11 @@
     padding: 0px !important;
     border-bottom: 0px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .react-player{
+       height: 100% !important;
+       width: 100% !important;
+    }
+}

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Row, Col, Typography, Tabs, Icon, Empty, Pagination } from 'antd';
+import React, {useState, lazy, Suspense} from 'react';
+import { Row, Col, Typography, Tabs, Icon, Spin, Empty, Pagination } from 'antd';
 import { Fade } from 'react-reveal';
 import 'react-lightbox-component/build/css/index.css'
 import ShowMoreText from 'react-show-more-text';
@@ -8,10 +8,13 @@ import './ProfileDetails.css';
 import * as CONFIG from '../../config/config';
 import { getAge } from '../Utils/Utils';
 import MovieCard from '../Card/Card';
-import Gallery from '../Gallery/Gallery';
+
+
+const Gallery = lazy(() => import('../Gallery/Gallery'));
 
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
+const antIcon = <Icon type="loading" spin />;
 
 const ProfileDetails = props => {
     if(props.profile){
@@ -82,9 +85,11 @@ const BasicInfo = (props) => {
 const OtherInfo = (props) => {
     let [currPage, changePage] = useState(1);
 
-    const pics = <Gallery list={props.profile.images.profiles} currentPage={currPage} />;
-    const cast = <CastCrew list={props.profile.movie_credits.cast} currentPage={currPage} />;
-    const crew = <CastCrew list={props.profile.movie_credits.crew} currentPage={currPage} />;
+    const pics = <Suspense fallback={antIcon}>
+                    <Gallery list={props.profile.images.profiles} currentPage={currPage} />
+                 </Suspense>
+    const cast = <CastCrew list={props.profile.movie_credits.cast} currentPage={currPage} />
+    const crew = <CastCrew list={props.profile.movie_credits.crew} currentPage={currPage} />
 
     const totalPics = props.profile.images.profiles.length;
     const totalCast = props.profile.movie_credits.cast.length;
@@ -123,7 +128,7 @@ const CastCrew = (props) => {
 
         return currentList.map((movie, index) => {
             return (
-                <Col xs={6} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
+                <Col xs={12} lg={4} key={movie.id+Math.random()} id={movie.id} className="moviecard castMovies">
                     <Fade delay={index * 30}>
                         <MovieCard movie={movie} />
                     </Fade>

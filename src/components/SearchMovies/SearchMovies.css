@@ -3,3 +3,38 @@
     vertical-align: top;
     margin-left: 5px;
 }
+
+.ant-select-dropdown-menu-item{
+    padding: 5px 5px !important;
+}
+
+.searchItem .ant-typography-ellipsis{
+    font-size: 12px;
+}
+.searchItem div.ant-typography{
+    margin-bottom: 0px !important;
+}
+.searchItem .movieRating{
+    right: 4px;
+}
+
+.ant-select-dropdown-menu-item{
+    white-space: unset !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .searchMovies{
+        width: 70% !important;
+    }
+    .searchItem strong{
+        font-size: 14px;
+    }
+    .ant-tag{
+        font-size: 11px !important;
+        padding: 0 5px !important;
+        padding-right: 4px !important;
+        margin-right: 4px !important;
+        height: 18px !important;
+        line-height: 18px !important;
+    }
+}

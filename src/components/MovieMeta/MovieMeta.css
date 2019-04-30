@@ -17,7 +17,17 @@
 
 
 @media only screen and (max-width: 768px) {
+    .movieMeta{
+        text-align: center;
+        margin-bottom: 10px;
+    }
     .movieMeta span{
         padding-bottom: 5px;
+    }
+    .movieMeta p{
+        font-size: 16px;
+    }
+    .movieMeta span{
+        font-size: 18px;
     }
 }

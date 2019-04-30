@@ -13,14 +13,6 @@
     border-radius: 6px;
     margin-bottom: 80px;
 }
-.ant-tag{
-    height : 35px !important;
-    line-height : 34px !important;
-    font-weight : 900 !important;
-    padding : 0 12px !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-}
 .movieName{
     font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 10px;
@@ -101,7 +93,11 @@
     }
     h1.ant-typography, .ant-typography h1{
         margin-top: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 5px !important;
+        font-size: 30px !important;
+    }
+    h2.ant-typography, .ant-typography h2{
+        font-size: 24px !important;
     }
     .movieName, .movieTagline {
         text-align : center;
@@ -110,15 +106,8 @@
     .tags{
         text-align: center;
     }
-    .ant-tag{
-        height : 25px !important;
-        line-height : 23px !important;
-        font-weight : 900 !important;
-        padding : 0 6px !important;
-        font-size: 14px !important;
-        margin-bottom: 10px !important;
-    }
     .prodCompanies img{
+        text-align: center;
         margin-bottom: 5px;
         display: block;
     }

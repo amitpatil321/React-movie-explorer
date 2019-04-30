@@ -79,6 +79,7 @@ const Videos = (props) => {
                 >
                     {(videoId) ?
                         <ReactPlayer
+                            className='react-player'
                             url      = {'https: //www.youtube.com/watch?v='+videoId}
                             playing  = {isPlaying}
                             controls = {true}
