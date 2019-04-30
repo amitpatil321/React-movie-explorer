@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AutoComplete, Rate } from 'antd';
+import { AutoComplete, Tag, Row, Col } from 'antd';
+import { Typography } from 'antd';
 import debounce from 'lodash/debounce';
-// import {find} from 'lodash';
 import { withRouter } from 'react-router-dom';
 
 import './SearchMovies.css';
@@ -9,6 +9,7 @@ import * as API from '../../API/MoviesAPI';
 import { makeUrl } from '../Utils/Utils';
 import * as CONFIG from '../../config/config';
 
+const { Paragraph } = Typography;
 const Option = AutoComplete.Option;
 
 class SearchMovies extends Component {
@@ -42,21 +43,30 @@ class SearchMovies extends Component {
     }
 
     _renderMovieName(movie){
+        let { id, title, poster_path, release_date, overview, vote_average, genre_ids } = movie;
         // Check if poster image availabe
-        let poster_path = (movie.poster_path) ?
-        CONFIG.IMAGE_SIZE.SMALL+movie.poster_path : CONFIG.NO_PHOTO.POSTER;
+        poster_path  = (poster_path) ? CONFIG.IMAGE_SIZE.SMALL+poster_path : CONFIG.NO_PHOTO.POSTER;
+        release_date = (release_date) ? "(" + release_date.split("-")[0] + ")" : '';
+        if (genre_ids){
+            genre_ids    = genre_ids.map(genreid => {
+                let color = CONFIG.COLORS[Math.floor(Math.random() * CONFIG.COLORS.length)];
+                return <Tag key={genreid} color={color}>{CONFIG.GENRE_FILTER.find(genreObj => parseInt(genreid) === genreObj.id).name}</Tag>
+            });
+        }
 
         return (
-            <Option key={movie.id} text={movie.title}>
-                <img src={poster_path} width={50} height={60} alt={movie.title} />
-                <div className="searchItem">
-                    &nbsp;<strong>{movie.title}</strong>
-                    &nbsp;{(movie.release_date) ? "("+movie.release_date.split("-")[0]+")" : '' }
-                    <div>
-                        {(movie.overview) ? movie.overview.substring(0,50)+"..." : ''}
-                    </div>
-                    <div><Rate allowHalf defaultValue={movie.vote_average / 2} tooltips={movie.rating} disabled /></div>
-                </div>
+            <Option key={id} text={title}>
+                <Row className="searchItem" gutter={8}>
+                    <Col xs={5} lg={4}>
+                        <div className="movieRating">{vote_average}</div>
+                        <img src={poster_path} width={"100%"} height={80} alt={title} />
+                    </Col>
+                    <Col xs={19} lg={20}>
+                        <strong>{title}</strong> {release_date}
+                        <Paragraph ellipsis={{ rows : 2 }}>{overview}</Paragraph>
+                        {genre_ids}
+                    </Col>
+                </Row>
             </Option>
           );
     }
@@ -64,16 +74,19 @@ class SearchMovies extends Component {
     _onSelect = (value, options) => {
         if(!value) return;
 
+        // Clear searchtext value and results
+        this.setState({ searchText: "", dataSource: [] })
+
         // Get all details of selected moview and pass to next page
         let movieDetails = (this.state.dataSource.find(movie => movie.id === parseInt(value)));
+        // If used immediately clicks on multitple tags in search results then belowc case occurs
+        if (!movieDetails) return
+
         let name = options.props.text;
         this.props.history.push({
             pathname: CONFIG.ROUTES.MOVIE+movieDetails.id+"/"+makeUrl(name),
             state: { movie : movieDetails }
         })
-
-        // Clear searchtext value and results
-        this.setState({ searchText: "", dataSource: [] })
 
     }
 
@@ -84,7 +97,7 @@ class SearchMovies extends Component {
                 value           = {this.state.searchText}
                 className       = "searchMovies"
                 dataSource      = {dataSource.map(this._renderMovieName)}
-                style           = {{ width: "30%" }}
+                style           = {{ width: "40%" }}
                 onSelect        = {this._onSelect}
                 onSearch        = {this._setText}
                 placeholder     = "Search Movie..."

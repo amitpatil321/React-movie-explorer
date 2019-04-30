@@ -4,9 +4,22 @@
     margin-left: 5px;
 }
 
-.searchItem .overview{
-    word-break: break-word;
-    white-space: inherit;
+.ant-select-dropdown-menu-item{
+    padding: 5px 5px !important;
+}
+
+.searchItem .ant-typography-ellipsis{
+    font-size: 12px;
+}
+.searchItem div.ant-typography{
+    margin-bottom: 0px !important;
+}
+.searchItem .movieRating{
+    right: 4px;
+}
+
+.ant-select-dropdown-menu-item{
+    white-space: unset !important;
 }
 
 @media only screen and (max-width: 768px) {
