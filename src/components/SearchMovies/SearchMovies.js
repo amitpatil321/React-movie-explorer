@@ -13,11 +13,11 @@ const Option = AutoComplete.Option;
 
 class SearchMovies extends Component {
     state = {
-        dataSource: [],
+        dataSource : [],
+        searchText : ''
     }
 
     _handleSearchDebounced = (value) => {
-        console.log("value");
         // Create a reference to "this"
         let _this = this;
         let names = [];
@@ -35,6 +35,11 @@ class SearchMovies extends Component {
     }
 
     _handleSearch = debounce(this._handleSearchDebounced, 500);
+
+    _setText = (value) => {
+        this.setState({ searchText : value })
+        this._handleSearch(value);
+    }
 
     _renderMovieName(movie){
         // Check if poster image availabe
@@ -66,20 +71,25 @@ class SearchMovies extends Component {
             pathname: CONFIG.ROUTES.MOVIE+movieDetails.id+"/"+makeUrl(name),
             state: { movie : movieDetails }
         })
+
+        // Clear searchtext value and results
+        this.setState({ searchText: "", dataSource: [] })
+
     }
 
     render() {
         const { dataSource } = this.state;
         return (
             <AutoComplete
-                className="searchMovies"
-                dataSource={dataSource.map(this._renderMovieName)}
-                style={{ width: 230 }}
-                onSelect={this._onSelect}
-                onSearch={this._handleSearch} // Add some delay to search
-                placeholder="Search Movie..."
-                optionLabelProp="text"
-                allowClear = {true}
+                value           = {this.state.searchText}
+                className       = "searchMovies"
+                dataSource      = {dataSource.map(this._renderMovieName)}
+                style           = {{ width: "30%" }}
+                onSelect        = {this._onSelect}
+                onSearch        = {this._setText}
+                placeholder     = "Search Movie..."
+                optionLabelProp = "text"
+                allowClear      = {true}
             />
         );
     }

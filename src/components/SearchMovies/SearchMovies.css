@@ -3,3 +3,14 @@
     vertical-align: top;
     margin-left: 5px;
 }
+
+.searchItem .overview{
+    word-break: break-word;
+    white-space: inherit;
+}
+
+@media only screen and (max-width: 768px) {
+    .searchMovies{
+        width: 70% !important;
+    }
+}
