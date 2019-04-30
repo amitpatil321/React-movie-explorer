@@ -13,14 +13,14 @@
     border-radius: 6px;
     margin-bottom: 80px;
 }
-.ant-tag{
+/* .ant-tag{
     height : 35px !important;
     line-height : 34px !important;
     font-weight : 900 !important;
     padding : 0 12px !important;
     font-size: 14px !important;
     cursor: pointer !important;
-}
+} */
 .movieName{
     font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 10px;
