@@ -26,4 +26,15 @@
     .searchMovies{
         width: 70% !important;
     }
+    .searchItem strong{
+        font-size: 14px;
+    }
+    .ant-tag{
+        font-size: 11px !important;
+        padding: 0 5px !important;
+        padding-right: 4px !important;
+        margin-right: 4px !important;
+        height: 18px !important;
+        line-height: 18px !important;
+    }
 }
