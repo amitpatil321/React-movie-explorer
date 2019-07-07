@@ -2,7 +2,7 @@
   "name": "movies",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://amitpatil321.github.io/React-Redux-Address-Book",
+  "homepage": "https://amitpatil321.github.io/React-TMDB/",
   "dependencies": {
     "antd": "^3.13.2",
     "axios": "^0.18.0",
