@@ -31,6 +31,7 @@ class App extends Component {
                 <Switch>
                   <Route path="/" exact component={Discover} />
                   {/* <Route path="/" component={Discover}/> */}
+                  { /*TODO : Add page for company movies */}
                   <Route path={CONFIG.ROUTES.MOVIE + ":id/:name"} component={MovieDetails} />
                   <Route path={CONFIG.ROUTES.GENRE + ":id/:name"} component={Genre} />
                   <Route path={CONFIG.ROUTES.PERSON + ":id/:name"} component={ActorProfile} />

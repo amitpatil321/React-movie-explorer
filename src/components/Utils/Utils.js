@@ -25,11 +25,12 @@ export function Capitalize(string){
 }
 
 export function extractUrl(url, node) {
+    console.log(url, node);
     if (url.length > 1){
         let arr = url.split("/");
-        if(node == "id") // return id from url
+        if(node === "id") // return id from url
             return arr[2];
-        else if(node == "name") // return movie name
+        else if(node === "name") // return movie name
             return arr[3].replace(/-/g, " ");
     }
     return false;

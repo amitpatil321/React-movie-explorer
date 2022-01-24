@@ -39,9 +39,9 @@ export const ROUTES = {
 
 // image constants
 export const NO_PHOTO = {
-    POSTER: "/images/no_poster.PNG",
-    PERSON: "/images/no_photo.jpg",
-    LOGO: "/images/no_logo.jpg"
+    POSTER: `${process.env.PUBLIC_URL}/images/no_poster.png`,
+    PERSON: `${process.env.PUBLIC_URL}/images/no_photo.jpg`,
+    LOGO: `${process.env.PUBLIC_URL}/images/no_logo.jpg`
 }
 
 export const TMDB_IMAGE = "http://image.tmdb.org/t/p";
