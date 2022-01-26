@@ -1,21 +1,22 @@
-.moviecard{
-   margin-bottom: 10px;
-   padding: 0px !important;
+.moviecard {
+  margin-bottom: 10px;
+  padding: 0px !important;
 }
-.ant-spin{
-   margin: 0 auto;
-   display: block !important;
+.ant-spin {
+  margin: 0 auto;
+  display: block !important;
 }
-.anticon-spin{
-   font-size: 34px;
-   margin-top: 100px;
+.loading-icon {
+  font-size: 34px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-.eachcard{
-   width: 220px !important;
+.eachcard {
+  width: 220px !important;
 }
 
 @media only screen and (max-width: 768px) {
-   .moviecard{
-      padding: 0px !important;
-   }
+  .moviecard {
+    padding: 0px !important;
+  }
 }

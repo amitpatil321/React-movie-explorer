@@ -1,21 +1,22 @@
-html, body{
-  font-family: 'Lato', sans-serif;
-  margin:0;
-  padding:0;
+html,
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
   position: relative;
   min-height: 100vh;
 }
-.mainContent-outer{
+.mainContent-outer {
   margin-top: 40px;
   height: 100%;
   min-height: 800px;
 }
 
-.layout{
+.layout {
   background-size: contain;
 }
 
-.mainContent{
+.mainContent {
   min-height: 800px;
   /* background: #eee; */
   max-width: 1170px !important;
@@ -25,68 +26,73 @@ html, body{
 /* .mainContent h2{
   color: #fff;
 } */
-.ant-menu{
+.ant-menu {
   line-height: 70px !important;
 }
-.ant-spin{
+.ant-spin {
   margin: 0 auto;
 }
 
-.center{
+.center {
   text-align: center;
 }
 
-.float-right{
+.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.float-right {
   float: right;
   text-align: right;
 }
 
-.float-left{
+.float-left {
   float: left;
   text-align: left;
 }
-h2{
+h2 {
   padding: 0px;
   margin: 0px;
 }
-hr{
+hr {
   /* padding: 5px 0px 5px 0px; */
   margin: 5px 0px 10px 0px;
   border: 0;
   height: 1px;
   background: rgb(221, 220, 220);
 }
-.ant-layout-footer{
+.ant-layout-footer {
   background: #001529;
   color: #fff;
   /* margin-top: 5%; */
   text-align: center;
 }
 
-.ant-back-top-content{
+.ant-back-top-content {
   background: blueviolet;
 }
-.ant-pagination{
+.ant-pagination {
   padding-bottom: 10px;
   text-align: center;
 }
 
-
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .mainContent{
+  .mainContent {
     padding: 10px;
   }
   /* tabs */
-  .ant-tabs-nav .ant-tabs-tab{
+  .ant-tabs-nav .ant-tabs-tab {
     margin-right: 5px;
     padding-right: 8px;
     padding-left: 8px;
   }
-  .ant-tabs-nav-scroll{
+  .ant-tabs-nav-scroll {
     text-align: center;
   }
-  .ant-tabs-nav-container{
+  .ant-tabs-nav-container {
     font-size: 13px;
   }
 }
