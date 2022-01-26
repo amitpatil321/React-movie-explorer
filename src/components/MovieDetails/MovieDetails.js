@@ -101,41 +101,43 @@ class MovieDetails extends Component {
       return (
         <div className="movieDetails">
           <Row gutter={16}>
-            <MovieInfo movie={movie} referer={this.props} />
-            <Companies movie={movie} />
-            <Meta movie={movie} />
+            <Col span={24}>
+              <MovieInfo movie={movie} referer={this.props} />
+            </Col>
+            <Col span={24} className="cast">
+              <Cast movie={movie} />
+            </Col>
           </Row>
           <Row>
-            <Cast movie={movie} />
-          </Row>
-          <Row>
-            <Tabs
-              defaultActiveKey="1"
-              onChange={() => this.setState({ currPage: 1 })}
-            >
-              <TabPane tab={"Videos (" + videos.length + ")"} key="1">
-                {videos.length > CONFIG.META_ITEMS_PERPAGE ? (
-                  <Pagination
-                    current={this.state.currPage}
-                    total={videos.length}
-                    pageSize={CONFIG.META_ITEMS_PERPAGE}
-                    onChange={(page) => this.setState({ currPage: page })}
-                  />
-                ) : (
-                  ""
-                )}
-                <Videos list={videos} currentPage={this.state.currPage} />
-              </TabPane>
-              <TabPane tab={"Images (" + backdrops.length + ")"} key="2">
-                <Pics list={backdrops} />
-              </TabPane>
-              <TabPane tab={"Posters (" + posters.length + ")"} key="3">
-                <Pics list={posters} />
-              </TabPane>
-              <TabPane tab={"Reviews (" + reviews.length + ")"} key="4">
-                <Reviews list={reviews} />
-              </TabPane>
-            </Tabs>
+            <Col span={24}>
+              <Tabs
+                defaultActiveKey="1"
+                onChange={() => this.setState({ currPage: 1 })}
+              >
+                <TabPane tab={"Videos (" + videos.length + ")"} key="1">
+                  {videos.length > CONFIG.META_ITEMS_PERPAGE ? (
+                    <Pagination
+                      current={this.state.currPage}
+                      total={videos.length}
+                      pageSize={CONFIG.META_ITEMS_PERPAGE}
+                      onChange={(page) => this.setState({ currPage: page })}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <Videos list={videos} currentPage={this.state.currPage} />
+                </TabPane>
+                <TabPane tab={"Images (" + backdrops.length + ")"} key="2">
+                  <Pics list={backdrops} />
+                </TabPane>
+                <TabPane tab={"Posters (" + posters.length + ")"} key="3">
+                  <Pics list={posters} />
+                </TabPane>
+                <TabPane tab={"Reviews (" + reviews.length + ")"} key="4">
+                  <Reviews list={reviews} />
+                </TabPane>
+              </Tabs>
+            </Col>
           </Row>
           {similar.length ? (
             <>
@@ -143,8 +145,10 @@ class MovieDetails extends Component {
                 <br />
                 <br />
                 <Row>
-                  <h2>You may also like</h2>
-                  <hr />
+                  <Col span={24}>
+                    <h2>You may also like</h2>
+                    <hr />
+                  </Col>
                   <Similar list={similar} />
                 </Row>
               </Suspense>
@@ -162,11 +166,10 @@ class MovieDetails extends Component {
   }
 }
 
-const MovieInfo = (props) => {
-  if (props.movie) {
+const MovieInfo = ({ movie, referer }) => {
+  if (movie) {
     // Destructuring
-    let { title, name, backdrop_path, poster_path, tagline, overview } =
-      props.movie;
+    let { title, name, backdrop_path, poster_path, tagline, overview } = movie;
 
     // Check whether title OR name provided
     title = title ? title : name;
@@ -185,31 +188,35 @@ const MovieInfo = (props) => {
     return (
       <>
         <Fade>
-          <BreadcrumbLinks referer={props.referer} movie={props.movie} />
+          <BreadcrumbLinks referer={referer} movie={movie} />
           <br />
         </Fade>
-        <Col xs={24} lg={7} className="moviePoster">
-          <Fade>
-            <Img
-              loader={<LoadingOutlined />}
-              src={poster_path}
-              alt={title}
-              width="294px"
-            />
-          </Fade>
-        </Col>
-        <Col xs={{ span: 24, offset: 0 }} lg={16} offset={1}>
-          <Fade>
-            <Title className="movieName">{title}</Title>
-            <Title level={2} className="movieTagline">
-              {tagline}
-            </Title>
-            <Paragraph className="overview">{overview}</Paragraph>
-            <div className="tags">
-              <Genres movie={props.movie} />
-            </div>
-          </Fade>
-        </Col>
+        <Row>
+          <Col xs={24} lg={7} className="moviePoster">
+            <Fade>
+              <Img
+                loader={<LoadingOutlined />}
+                src={poster_path}
+                alt={title}
+                width="294px"
+              />
+            </Fade>
+          </Col>
+          <Col xs={{ span: 24, offset: 0 }} lg={17} offset={1}>
+            <Fade>
+              <Title className="movieName">{title}</Title>
+              <Title level={2} className="movieTagline">
+                {tagline}
+              </Title>
+              <Paragraph className="overview">{overview}</Paragraph>
+              <div className="tags">
+                <Genres movie={movie} />
+              </div>
+              <Companies movie={movie} />
+              <Meta movie={movie} />
+            </Fade>
+          </Col>
+        </Row>
       </>
     );
   }
@@ -217,29 +224,31 @@ const MovieInfo = (props) => {
 
 const Companies = (props) => {
   return (
-    <Col xs={24} lg={16} className="prodCompanies" type="flex">
-      <MovieProdCompanies movie={props.movie} />
-    </Col>
+    <Row>
+      <Col xs={24} lg={24} className="prodCompanies" type="flex">
+        <Row>
+          <MovieProdCompanies movie={props.movie} />
+        </Row>
+      </Col>
+    </Row>
   );
 };
 
 const Meta = (props) => {
   return (
-    <Col xs={24} lg={16}>
-      <Suspense fallback={<LoadingOutlined />}>
-        <MovieMeta movie={props.movie} />
-      </Suspense>
-    </Col>
+    <Suspense fallback={<LoadingOutlined />}>
+      <MovieMeta movie={props.movie} />
+    </Suspense>
   );
 };
 
-const Cast = (props) => {
+const Cast = ({ movie }) => {
   return (
-    <Col span={24} className="cast">
-      <Suspense fallback={<LoadingOutlined />}>
-        <MovieCast movie={props.movie} />
-      </Suspense>
-    </Col>
+    <Suspense fallback={<LoadingOutlined />}>
+      <Row>
+        <MovieCast movie={movie} />
+      </Row>
+    </Suspense>
   );
 };
 
