@@ -179,22 +179,25 @@ const CastCrew = (props) => {
     const indexOfLastItem = props.currentPage * CONFIG.META_ITEMS_PERPAGE;
     const indexOfFirstItem = indexOfLastItem - CONFIG.META_ITEMS_PERPAGE;
     const currentList = props.list.slice(indexOfFirstItem, indexOfLastItem);
-
-    return currentList.map((movie, index) => {
-      return (
-        <Col
-          xs={12}
-          lg={4}
-          key={movie.id + Math.random()}
-          id={movie.id}
-          className="moviecard castMovies"
-        >
-          <Fade delay={index * 30}>
-            <MovieCard movie={movie} />
-          </Fade>
-        </Col>
-      );
-    });
+    return (
+      <Row>
+        {currentList.map((movie, index) => {
+          return (
+            <Col
+              xs={12}
+              lg={4}
+              key={movie.id + Math.random()}
+              id={movie.id}
+              className="moviecard castMovies"
+            >
+              <Fade delay={index * 30}>
+                <MovieCard movie={movie} />
+              </Fade>
+            </Col>
+          );
+        })}
+      </Row>
+    );
   } else return <Empty description={CONFIG.ERRORS.NOTHING_TO_SHOW}></Empty>;
 };
 
