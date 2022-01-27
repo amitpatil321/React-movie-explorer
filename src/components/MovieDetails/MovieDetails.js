@@ -23,11 +23,11 @@ import MovieProdCompanies from "../ProdCompanies/ProdCompanies";
 import Gallery from "../Gallery/Gallery";
 import Videos from "../Videos/Videos";
 import "./MovieDetails.css";
-import Reviews from "../Reviews/Reviews";
 
 const MovieMeta = lazy(() => import("../MovieMeta/MovieMeta"));
 const MovieCast = lazy(() => import("../Cast/Cast"));
 const Similar = lazy(() => import("../Similar/Similar"));
+const Reviews = lazy(() => import("../Reviews/Reviews"));
 
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
@@ -134,7 +134,9 @@ class MovieDetails extends Component {
                   <Pics list={posters} />
                 </TabPane>
                 <TabPane tab={"Reviews (" + reviews.length + ")"} key="4">
-                  <Reviews list={reviews} />
+                  <Suspense fallback={<LoadingOutlined />}>
+                    <Reviews list={reviews} />
+                  </Suspense>
                 </TabPane>
               </Tabs>
             </Col>
