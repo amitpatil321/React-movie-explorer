@@ -1,5 +1,4 @@
 <div align="left">
-    <img src="https://img.icons8.com/?size=512&id=55494&format=png" width="40%" align="left" style="margin-right: 15px"/>
     <div style="display: inline-block;">
         <h2 style="display: inline-block; vertical-align: middle; margin-top: 0;">REACT-MOVIE-EXPLORER</h2>
         <p>
@@ -47,6 +46,8 @@
 
 The React-movie-explorer project is a user-friendly platform that simplifies movie discovery and exploration. With features like real-time search, dynamic genre lists, and interactive movie details, it caters to movie enthusiasts looking for a seamless browsing experience. By offering a visually appealing interface and comprehensive movie information, it enhances user engagement and enjoyment.
 
+<img src="https://raw.githubusercontent.com/amitpatil321/React-TMDB/master/movies.png" />
+
 ---
 
 ## 👾 Features
@@ -54,11 +55,10 @@ The React-movie-explorer project is a user-friendly platform that simplifies mov
 |     |      Feature      | Summary                                                                                                                                                                                                                                                                                          |
 | :-- | :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ⚙️  | **Architecture**  | <ul><li>Utilizes **React** for building a dynamic and interactive user interface.</li><li>Integrates **React Router** for managing navigation and routing within the application.</li><li>Employs **Axios** for handling API requests and data retrieval.</li></ul>                              |
-| 🔩  | **Code Quality**  | <ul><li>Follows **ESLint** and **Prettier** standards for consistent code formatting.</li><li>Includes **unit tests** for components using **Jest** and **React Testing Library**.</li><li>Utilizes **PropTypes** for type-checking component props.</li></ul>                                   |
+| 🔩  | **Code Quality**  | <ul><li>Follows **ESLint** and **Prettier** standards for consistent code formatting.</li><li>Utilizes **PropTypes** for type-checking component props.</li></ul>                                                                                                                                |
 | 📄  | **Documentation** | <ul><li>Extensive inline comments in **JavaScript** files for code clarity and understanding.</li><li>Includes a detailed **README.md** file with installation, usage, and testing instructions.</li><li>Utilizes **JSDoc** comments for documenting functions and components.</li></ul>         |
 | 🔌  | **Integrations**  | <ul><li>Integrates **Ant Design** for UI components and styling.</li><li>Utilizes **React Player** for video playback functionality.</li><li>Includes **ScrollReveal** for scroll animations and effects.</li></ul>                                                                              |
 | 🧩  |  **Modularity**   | <ul><li>Organizes components into separate folders for **reusability** and **maintainability**.</li><li>Utilizes **Utils** folder for common utility functions across the application.</li><li>Follows a **component-based** architecture for easy component isolation and management.</li></ul> |
-| 🧪  |    **Testing**    | <ul><li>Includes **unit tests** for critical components and utilities.</li><li>Utilizes **mocking** for API requests in tests to ensure predictable behavior.</li><li>Implements **snapshot testing** for UI components to detect unexpected changes.</li></ul>                                  |
 | ⚡️ |  **Performance**  | <ul><li>Optimizes **image loading** with lazy loading and image size optimization.</li><li>Utilizes **pagination** for large data sets to improve loading times.</li><li>Implements **service worker** for offline capabilities and faster subsequent visits.</li></ul>                          |
 | 🛡️  |   **Security**    | <ul><li>Secures API requests by **appending API key** to every request header.</li><li>Implements **error handling** for invalid requests and responses.</li><li>Ensures **data sanitization** to prevent XSS attacks.</li></ul>                                                                 |
 | 📦  | **Dependencies**  | <ul><li>Manages dependencies using **npm** with a detailed **package-lock.json** file.</li><li>Includes key dependencies like **Ant Design**, **Axios**, and **React Router Dom** for core functionality.</li><li>Utilizes **gh-pages** for project deployment to GitHub Pages.</li></ul>        |
@@ -579,14 +579,6 @@ Run the test suite using the following command:
 
 ---
 
-## 📌 Project Roadmap
-
-- [x] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
-
----
-
 ## 🔰 Contributing
 
 - **💬 [Join the Discussions](https://github.com/amitpatil321/React-movie-explorer/discussions)**: Share your insights, provide feedback, or ask questions.
@@ -627,17 +619,3 @@ Run the test suite using the following command:
    </a>
 </p>
 </details>
-
----
-
-## 🎗 License
-
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
-
----
-
-## 🙌 Acknowledgments
-
-- List any resources, contributors, inspiration, etc. here.
-
----
