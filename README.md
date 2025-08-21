@@ -1,6 +1,6 @@
 <div align="center">
     <div style="display: inline-block;">
-        <h2 style="display: inline-block; vertical-align: middle; margin-top: 0;">REACT-MOVIE-EXPLORER</h2>
+        <h2 style="display: inline-block; vertical-align: middle; margin-top: 0;">REACT MOVIE EXPLORER</h2>
         <p>
 	<em>Discover, Explore, Experience: Movies Unleashed!</em>
 </p>
